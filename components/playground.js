@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
 import * as THREE from 'three';
 // import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
+import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js';
 import VirtualScroll from 'virtual-scroll';
 import styles from '../styles/Playground.module.css';
 
@@ -57,14 +59,54 @@ const init = () => {
         'purple',
         'green',
     ];
-    const radius = 6;
+    let textures = [
+        `/1.webp`,
+        `/2.webp`,
+        `/3.webp`,
+        `/4.webp`,
+        `/5.webp`,
+        `/6.webp`,
+        `/7.webp`,
+        `/8.webp`,
+    ].map((url) => new THREE.TextureLoader().load(url));
+    // const radius = 2;
+    const radius = 7;
     // const radius = 3;
     const group = new THREE.Group();
+    const loader = new FontLoader();
     for (let i = 0; i < totalPoints; i++) {
         // const geo = new THREE.SphereGeometry(0.025, 10, 10);
-        const geo = new THREE.PlaneGeometry(3, 2, 1, 1);
-        const mat = new THREE.MeshBasicMaterial({
-            color: colors[i],
+        const geo = new THREE.PlaneGeometry(5, 2.8, 10, 10);
+        // const geo = new THREE.PlaneGeometry(0.5, 0.25, 1, 1);
+        // const mat = new THREE.MeshBasicMaterial({
+        //     color: colors[i],
+        // });
+        const mat = new THREE.ShaderMaterial({
+            uniforms: {
+                // uTexture: { value: textures[0] },
+                uTexture: { value: textures[i] },
+            },
+            vertexShader: `
+                varying vec2 vUv;
+                void main(){
+                  vUv = uv;
+                  vec3 newPosition = position;
+                  float distanceFromCenter = abs(
+                      (modelMatrix * vec4(position, 1.0)).y
+                  );
+                   
+                  // most important
+                  newPosition.z *= 0.0 + 1.1*pow(distanceFromCenter,2.);
+                    
+                  gl_Position = projectionMatrix * modelViewMatrix * vec4( newPosition, 1.0 );
+                }`,
+            fragmentShader: `
+                  uniform sampler2D uTexture;
+                  varying vec2 vUv;
+                  void main()	{
+                    gl_FragColor = texture2D(uTexture,vUv);
+                  }
+                 `,
         });
         const mesh = new THREE.Mesh(geo, mat);
         const angle = theta * i;
@@ -75,6 +117,21 @@ const init = () => {
             radius * Math.sin(angle),
             0
         );
+        mesh.rotation.z = angle;
+        // loader.load('/maxilla-bold.json', function (font) {
+        //     const textGeometry = new TextGeometry('BLEACH EX.PV', {
+        //         font: font,
+        //         size: 0.75,
+        //         height: 0.01,
+        //         curveSegments: 8,
+        //     });
+        //     const textMaterial = new THREE.MeshBasicMaterial({
+        //         color: 'white',
+        //     });
+        //     const text = new THREE.Mesh(textGeometry, textMaterial);
+        //     scene.add(text);
+        //     text.position.set(-2, -1, 1);
+        // });
     }
     scene.add(group);
     // group.position.x = 0;
@@ -89,20 +146,18 @@ const init = () => {
     const scroller = new VirtualScroll();
     console.log(scroller);
     scroller.on((event) => {
-        scrollPos = event.y / 4000;
-        scrollSpeed = (event.deltaY * theta) / 1000;
-        // console.log(scrollPos);
-        console.log(event.originalEvent);
-        console.log(event.y);
+        scrollPos = -event.y / 6000;
+        scrollSpeed = (event.deltaY * theta) / 2000;
 
         // always allow scroll, but if position less than half way, scroll back
         // if position more than halfway, scroll forwards
         // event.y = 5000;
     });
 
-    scroller.off((event) => {
-        console.log(event);
-    });
+    setTimeout(() => {
+        window.scroll(0, 500);
+        console.log('scroll');
+    }, 2000);
 
     // Renderer
     const renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -119,15 +174,29 @@ const init = () => {
     };
     window.addEventListener('resize', onWindowResize, false);
 
+    // Parallax mouse movement
+    let oldX = 0;
+    let oldY = 0;
+    const onMouseMove = (e) => {
+        let deltaX = e.x - oldX;
+        let deltaY = e.y - oldY;
+    };
+    window.addEventListener('mousemove', onMouseMove);
+
     // Rendering
     const render = () => {
         requestAnimationFrame(render);
         scrollSpeed *= 0.9;
         scrollTargetSpeed += (scrollSpeed - scrollTargetSpeed) * 0.1;
         scrollTargetPos += (scrollPos - scrollTargetPos) * 0.1;
-        group.rotation.y = scrollTargetSpeed * 4;
-        group.position.z = -scrollTargetSpeed * 5;
+        group.rotation.y = scrollTargetSpeed * 2;
+        group.position.z = scrollTargetSpeed * 5;
         group.rotation.z = scrollTargetPos;
+        group.scale.set(
+            Math.max(1, Math.abs(scrollTargetSpeed * 7)),
+            Math.max(1, Math.abs(scrollTargetSpeed * 7)),
+            1
+        );
 
         // if (scrollSpeed < 0.01 && scrollSpeed > -0.01) {
         //     scrollPos = Math.ceil(scrollPos / theta) * theta;
@@ -139,7 +208,7 @@ const init = () => {
         // when scroll speed comes close to 0 (within a threshold), set group.rotation.z to one of the angles (theta * i)
 
         // for (let i = 0; i < group.children.length; i++) {
-        //     group.children[i].position.z = -scrollTargetSpeed * 5;
+        //     group.children[i].rotation.x = scrollTargetSpeed * 2;
         // }
 
         renderer.render(scene, camera);

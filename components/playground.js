@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import * as THREE from 'three';
 // import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
@@ -24,7 +24,7 @@ const visibleWidthAtZDepth = (depth, camera) => {
     return height * camera.aspect;
 };
 
-const init = () => {
+const init = (setSelected) => {
     // Element variables
     const container = document.getElementById('container');
     const webglEl = document.getElementById('webglEl');
@@ -37,28 +37,11 @@ const init = () => {
         1,
         1100
     );
-    // camera.position.x = 0.1;
     camera.position.z = 5;
-
-    // Geometry
-    // const geo = new THREE.SphereGeometry(1, 10, 10);
-    // const mat = new THREE.MeshLambertMaterial({ color: 0xffcc00 });
-    // const mesh = new THREE.Mesh(geo, mat);
-    // scene.add(mesh);
 
     // Points
     const totalPoints = 8;
     const theta = (Math.PI * 2) / totalPoints;
-    const colors = [
-        'white',
-        'yellow',
-        'hotpink',
-        'lightblue',
-        'red',
-        'orange',
-        'purple',
-        'green',
-    ];
     let textures = [
         `/1.webp`,
         `/2.webp`,
@@ -69,21 +52,13 @@ const init = () => {
         `/7.webp`,
         `/8.webp`,
     ].map((url) => new THREE.TextureLoader().load(url));
-    // const radius = 2;
     const radius = 7;
-    // const radius = 3;
     const group = new THREE.Group();
     const loader = new FontLoader();
     for (let i = 0; i < totalPoints; i++) {
-        // const geo = new THREE.SphereGeometry(0.025, 10, 10);
         const geo = new THREE.PlaneGeometry(5, 2.8, 10, 10);
-        // const geo = new THREE.PlaneGeometry(0.5, 0.25, 1, 1);
-        // const mat = new THREE.MeshBasicMaterial({
-        //     color: colors[i],
-        // });
         const mat = new THREE.ShaderMaterial({
             uniforms: {
-                // uTexture: { value: textures[0] },
                 uTexture: { value: textures[i] },
             },
             vertexShader: `
@@ -118,25 +93,29 @@ const init = () => {
             0
         );
         mesh.rotation.z = angle;
-        // loader.load('/maxilla-bold.json', function (font) {
-        //     const textGeometry = new TextGeometry('BLEACH EX.PV', {
-        //         font: font,
-        //         size: 0.75,
-        //         height: 0.01,
-        //         curveSegments: 8,
-        //     });
-        //     const textMaterial = new THREE.MeshBasicMaterial({
-        //         color: 'white',
-        //     });
-        //     const text = new THREE.Mesh(textGeometry, textMaterial);
-        //     scene.add(text);
-        //     text.position.set(-2, -1, 1);
-        // });
+        loader.load('/maxilla-bold.json', function (font) {
+            const textGeometry = new TextGeometry('BLEACH EX.PV', {
+                font: font,
+                size: 0.5,
+                height: 0.01,
+                curveSegments: 8,
+            });
+            const textMaterial = new THREE.MeshBasicMaterial({
+                color: 'white',
+            });
+            const text = new THREE.Mesh(textGeometry, textMaterial);
+            group.add(text);
+            text.position.set(
+                radius * Math.cos(angle),
+                radius * Math.sin(angle),
+                2
+            );
+            // text.translateX(-1);
+            text.rotation.z = angle;
+        });
     }
     scene.add(group);
-    // group.position.x = 0;
-    group.position.x = -visibleWidthAtZDepth(0, camera) / 2;
-    // group.position.x = -radius * 2;
+    group.position.x = -(visibleWidthAtZDepth(0, camera) / 2) + 0.5;
 
     // Scrolling
     let scrollPos = 0;
@@ -144,7 +123,6 @@ const init = () => {
     let scrollSpeed = 0;
     let scrollTargetSpeed = 0;
     const scroller = new VirtualScroll();
-    console.log(scroller);
     scroller.on((event) => {
         scrollPos = -event.y / 6000;
         scrollSpeed = (event.deltaY * theta) / 2000;
@@ -153,11 +131,6 @@ const init = () => {
         // if position more than halfway, scroll forwards
         // event.y = 5000;
     });
-
-    setTimeout(() => {
-        window.scroll(0, 500);
-        console.log('scroll');
-    }, 2000);
 
     // Renderer
     const renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -189,12 +162,12 @@ const init = () => {
         scrollSpeed *= 0.9;
         scrollTargetSpeed += (scrollSpeed - scrollTargetSpeed) * 0.1;
         scrollTargetPos += (scrollPos - scrollTargetPos) * 0.1;
-        group.rotation.y = scrollTargetSpeed * 2;
+        group.rotation.y = -Math.abs(scrollTargetSpeed) * 0.5;
         group.position.z = scrollTargetSpeed * 5;
-        group.rotation.z = scrollTargetPos;
+        group.rotation.z = scrollTargetPos * 1.25;
         group.scale.set(
-            Math.max(1, Math.abs(scrollTargetSpeed * 7)),
-            Math.max(1, Math.abs(scrollTargetSpeed * 7)),
+            Math.max(1, Math.abs(scrollTargetSpeed * 2)),
+            Math.max(1, Math.abs(scrollTargetSpeed * 2)),
             1
         );
 
@@ -207,25 +180,81 @@ const init = () => {
 
         // when scroll speed comes close to 0 (within a threshold), set group.rotation.z to one of the angles (theta * i)
 
-        // for (let i = 0; i < group.children.length; i++) {
-        //     group.children[i].rotation.x = scrollTargetSpeed * 2;
-        // }
+        for (let i = 0; i < group.children.length; i++) {
+            group.children[i].rotation.x = scrollTargetSpeed;
+        }
+
+        let rot;
+        if (group.rotation.z >= 0) {
+            rot = group.rotation.z % (Math.PI * 2);
+        } else {
+            rot = Math.PI * 2 + (group.rotation.z % (Math.PI * 2));
+        }
+
+        // refactor this later to be generic to work with any number of project cards
+        if (rot > theta * 7 + theta * 0.5 || rot <= theta * 0.5) {
+            setSelected(0);
+        } else if (rot > theta * 0.5 && rot <= theta + theta * 0.5) {
+            setSelected(1);
+        } else if (
+            rot > theta + theta * 0.5 &&
+            rot <= theta * 2 + theta * 0.5
+        ) {
+            setSelected(2);
+        } else if (
+            rot > theta * 2 + theta * 0.5 &&
+            rot <= theta * 3 + theta * 0.5
+        ) {
+            setSelected(3);
+        } else if (
+            rot > theta * 3 + theta * 0.5 &&
+            rot <= theta * 4 + theta * 0.5
+        ) {
+            setSelected(4);
+        } else if (
+            rot > theta * 4 + theta * 0.5 &&
+            rot <= theta * 5 + theta * 0.5
+        ) {
+            setSelected(5);
+        } else if (
+            rot > theta * 5 + theta * 0.5 &&
+            rot <= theta * 6 + theta * 0.5
+        ) {
+            setSelected(6);
+        } else if (
+            rot > theta * 6 + theta * 0.5 &&
+            rot <= theta * 7 + theta * 0.5
+        ) {
+            setSelected(7);
+        }
+
+        // Radial progress indicator
+        const progressCircle = document.querySelector('.progress-circle');
+        progressCircle.style.transform = `rotate(${rot * (180 / Math.PI)}deg)`;
 
         renderer.render(scene, camera);
     };
     render();
 };
 
-const Playground = () => {
+const Playground = ({ getSelected }) => {
+    const [selected, setSelected] = useState(0);
+
     useEffect(() => {
-        init();
+        init(setSelected);
     }, []);
+
+    useEffect(() => {
+        getSelected(selected);
+    }, [selected]);
 
     return (
         <div className='wrapper'>
             <div className={styles.container} id='container'>
                 <div id='webglEl'></div>
             </div>
+            <img className='circle' src='/circle.svg' alt='' />
+            <img className='progress-circle' src='/circle-chunk.svg' alt='' />
         </div>
     );
 };

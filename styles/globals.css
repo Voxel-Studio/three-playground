@@ -19,12 +19,19 @@ a {
   box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-  body {
-    color: white;
-    background: black;
-  }
+.circle {
+    width: 65px;
+    position: fixed;
+    bottom: 50px;
+    left: 50px;
+    z-index: 2;
+}
+
+.progress-circle {
+    width: 65px;
+    position: fixed;
+    bottom: 50px;
+    left: 50px;
+    z-index: 2;
+    transform: rotate(0deg);
 }

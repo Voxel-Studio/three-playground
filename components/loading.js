@@ -4,7 +4,7 @@ import styles from '../styles/Loading.module.css';
 import { StyleRegistry } from 'styled-jsx';
 
 export const Loading = () => {
-    const [loaded, setLoaded] = useState(true);
+    const [loaded, setLoaded] = useState(false);
     const [startLoading, setStartLoading] = useState(false);
     useEffect(() => {
         setTimeout(() => {

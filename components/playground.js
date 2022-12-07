@@ -46,9 +46,9 @@ const init = (setSelected) => {
     const totalPoints = 8;
     const theta = (Math.PI * 2) / totalPoints;
     const textures = [
+        `/reconnect.jpg`,
         `/bleach.jpg`,
         '/route-246.jpg',
-        `/reconnect.jpg`,
         `/theatre.jpg`,
         `/black-eye-patch.jpg`,
         `/8.webp`,
@@ -56,9 +56,9 @@ const init = (setSelected) => {
         `/one-piece.jpg`,
     ].map((url) => new THREE.TextureLoader().load(url));
     const titles = [
+        'RE:CONNECT',
         'BLEACH EX.PV',
         'Route 246',
-        'RE:CONNECT',
         'THEATRE IN\nA DREAM',
         'H&M x\nBlackEyePatch',
         'SPACE SHOWER',

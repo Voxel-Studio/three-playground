@@ -46,14 +46,14 @@ const init = (setSelected) => {
     const totalPoints = 8;
     const theta = (Math.PI * 2) / totalPoints;
     const textures = [
-        `/1.webp`,
+        `/bleach.jpg`,
+        '/route-246.jpg',
+        `/reconnect.jpg`,
+        `/theatre.jpg`,
+        `/black-eye-patch.jpg`,
         `/8.webp`,
-        `/7.webp`,
-        `/6.webp`,
-        `/5.webp`,
-        `/4.webp`,
-        `/3.webp`,
-        `/2.webp`,
+        `/versus.jpg`,
+        `/one-piece.jpg`,
     ].map((url) => new THREE.TextureLoader().load(url));
     const titles = [
         'BLEACH EX.PV',
@@ -98,7 +98,7 @@ const init = (setSelected) => {
         });
         const mesh = new THREE.Mesh(geo, mat);
         const angle = theta * i;
-        console.log(angle);
+        // console.log(angle);
         mesh.name = 'plane';
         group.add(mesh);
         mesh.position.set(
@@ -144,7 +144,6 @@ const init = (setSelected) => {
     const scroller = new VirtualScroll();
     scroller.on((event) => {
         scrollPos = -event.y / 6000;
-        console.log(scrollPos);
         scrollSpeed = (event.deltaY * theta) / 2000;
 
         // always allow scroll, but if position less than half way, scroll back
@@ -168,8 +167,8 @@ const init = (setSelected) => {
     window.addEventListener('resize', onWindowResize, false);
 
     // Parallax mouse movement
-    let oldX = 0;
-    let oldY = 0;
+    let oldX = window.innerWidth / 2;
+    let oldY = window / innerHeight / 2;
     let deltaX = 0;
     let deltaY = 0;
     let targetDeltaX = 0;
@@ -179,8 +178,9 @@ const init = (setSelected) => {
     let xTargetPos = 0;
     let yTargetPos = 0;
     const onMouseMove = (e) => {
-        deltaX = e.clientX - oldX;
-        deltaY = e.clientY - oldY;
+        deltaX = Math.abs(e.clientX) < 10 && e.clientX - oldX;
+        deltaY = Math.abs(e.clientY) < 10 && e.clientY - oldY;
+        // deltaY = e.clientY - oldY;
         oldX = e.clientX;
         oldY = e.clientY;
         // console.log(e.clientY);
@@ -196,14 +196,14 @@ const init = (setSelected) => {
         scrollSpeed *= 0.9;
         scrollTargetSpeed += (scrollSpeed - scrollTargetSpeed) * 0.1;
         scrollTargetPos += (scrollPos - scrollTargetPos) * 0.1;
-        group.rotation.y = -Math.abs(scrollTargetSpeed) * 0.5;
-        group.position.z = scrollTargetSpeed * 5;
+        // group.rotation.y = -Math.abs(scrollTargetSpeed) * 0.5;
+        // group.position.z = scrollTargetSpeed * 5;
         group.rotation.z = scrollTargetPos * 1.25;
-        group.scale.set(
-            Math.max(1, Math.abs(scrollTargetSpeed * 2)),
-            Math.max(1, Math.abs(scrollTargetSpeed * 2)),
-            1
-        );
+        // group.scale.set(
+        //     Math.max(1, Math.abs(scrollTargetSpeed * 2)),
+        //     Math.max(1, Math.abs(scrollTargetSpeed * 2)),
+        //     1
+        // );
 
         // if (scrollSpeed < 0.01 && scrollSpeed > -0.01) {
         //     scrollPos = Math.ceil(scrollPos / theta) * theta;
@@ -213,10 +213,6 @@ const init = (setSelected) => {
         // }
 
         // when scroll speed comes close to 0 (within a threshold), set group.rotation.z to one of the angles (theta * i)
-
-        for (let i = 0; i < group.children.length; i++) {
-            group.children[i].rotation.x = scrollTargetSpeed;
-        }
 
         // movement toward mouse
         deltaX *= 0.9;
@@ -229,7 +225,6 @@ const init = (setSelected) => {
                 child.translateX(targetDeltaX / 3000);
                 child.translateY(-targetDeltaY / 3000);
             }
-
             if (child.name === 'text') {
                 child.translateX(targetDeltaX / 1000);
                 child.translateY(-targetDeltaY / 1000);
@@ -240,9 +235,9 @@ const init = (setSelected) => {
         // yPos *= 0.9;
         xTargetPos += (xPos - xTargetPos) * 0.05;
         yTargetPos += (yPos - yTargetPos) * 0.05;
-        group.rotation.y = xTargetPos / 5000 - xTargetPos / 2 / 5000;
+        // group.rotation.y = xTargetPos / 7000 - 0.14;
+        group.rotation.y = xTargetPos / 9000;
         group.rotation.x = yTargetPos / 5000;
-        // console.log(yTargetPos);
 
         // clamp the max rotations with if statements
         // group.rotateY(targetDeltaX / 3000);
@@ -310,6 +305,17 @@ const init = (setSelected) => {
         //     group.children[i].translateX(0);
         //     group.children[selected].translateX(-1);
         // }
+
+        for (let i = 0; i < group.children.length; i++) {
+            group.children[i].rotation.x = scrollTargetSpeed * 2;
+            // group.children[i].scale.set(1, 1, 1);
+
+            // if (i === selected) {
+            //     // group.children[i - 1].scale.set(1.2, 1.2, 1.2);
+            //     group.children[i + 1].scale.set(1.2, 1.2, 1.2);
+            //     group.children[i].scale.set(1.5, 1.5, 1.5);
+            // }
+        }
 
         // Radial progress indicator
         const progressCircle = document.querySelector('.progress-circle');

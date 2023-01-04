@@ -4,7 +4,7 @@ import * as THREE from 'three';
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js';
 import VirtualScroll from 'virtual-scroll';
-import styles from '../styles/Playground.module.css';
+import styles from '../styles/Projects.module.css';
 import { Plane } from 'three';
 import { Loading } from './loading';
 import { loadingTimeMs } from '../utils/helper';
@@ -319,14 +319,17 @@ const init = (setSelected) => {
 
         // Radial progress indicator
         const progressCircle = document.querySelector('.progress-circle');
-        progressCircle.style.transform = `rotate(${rot * (180 / Math.PI)}deg)`;
+        if (progressCircle)
+            progressCircle.style.transform = `rotate(${
+                rot * (180 / Math.PI)
+            }deg)`;
 
         renderer.render(scene, camera);
     };
     render();
 };
 
-const Playground = ({ getSelected }) => {
+const Projects = ({ getSelected }) => {
     const [selected, setSelected] = useState(0);
 
     useEffect(() => {
@@ -349,4 +352,4 @@ const Playground = ({ getSelected }) => {
     );
 };
 
-export default Playground;
+export default Projects;

@@ -1,28 +1,23 @@
 import { useState } from 'react';
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
-import Playground from '../components/playground';
+import Landing from '../components/landing';
+import { useRouter } from 'next/router';
 
 export default function Home() {
-    const [selectedProject, setSelectedProject] = useState(0);
-    const getSelected = (selected) => {
-        setSelectedProject(selected);
-    };
+    const router = useRouter();
     return (
-        <div>
-            {/* <h1>Yo</h1> */}
-            <Playground getSelected={getSelected} />
-            <div className={styles.overlay} />
-            <img
-                className={styles.logoFull}
-                src='/insert-logo-full.png'
-                alt=''
-            />
-            <img className={styles.logo} src='/insert-logo.png' alt='' />
-            <img className={styles.menu} src='/menu.svg' alt='' />
-            <p className={styles.allWorks}>all works</p>
-            <p className={styles.projectNumber}>{selectedProject + 1} / 8</p>
-            {/* <div className={styles.clickContainer} /> */}
+        <div className={styles.container}>
+            <Landing />
+            <div className={styles.textContainer}>
+                <h1>
+                    <span onClick={() => router.push('/case-studies')}>
+                        Just out of reach, behind a digital curtain, exists a
+                        galaxy of activity. A new economic frontier that may be
+                        the answer to the generational wealth gap.
+                    </span>
+                </h1>
+            </div>
         </div>
     );
 }

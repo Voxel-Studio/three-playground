@@ -1,4 +1,4 @@
-/* .overlay {
+.overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -13,6 +13,7 @@
     left: 50px;
     top: 50px;
     width: 120px;
+    cursor: pointer;
 }
 
 .logo {
@@ -50,37 +51,4 @@
     font-weight: 300;
     opacity: 0.5;
     font-size: 0.8rem;
-} */
-
-.container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.textContainer {
-    position: relative;
-    max-width: 65%;
-    z-index: 5 !important;
-    margin-top: 200vh;
-    margin-bottom: 100vh;
-    /* text-align: center; */
-    font-size: 2.75rem;
-    /* padding: 40px; */
-}
-
-.textContainer h1 {
-    /* line-height: 1.15em; */
-    /* line-height: calc(1em + 10px); */
-    padding: 20px;
-}
-
-.textContainer h1 span {
-    background: white;
-    color: black;
-    /* padding: 10px; */
-    /* padding: 20px; */
-    font-weight: 300;
-    line-height: 1.25em;
-    cursor: pointer;
 }

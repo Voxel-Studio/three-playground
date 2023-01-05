@@ -7,7 +7,7 @@ const Footer = () => {
                 <div className={`${styles.contactContainer} wrapper`}>
                     <div className={styles.info}>
                         {/* <div className='wrapper'> */}
-                        <div className={styles.row}>
+                        <div className={`${styles.row} ${styles.firstRow}`}>
                             <div className={styles.col}>
                                 <h4>ADDRESS</h4>
                                 <p>Unit 39 Atcham Business Park</p>
@@ -37,7 +37,12 @@ const Footer = () => {
                     </div>
                     <form className={styles.form}>
                         <div className={styles.formRow}>
-                            <input type='text' placeholder='NAME*' required />
+                            <input
+                                className={styles.formName}
+                                type='text'
+                                placeholder='NAME*'
+                                required
+                            />
                             <input type='text' placeholder='EMAIL*' required />
                         </div>
                         <div className={styles.formRow}>

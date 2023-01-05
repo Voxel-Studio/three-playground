@@ -4,14 +4,23 @@ const Header = () => {
     return (
         <div className='wrapper'>
             <nav className={styles.header}>
-                <img src='/insert-logo-full.png' alt='' />
+                <img
+                    className={styles.logo}
+                    src='/insert-logo-full.png'
+                    alt=''
+                />
                 <ul>
                     <li>HOME</li>
                     <li>ABOUT</li>
                     <li>SERVICES</li>
                     <li>PORTFOLIO</li>
                 </ul>
-                <button>CONTACT</button>
+                <button className={styles.buttonContact}>CONTACT</button>
+                <img
+                    className={styles.buttonHamburger}
+                    src='/menu.png'
+                    alt=''
+                />
             </nav>
         </div>
     );

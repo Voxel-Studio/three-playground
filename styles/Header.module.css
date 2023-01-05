@@ -7,7 +7,7 @@
     position: relative;
 }
 
-.header img {
+.logo {
     /* width: 128px; */
     height: 28px;
     position: absolute;
@@ -36,7 +36,7 @@
     margin-right: 0;
 }
 
-.header button {
+.buttonContact {
     cursor: pointer;
     position: absolute;
     top: 50%;
@@ -49,4 +49,25 @@
     padding: 10px 30px;
     font-size: 0.7rem;
     justify-self: flex-end;
+}
+
+.buttonHamburger {
+    display: none;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    justify-self: flex-end;
+    width: 28px;
+}
+
+@media (max-width: 1024px) {
+    .header ul, .buttonContact {
+        display: none;
+    }
+
+    .buttonHamburger {
+        display: block;
+    }
 }

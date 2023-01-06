@@ -28,9 +28,9 @@ export default function News() {
             </div>
             <div className={styles.newsWrapper}>
                 <ul className={styles.news}>
-                    {items.map((item) => {
+                    {items.map((item, i) => {
                         return (
-                            <li className={styles.card}>
+                            <li className={styles.card} key={i}>
                                 <img
                                     className={styles.img}
                                     src={item.img}

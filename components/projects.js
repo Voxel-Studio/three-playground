@@ -65,11 +65,13 @@ const init = (setSelected) => {
         'Versus Night 0.0',
         'ONE PIECE',
     ];
-    const radius = 7;
+    // const radius = 7;
+    const radius = 5.5;
     const group = new THREE.Group();
     const loader = new FontLoader();
     for (let i = 0; i < totalPoints; i++) {
-        const geo = new THREE.PlaneGeometry(5, 2.8, 10, 10);
+        // const geo = new THREE.PlaneGeometry(5, 2.8, 10, 10);
+        const geo = new THREE.PlaneGeometry(4, 2.25, 10, 10);
         const mat = new THREE.ShaderMaterial({
             uniforms: {
                 uTexture: { value: textures[i] },
@@ -97,7 +99,8 @@ const init = (setSelected) => {
                  `,
         });
         const mesh = new THREE.Mesh(geo, mat);
-        const angle = theta * i;
+        // const angle = theta * i;
+        const angle = theta * i + Math.PI;
         // console.log(angle);
         mesh.name = 'plane';
         group.add(mesh);
@@ -107,6 +110,7 @@ const init = (setSelected) => {
             0
         );
         mesh.rotation.z = angle;
+        mesh.scale.y *= -1;
         loader.load('/sharp-grotesk.json', function (font) {
             const textGeometry = new TextGeometry(titles[i], {
                 font: font,
@@ -121,16 +125,21 @@ const init = (setSelected) => {
             text.name = 'text';
             group.add(text);
             text.position.set(
-                radius * 1 * Math.cos(angle),
-                radius * 1 * Math.sin(angle),
+                // radius * 1 * Math.cos(angle),
+                radius * 1.75 * Math.cos(angle),
+                // radius * 1 * Math.sin(angle),
+                radius * 1.75 * Math.sin(angle),
                 2
             );
             text.rotation.z = angle;
+            text.scale.y *= -1;
+            text.scale.x *= -1;
             // console.log(text.position);
         });
     }
     scene.add(group);
-    group.position.x = -(visibleWidthAtZDepth(0, camera) / 2) - 1;
+    // group.position.x = -(visibleWidthAtZDepth(0, camera) / 2) - 1;
+    group.position.x = visibleWidthAtZDepth(0, camera) / 2 - 1;
 
     // Scrolling
     // let scrollPos = 0;
@@ -143,8 +152,10 @@ const init = (setSelected) => {
     let scrollTargetSpeed = 0;
     const scroller = new VirtualScroll();
     scroller.on((event) => {
-        scrollPos = -event.y / 6000;
-        scrollSpeed = (event.deltaY * theta) / 2000;
+        // scrollPos = -event.y / 6000;
+        scrollPos = event.y / 6000;
+        // scrollSpeed = (event.deltaY * theta) / 2000;
+        scrollSpeed = (event.deltaY * theta) / 3000;
 
         // always allow scroll, but if position less than half way, scroll back
         // if position more than halfway, scroll forwards
@@ -231,21 +242,10 @@ const init = (setSelected) => {
             }
         });
 
-        // xPos *= 0.9;
-        // yPos *= 0.9;
-        xTargetPos += (xPos - xTargetPos) * 0.05;
-        yTargetPos += (yPos - yTargetPos) * 0.05;
-        // group.rotation.y = xTargetPos / 7000 - 0.14;
-        group.rotation.y = xTargetPos / 9000;
-        group.rotation.x = yTargetPos / 5000;
-
-        // clamp the max rotations with if statements
-        // group.rotateY(targetDeltaX / 3000);
-        // group.rotateX(targetDeltaY / 5000);
-        // if (group.rotation.x > -0.1 && group.rotation.x < 0.1) {
-        //     group.rotateX((targetDeltaY / 1000).toFixed(1));
-        //     console.log(group.rotation.x);
-        // }
+        // xTargetPos += (xPos - xTargetPos) * 0.05;
+        // yTargetPos += (yPos - yTargetPos) * 0.05;
+        // group.rotation.y = xTargetPos / 9000;
+        // group.rotation.x = yTargetPos / 5000;
 
         let rot;
         if (group.rotation.z >= 0) {
@@ -307,22 +307,15 @@ const init = (setSelected) => {
         // }
 
         for (let i = 0; i < group.children.length; i++) {
-            group.children[i].rotation.x = scrollTargetSpeed * 2;
-            // group.children[i].scale.set(1, 1, 1);
-
-            // if (i === selected) {
-            //     // group.children[i - 1].scale.set(1.2, 1.2, 1.2);
-            //     group.children[i + 1].scale.set(1.2, 1.2, 1.2);
-            //     group.children[i].scale.set(1.5, 1.5, 1.5);
-            // }
+            // group.children[i].rotation.x = scrollTargetSpeed * 2;
         }
 
         // Radial progress indicator
-        const progressCircle = document.querySelector('.progress-circle');
-        if (progressCircle)
-            progressCircle.style.transform = `rotate(${
-                rot * (180 / Math.PI)
-            }deg)`;
+        // const progressCircle = document.querySelector('.progress-circle');
+        // if (progressCircle)
+        //     progressCircle.style.transform = `rotate(${
+        //         rot * (180 / Math.PI)
+        //     }deg)`;
 
         renderer.render(scene, camera);
     };
@@ -345,8 +338,8 @@ const Projects = ({ getSelected }) => {
             <div className={styles.container} id='container'>
                 <div id='webglEl'></div>
             </div>
-            <img className='circle' src='/circle.svg' alt='' />
-            <img className='progress-circle' src='/circle-chunk.svg' alt='' />
+            {/* <img className='circle' src='/circle.svg' alt='' /> */}
+            {/* <img className='progress-circle' src='/circle-chunk.svg' alt='' /> */}
             <Loading />
         </div>
     );

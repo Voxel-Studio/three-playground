@@ -5,11 +5,13 @@ const Header = () => {
     return (
         <div className='wrapper'>
             <nav className={styles.header}>
-                <img
-                    className={styles.logo}
-                    src='/insert-logo-full.png'
-                    alt=''
-                />
+                <Link href='/'>
+                    <img
+                        className={styles.logo}
+                        src='/insert-logo-full.png'
+                        alt=''
+                    />
+                </Link>
                 <ul>
                     <li>
                         <Link href='/'>HOME</Link>

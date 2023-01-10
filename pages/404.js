@@ -10,7 +10,7 @@ export default function Custom404() {
                 <h1 className={styles.h1}>Page not found</h1>
                 <div className={styles.line}></div>
             </div>
-            <Footer />
+            <Footer showContact={true} />
         </div>
     );
 }

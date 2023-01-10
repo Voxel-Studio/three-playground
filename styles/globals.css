@@ -66,3 +66,130 @@ h1, h4 {
     z-index: 2;
     transform: rotate(0deg);
 }
+
+.backToTop {
+    cursor: pointer;
+    /* padding: 40px;
+    padding-right: 0; */
+    display: flex;
+    align-items: center;
+    writing-mode: vertical-lr;
+    transform: rotate(180deg);
+    justify-self: flex-start;
+    align-self: flex-start;
+    margin-top: 40px;
+    /* margin-bottom: -40px; */
+}
+
+.backToTop p {
+    /* font-size: 1rem !important; */
+    font-weight: 300 !important;
+    margin: 0 !important;
+}
+
+.backToTop div {
+    width: 1px;
+    height: 40px;
+    margin-top: 20px;
+    background: white;
+}
+
+.moreNews {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.newsCard {
+    cursor: pointer;
+    position: relative;
+    width: 48%;
+    height: 400px;
+    padding: 80px;
+    background: var(--colGrey);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.newsCard img {
+    object-fit: cover;
+    width: 200px;
+    aspect-ratio: 1 / 1;
+}
+
+.newsCard p {
+    font-weight: 300;
+    font-size: 1.5rem;
+}
+
+.moreNewsFirst {
+
+}
+
+.nextArticle, .prevArticle {
+    font-size: 0.8rem !important
+}
+
+.nextArticle {
+    position: absolute;
+    bottom: 40px;
+    left: 80px;
+    text-align: left;
+    font-size: 0.8rem;
+}
+
+.prevArticle {
+    position: absolute;
+    bottom: 40px;
+    right: 80px;
+    text-align: right;
+}
+
+@media (max-width: 1024px) {
+    .moreNews {
+        flex-direction: column;
+    }
+
+    .newsCard {
+        width: 100%;
+    }
+
+    .newsCard:first-of-type {
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 767px) {
+    .newsCard {
+        align-items: flex-start;
+        padding: 40px;
+        height: auto;
+    }
+
+    .newsCard p {
+        font-size: 1rem;
+    }
+
+    .newsCard img {
+        width: 100px;
+    }
+
+    .moreNewsFirst {
+        text-align: right;
+    }
+
+    .nextArticle, .prevArticle {
+        left: 40px;
+        bottom: 40px;
+        right: auto;
+        /* position: relative;
+        bottom: auto;
+        left: auto;
+        right: auto; */
+    }
+
+    .prevArticle {
+        right: 40px;
+    }
+}

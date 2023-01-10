@@ -57,6 +57,17 @@ export default function News() {
                     })}
                 </ul>
             </div>
+            <div className='wrapper'>
+                <div
+                    className='backToTop'
+                    onClick={() =>
+                        window.scrollTo({ top: 0, behavior: 'smooth' })
+                    }
+                >
+                    <p>BACK TO TOP</p>
+                    <div />
+                </div>
+            </div>
             <Footer />
         </div>
     );

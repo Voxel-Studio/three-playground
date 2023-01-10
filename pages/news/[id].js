@@ -7,6 +7,7 @@ import { newsItems } from '../../utils/helper';
 // using hard coded array in helper file for now
 // this needs to be converted to CMS using the commented out code
 // I think this requires the site to be rebuilt after each CMS change?
+// might need to change this to server side rendering SSR?
 export const getStaticPaths = async () => {
     // const res = await fetch('STRAPI_URL_HERE/');
     // const data = await res.json();
@@ -60,7 +61,58 @@ export default function Article({ item }) {
                 <h1 className={titleStyles.h1}>{item.title}</h1>
                 <div className={titleStyles.line}></div>
             </div>
-            <div className={styles.newsWrapper}></div>
+            <img className={styles.heroImg} src={item.img} alt='' />
+            <div className={styles.newsItemWrapper}>
+                <p>
+                    In a enim non libero commodo dapibus. Curabitur ullamcorper,
+                    orci ut ultricies imperdiet, tellus libero malesuada risus,
+                    non commodo lectus eros vel risus. Interdum et malesuada
+                    fames ac ante ipsum primis in faucibus. Suspendisse sit amet
+                    bibendum lectus, blandit ultrices nunc. Nunc laoreet purus
+                    lacus, vitae pellentesque enim semper vitae.
+                </p>
+                <p>
+                    Nulla feugiat sit amet nunc ac pulvinar. Etiam sapien dui,
+                    tempor porttitor sollicitudin eget, commodo sed nisi.
+                    Praesent urna nisl, convallis aliquam tempor quis, porta
+                    condimentum mauris. Aenean scelerisque eros magna, nec
+                    venenatis odio sodales et. Sed sodales turpis turpis, quis
+                    varius lectus posuere porttitor. Duis ac tincidunt nibh, vel
+                    porttitor neque. Duis magna erat, convallis a massa ut,
+                    congue dapibus lectus.
+                </p>
+                <img src={item.img} alt='' />
+                <div className={styles.metaGrid}>
+                    <p>Posted on:</p>
+                    <p>18/12/2022</p>
+                    <p>Tags:</p>
+                    <p>#events #production #digital</p>
+                </div>
+            </div>
+            {/* <div className={styles.newsWrapper}></div> */}
+            <div className='moreNews'>
+                <div className='newsCard'>
+                    <img src='/more-news-1.jpg' alt='' />
+                    <p className='moreNewsFirst'>Yamaha - WAY UP HOUSE</p>
+                    <p className='prevArticle'>PREV</p>
+                </div>
+                <div className='newsCard'>
+                    <p>TikTok - Transparency Forum</p>
+                    <p className='nextArticle'>NEXT</p>
+                    <img src='/more-news-2.jpg' alt='' />
+                </div>
+            </div>
+            <div className='wrapper'>
+                <div
+                    className='backToTop'
+                    onClick={() =>
+                        window.scrollTo({ top: 0, behavior: 'smooth' })
+                    }
+                >
+                    <p>BACK TO TOP</p>
+                    <div />
+                </div>
+            </div>
             <Footer />
         </div>
     );

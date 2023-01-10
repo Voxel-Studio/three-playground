@@ -10,7 +10,7 @@ export default function Contact() {
                 <h1 className={styles.h1}>Contact</h1>
                 <div className={styles.line}></div>
             </div>
-            <Footer />
+            <Footer showContact={true} />
         </div>
     );
 }

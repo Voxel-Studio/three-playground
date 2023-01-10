@@ -1,9 +1,12 @@
 import styles from '../styles/Footer.module.css';
 
-const Footer = () => {
+const Footer = ({ showContact = false }) => {
     return (
         <footer className={styles.footer}>
-            <div className={styles.contact}>
+            <div
+                className={styles.contact}
+                style={{ display: showContact ? 'flex' : 'none' }}
+            >
                 <div className={`${styles.contactContainer} wrapper`}>
                     <div className={styles.info}>
                         {/* <div className='wrapper'> */}

@@ -3,6 +3,7 @@ import * as THREE from 'three';
 // import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js';
+import Header from './header';
 import VirtualScroll from 'virtual-scroll';
 import styles from '../styles/Landing.module.css';
 import { Plane } from 'three';
@@ -278,6 +279,7 @@ const Landing = () => {
             <div className={styles.container} id='container'>
                 <div id='webglEl'></div>
             </div>
+            <Header />
             <Loading />
         </div>
     );

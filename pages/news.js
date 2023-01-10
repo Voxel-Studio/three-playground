@@ -1,22 +1,27 @@
+import Link from 'next/link';
 import Header from '../components/header';
 import Footer from '../components/footer';
 import titleStyles from '../styles/TitleSection.module.css';
 import styles from '../styles/News.module.css';
+import { newsItems } from '../utils/helper';
 
-const items = [
-    {
-        title: 'Lorem ipsum dolor lorem upsleviosa',
-        img: '/news1.jpg',
-    },
-    {
-        title: 'Onsite at ExCeL London for ICE 2023',
-        img: '/news2.jpg',
-    },
-    {
-        title: 'Lorem ipsum dolor lorem upsleviosa',
-        img: '/news3.jpg',
-    },
-];
+// const items = [
+//     {
+//         title: 'Lorem ipsum dolor lorem upsleviosa',
+//         img: '/news1.jpg',
+//         id: 'lorem-ipsum-1',
+//     },
+//     {
+//         title: 'Onsite at ExCeL London for ICE 2023',
+//         img: '/news2.jpg',
+//         id: 'onsite-at-excel-london',
+//     },
+//     {
+//         title: 'Lorem ipsum dolor lorem upsleviosa',
+//         img: '/news3.jpg',
+//         id: 'lorem-ipsum-2',
+//     },
+// ];
 
 export default function News() {
     return (
@@ -28,24 +33,26 @@ export default function News() {
             </div>
             <div className={styles.newsWrapper}>
                 <ul className={styles.news}>
-                    {items.map((item, i) => {
+                    {newsItems.map((item, i) => {
                         return (
-                            <li className={styles.card} key={i}>
-                                <img
-                                    className={styles.img}
-                                    src={item.img}
-                                    alt=''
-                                />
-                                <div className={styles.info}>
-                                    <p>01222</p>
-                                    <div className={styles.bottom}>
-                                        <div className={styles.line}></div>
-                                        <h2 className={styles.title}>
-                                            {item.title}
-                                        </h2>
+                            <Link href={`news/${item.id}`} key={i}>
+                                <li className={styles.card}>
+                                    <img
+                                        className={styles.img}
+                                        src={item.img}
+                                        alt=''
+                                    />
+                                    <div className={styles.info}>
+                                        <p>01222</p>
+                                        <div className={styles.bottom}>
+                                            <div className={styles.line}></div>
+                                            <h2 className={styles.title}>
+                                                {item.title}
+                                            </h2>
+                                        </div>
                                     </div>
-                                </div>
-                            </li>
+                                </li>
+                            </Link>
                         );
                     })}
                 </ul>

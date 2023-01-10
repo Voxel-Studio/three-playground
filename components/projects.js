@@ -46,24 +46,40 @@ const init = (setSelected) => {
     const totalPoints = 8;
     const theta = (Math.PI * 2) / totalPoints;
     const textures = [
-        `/reconnect.jpg`,
-        `/bleach.jpg`,
-        '/route-246.jpg',
-        `/theatre.jpg`,
-        `/black-eye-patch.jpg`,
-        `/8.webp`,
-        `/versus.jpg`,
-        `/one-piece.jpg`,
+        // `/reconnect.jpg`,
+        `/adidas-1.jpeg`,
+        // `/bleach.jpg`,
+        `/tiktok-1.jpeg`,
+        // '/route-246.jpg',
+        `/adidas-1.jpeg`,
+        // `/theatre.jpg`,
+        `/tiktok-2.jpeg`,
+        // `/black-eye-patch.jpg`,
+        `/adidas-1.jpeg`,
+        // `/8.webp`,
+        `/tiktok-2.jpeg`,
+        // `/versus.jpg`,
+        `/adidas-1.jpeg`,
+        // `/one-piece.jpg`,
+        `/tiktok-2.jpeg`,
     ].map((url) => new THREE.TextureLoader().load(url));
     const titles = [
-        'RE:CONNECT',
-        'BLEACH EX.PV',
-        'Route 246',
-        'THEATRE IN\nA DREAM',
-        'H&M x\nBlackEyePatch',
-        'SPACE SHOWER',
-        'Versus Night 0.0',
-        'ONE PIECE',
+        // 'RE:CONNECT',
+        'Building blocks of the future',
+        'Building blocks of the future',
+        'Building blocks of the future',
+        'Building blocks of the future',
+        'Building blocks of the future',
+        'Building blocks of the future',
+        'Building blocks of the future',
+        'Building blocks of the future',
+        // 'BLEACH EX.PV',
+        // 'Route 246',
+        // 'THEATRE IN\nA DREAM',
+        // 'H&M x\nBlackEyePatch',
+        // 'SPACE SHOWER',
+        // 'Versus Night 0.0',
+        // 'ONE PIECE',
     ];
     // const radius = 7;
     const radius = 5.5;
@@ -111,10 +127,12 @@ const init = (setSelected) => {
         );
         mesh.rotation.z = angle;
         mesh.scale.y *= -1;
-        loader.load('/sharp-grotesk.json', function (font) {
+        // loader.load('/sharp-grotesk.json', function (font) {
+        loader.load('/lexend-deca.json', function (font) {
             const textGeometry = new TextGeometry(titles[i], {
                 font: font,
-                size: 0.4,
+                // size: 0.4,
+                size: 0.2,
                 height: 0.01,
                 curveSegments: 8,
             });
@@ -126,9 +144,11 @@ const init = (setSelected) => {
             group.add(text);
             text.position.set(
                 // radius * 1 * Math.cos(angle),
-                radius * 1.75 * Math.cos(angle),
+                // radius * 1.75 * Math.cos(angle),
+                radius * 2 * Math.cos(angle),
                 // radius * 1 * Math.sin(angle),
-                radius * 1.75 * Math.sin(angle),
+                // radius * 1.75 * Math.sin(angle),
+                radius * 2 * Math.sin(angle),
                 2
             );
             text.rotation.z = angle;
@@ -139,7 +159,8 @@ const init = (setSelected) => {
     }
     scene.add(group);
     // group.position.x = -(visibleWidthAtZDepth(0, camera) / 2) - 1;
-    group.position.x = visibleWidthAtZDepth(0, camera) / 2 - 1;
+    // group.position.x = visibleWidthAtZDepth(0, camera) / 2 - 1;
+    group.position.x = visibleWidthAtZDepth(0, camera) / 2 + 1;
 
     // Scrolling
     // let scrollPos = 0;
@@ -207,14 +228,14 @@ const init = (setSelected) => {
         scrollSpeed *= 0.9;
         scrollTargetSpeed += (scrollSpeed - scrollTargetSpeed) * 0.1;
         scrollTargetPos += (scrollPos - scrollTargetPos) * 0.1;
-        // group.rotation.y = -Math.abs(scrollTargetSpeed) * 0.5;
-        // group.position.z = scrollTargetSpeed * 5;
+        group.rotation.y = -Math.abs(scrollTargetSpeed) * 0.5;
+        group.position.z = scrollTargetSpeed * 5;
         group.rotation.z = scrollTargetPos * 1.25;
-        // group.scale.set(
-        //     Math.max(1, Math.abs(scrollTargetSpeed * 2)),
-        //     Math.max(1, Math.abs(scrollTargetSpeed * 2)),
-        //     1
-        // );
+        group.scale.set(
+            Math.max(1, Math.abs(scrollTargetSpeed * 2)),
+            Math.max(1, Math.abs(scrollTargetSpeed * 2)),
+            1
+        );
 
         // if (scrollSpeed < 0.01 && scrollSpeed > -0.01) {
         //     scrollPos = Math.ceil(scrollPos / theta) * theta;
@@ -242,10 +263,12 @@ const init = (setSelected) => {
             }
         });
 
-        // xTargetPos += (xPos - xTargetPos) * 0.05;
-        // yTargetPos += (yPos - yTargetPos) * 0.05;
+        xTargetPos += (xPos - xTargetPos) * 0.05;
+        yTargetPos += (yPos - yTargetPos) * 0.05;
         // group.rotation.y = xTargetPos / 9000;
         // group.rotation.x = yTargetPos / 5000;
+        group.rotation.y = xTargetPos / 40000;
+        group.rotation.x = yTargetPos / 20000;
 
         let rot;
         if (group.rotation.z >= 0) {

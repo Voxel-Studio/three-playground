@@ -1,5 +1,5 @@
-// export const loadingTimeMs = 4500;
-export const loadingTimeMs = 500;
+export const loadingTimeMs = 4500;
+// export const loadingTimeMs = 500;
 
 // THIS NEEDS TO BE CONVERTED TO THE CMS
 export const newsItems = [

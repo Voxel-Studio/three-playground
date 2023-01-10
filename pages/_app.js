@@ -1,5 +1,6 @@
 import '../styles/globals.css';
 import Head from 'next/head';
+import Validation from '../components/validation';
 
 function MyApp({ Component, pageProps }) {
     return (
@@ -12,6 +13,7 @@ function MyApp({ Component, pageProps }) {
                 />
             </Head>
             <Component {...pageProps} />
+            <Validation />
         </>
     );
 }

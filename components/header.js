@@ -1,9 +1,9 @@
 import Link from 'next/link';
 import styles from '../styles/Header.module.css';
 
-const Header = () => {
+const Header = ({ isHomepage = false }) => {
     return (
-        <div className='wrapper'>
+        <div className={isHomepage ? 'wrapper centred' : 'wrapper'}>
             <nav className={styles.header}>
                 <Link href='/'>
                     <img

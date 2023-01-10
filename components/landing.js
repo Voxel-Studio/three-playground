@@ -279,7 +279,7 @@ const Landing = () => {
             <div className={styles.container} id='container'>
                 <div id='webglEl'></div>
             </div>
-            <Header />
+            <Header isHomepage={true} />
             <Loading />
         </div>
     );

@@ -15,6 +15,7 @@ body {
     /* background-color: var(--colGrey); */
     background-color: black;
     color: white;
+    overflow-x: hidden !important;
 }
 
 a {

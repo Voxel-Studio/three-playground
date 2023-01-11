@@ -7,7 +7,7 @@ import VirtualScroll from 'virtual-scroll';
 import styles from '../styles/Projects.module.css';
 import { Plane } from 'three';
 import { Loading } from './loading';
-import { loadingTimeMs } from '../utils/helper';
+import { loadingTimeMs, projectItems } from '../utils/helper';
 
 const visibleHeightAtZDepth = (depth, camera) => {
     // compensate for cameras not positioned at z=0
@@ -45,42 +45,17 @@ const init = (setSelected) => {
     // Points
     const totalPoints = 8;
     const theta = (Math.PI * 2) / totalPoints;
-    const textures = [
-        // `/reconnect.jpg`,
-        `/adidas-1.jpeg`,
-        // `/bleach.jpg`,
-        `/tiktok-1.jpeg`,
-        // '/route-246.jpg',
-        `/adidas-1.jpeg`,
-        // `/theatre.jpg`,
-        `/tiktok-2.jpeg`,
-        // `/black-eye-patch.jpg`,
-        `/adidas-1.jpeg`,
-        // `/8.webp`,
-        `/tiktok-2.jpeg`,
-        // `/versus.jpg`,
-        `/adidas-1.jpeg`,
-        // `/one-piece.jpg`,
-        `/tiktok-2.jpeg`,
-    ].map((url) => new THREE.TextureLoader().load(url));
-    const titles = [
-        // 'RE:CONNECT',
-        'Building blocks of the future',
-        'Building blocks of the future',
-        'Building blocks of the future',
-        'Building blocks of the future',
-        'Building blocks of the future',
-        'Building blocks of the future',
-        'Building blocks of the future',
-        'Building blocks of the future',
-        // 'BLEACH EX.PV',
-        // 'Route 246',
-        // 'THEATRE IN\nA DREAM',
-        // 'H&M x\nBlackEyePatch',
-        // 'SPACE SHOWER',
-        // 'Versus Night 0.0',
-        // 'ONE PIECE',
-    ];
+    let projectImages = [];
+    projectItems.map((item) => {
+        projectImages.push(item.image);
+    });
+    const textures = projectImages.map((url) =>
+        new THREE.TextureLoader().load(url)
+    );
+    let titles = [];
+    projectItems.map((item) => {
+        titles.push(item.title);
+    });
     // const radius = 7;
     const radius = 5.5;
     const group = new THREE.Group();

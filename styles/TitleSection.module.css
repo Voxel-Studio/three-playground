@@ -1,7 +1,9 @@
 .container {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
+    z-index: 10;
 }
 
 .h1 {
@@ -15,4 +17,25 @@
     height: 1px;
     background: white;
     margin-top: 20px;
+}
+
+.detailGrid {
+    margin-top: calc(85vh - 300px);
+    display: grid;
+    grid-template-columns: repeat(3, 200px);
+    grid-auto-rows: 1fr 1fr;
+    grid-gap: 20px;
+}
+
+.detailGridTitle {
+    letter-spacing: 1px;
+}
+
+@media (max-width: 767px) {
+    .detailGrid {
+        margin-top: calc(60vh - 300px);
+        grid-template-columns: repeat(3, 100px);
+        grid-gap: 10px;
+        font-size: 0.8rem;
+    }
 }

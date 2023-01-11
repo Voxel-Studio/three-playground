@@ -258,20 +258,20 @@ const init = (setSelected) => {
             setSelected(0);
             selected = 0;
         } else if (rot > theta * 0.5 && rot <= theta + theta * 0.5) {
-            setSelected(1);
-            selected = 1;
+            setSelected(7);
+            selected = 7;
         } else if (
             rot > theta + theta * 0.5 &&
             rot <= theta * 2 + theta * 0.5
         ) {
-            setSelected(2);
-            selected = 2;
+            setSelected(6);
+            selected = 6;
         } else if (
             rot > theta * 2 + theta * 0.5 &&
             rot <= theta * 3 + theta * 0.5
         ) {
-            setSelected(3);
-            selected = 3;
+            setSelected(5);
+            selected = 5;
         } else if (
             rot > theta * 3 + theta * 0.5 &&
             rot <= theta * 4 + theta * 0.5
@@ -282,22 +282,30 @@ const init = (setSelected) => {
             rot > theta * 4 + theta * 0.5 &&
             rot <= theta * 5 + theta * 0.5
         ) {
-            setSelected(5);
-            selected = 5;
+            setSelected(3);
+            selected = 3;
         } else if (
             rot > theta * 5 + theta * 0.5 &&
             rot <= theta * 6 + theta * 0.5
         ) {
-            setSelected(6);
-            selected = 6;
+            setSelected(2);
+            selected = 2;
         } else if (
             rot > theta * 6 + theta * 0.5 &&
             rot <= theta * 7 + theta * 0.5
         ) {
-            setSelected(7);
-            selected = 7;
+            setSelected(1);
+            selected = 1;
         }
         // console.log(selected);
+
+        const progressNumbers = document.querySelectorAll('.progressNumber');
+        progressNumbers.forEach((number) => (number.style.opacity = 0.25));
+        progressNumbers[selected].style.opacity = 1;
+        const brackets = document.querySelector('.brackets');
+        brackets.style.transform = `translateY(calc(${selected}em + ${
+            selected * 10
+        }px))`;
 
         // for (let i = 0; i < group.children.length; i++) {
         //     group.children[i].translateX(0);
@@ -336,6 +344,17 @@ const Projects = ({ getSelected }) => {
             <div className={styles.container} id='container'>
                 <div id='webglEl'></div>
             </div>
+            <ul className={styles.progress}>
+                <img className='brackets' src='/brackets.svg' alt='' />
+                <li className='progressNumber'>01</li>
+                <li className='progressNumber'>02</li>
+                <li className='progressNumber'>03</li>
+                <li className='progressNumber'>04</li>
+                <li className='progressNumber'>05</li>
+                <li className='progressNumber'>06</li>
+                <li className='progressNumber'>07</li>
+                <li className='progressNumber'>08</li>
+            </ul>
             {/* <img className='circle' src='/circle.svg' alt='' /> */}
             {/* <img className='progress-circle' src='/circle-chunk.svg' alt='' /> */}
             <Loading />

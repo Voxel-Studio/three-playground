@@ -54,6 +54,14 @@
     margin-bottom: 20px;
 }
 
+.footer a {
+    transition: opacity 0.2s ease-in-out;
+}
+
+.footer a:hover {
+    opacity: 0.8;
+}
+
 .col p {
     font-weight: 400;
 }
@@ -62,14 +70,22 @@
     margin-top: 80px;
 }
 
+.social img {
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+
 .social img:first-of-type {
     margin-right: 20px;
+}
+
+.social img:hover {
+    transform: scale(1.25);
 }
 
 .form {
     display: flex;
     flex-direction: column;
-    /* background: hotpink; */
     min-width: 550px;
 }
 
@@ -78,36 +94,56 @@
     margin-bottom: 40px;
 }
 
-.form input[type=text] {
+.inputText {
     background: none;
     border: none;
     border-bottom: solid #545454 1px;
     padding-bottom: 20px;
     margin-right: 20px;
     width: 100%;
-    font-size: 0.6rem;
+    font-size: 0.8rem;
+    outline:  none;
+    transition: border-color 0.2s ease-in-out;
+    color: white;
+    padding-left: 20px;
 }
 
-.form input::placeholder {
+.inputText:focus {
+    border-color: white;
+}
+
+.inputText::placeholder {
     color: white;
     opacity: 1;
     letter-spacing: 1px;
     font-size: 0.6rem;
+    /* padding-left: 20px; */
   }
 
-.form input[type=text]:last-of-type {
+.inputText:last-of-type {
     margin-right: 0;
 }
 
 .inputMessage {
     padding-bottom: 80px !important;
+    /* padding-bottom: 0px !important; */
+    /* height: 140px; */
 }
 
-.form input[type=submit] {
+/* .inputMessage::placeholder {
+    position: absolute;
+    top: 40px;
+    left: 20px;
+} */
+
+.submitButton {
+    position: relative;
     cursor: pointer;
     background: none;
+    outline: none;
+    border: none;
     border: solid white 1px;
-    color: white;
+    background: black;
     width: 180px;
     height: 60px;
     font-size: 0.7rem;
@@ -115,6 +151,33 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
+    transition: border-color 0.4s ease-in-out;
+}
+
+.underlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: white;
+    transform: translate(-100%, 100%) scale(1);
+    transition: transform 0.4s ease-in-out;
+}
+
+.submitButton span {
+    mix-blend-mode: exclusion;
+    color: white;
+}
+
+.submitButton:hover {
+    border-color: black;
+}
+
+.submitButton:hover .underlay {
+    transform: scale(2);
 }
 
 .about {
@@ -175,6 +238,11 @@
 .terms p, .terms li {
     color: #888888;
     font-size: 0.7rem;
+    transition: color 0.2s ease-in-out;
+}
+
+.terms li:hover {
+    color: white;
 }
 
 .right {

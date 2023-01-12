@@ -27,7 +27,10 @@ const Header = ({ isHomepage = false }) => {
                     </li>
                 </ul>
                 <Link href='/contact'>
-                    <button className={styles.buttonContact}>CONTACT</button>
+                    <button className={styles.buttonContact}>
+                        <div className={styles.underlay}></div>
+                        <span>CONTACT</span>
+                    </button>
                 </Link>
                 <img
                     className={styles.buttonHamburger}

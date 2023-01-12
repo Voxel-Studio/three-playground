@@ -41,22 +41,30 @@ const Footer = ({ showContact = false }) => {
                     <form className={styles.form}>
                         <div className={styles.formRow}>
                             <input
-                                className={styles.formName}
+                                className={`${styles.formName} ${styles.inputText}`}
                                 type='text'
                                 placeholder='NAME*'
                                 required
                             />
-                            <input type='text' placeholder='EMAIL*' required />
+                            <input
+                                className={styles.inputText}
+                                type='email'
+                                placeholder='EMAIL*'
+                                required
+                            />
                         </div>
                         <div className={styles.formRow}>
                             <input
-                                className={styles.inputMessage}
+                                className={`${styles.inputMessage} ${styles.inputText}`}
                                 type='text'
                                 placeholder='MESSAGE*'
                                 required
                             />
                         </div>
-                        <input type='submit' value='SEND IT  NOW' />
+                        <button className={styles.submitButton} type='submit'>
+                            <div className={styles.underlay}></div>
+                            <span>SEND IT NOW</span>
+                        </button>
                     </form>
                 </div>
             </div>

@@ -5,6 +5,7 @@
     /* justify-content: space-between; */
     /* align-items: center; */
     position: relative;
+    transition: all 0.35s ease;
 }
 
 .logo {
@@ -14,6 +15,13 @@
     top: 50%;
     left: 0;
     transform: translateY(-50%);
+    transform-origin: center;
+    transition: all 0.35s ease-in-out;
+}
+
+.logo:hover {
+    transform: translateY(-50%) skew(10deg) scale(1);
+    filter: blur(0.5px);
 }
 
 .header ul {
@@ -27,13 +35,41 @@
 
 .header ul li {
     cursor: pointer;
-    margin-right: 80px;
+    padding: 7px 10px;
+    /* margin-right: 80px; */
+    margin-right: 60px;
     font-size: 0.7rem;
     letter-spacing: 1px;
+    overflow: hidden;
+    transition: opacity 0.35s ease-in-out;
 }
 
 .header ul li:last-of-type {
     margin-right: 0;
+}
+
+.hoverScroll {
+    position: relative;
+    transition: all 0.35s ease;
+}
+
+.hoverScroll:after {
+    position: absolute;
+    transition: all 0.35s ease;
+    /* padding: 0.3em 0; */
+    position: absolute;
+    bottom: calc(100% + 10px);
+    left: 0;
+    content: attr(data-hover);
+    color: white;
+    white-space: nowrap;
+}
+.header ul li:hover .hoverScroll {
+    transform: translateY(calc(100% + 10px));
+}
+
+.header ul li:hover {
+    opacity: 0.5;
 }
 
 .buttonContact {

@@ -14,16 +14,44 @@ const Header = ({ isHomepage = false }) => {
                 </Link>
                 <ul>
                     <li>
-                        <Link href='/'>HOME</Link>
+                        <Link href='/'>
+                            <div
+                                className={styles.hoverScroll}
+                                data-hover='HOME'
+                            >
+                                HOME
+                            </div>
+                        </Link>
                     </li>
                     <li>
-                        <Link href='/about'>ABOUT</Link>
+                        <Link href='/about'>
+                            <div
+                                className={styles.hoverScroll}
+                                data-hover='ABOUT'
+                            >
+                                ABOUT
+                            </div>
+                        </Link>
                     </li>
                     <li>
-                        <Link href='/services'>SERVICES</Link>
+                        <Link href='/services'>
+                            <div
+                                className={styles.hoverScroll}
+                                data-hover='SERVICES'
+                            >
+                                SERVICES
+                            </div>
+                        </Link>
                     </li>
                     <li>
-                        <Link href='/case-studies'>PORTFOLIO</Link>
+                        <Link href='/case-studies'>
+                            <div
+                                className={styles.hoverScroll}
+                                data-hover='PORTFOLIO'
+                            >
+                                PORTFOLIO
+                            </div>
+                        </Link>
                     </li>
                 </ul>
                 <Link href='/contact'>

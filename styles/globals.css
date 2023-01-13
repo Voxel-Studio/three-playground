@@ -1,5 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
+/* @keyframes fadeIn {
+    from {
+        filter: blur(4px);
+        transform: skew(10deg);
+    }
+    to {
+        filter: blur(0px);
+        transform: skew(0deg);
+    }
+} */
+
 :root {
     --colGrey: #0F0F0F;
 }
@@ -16,6 +27,11 @@ body {
     background-color: black;
     color: white;
     overflow-x: hidden !important;
+    /* filter: blur(0px);
+    transform: skew(0deg);
+    animation-name: fadeIn;
+    animation-duration: 0.35s;
+    animation-timing-function: ease-in-out; */
 }
 
 a {
@@ -148,17 +164,23 @@ h1, h4 {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    overflow: hidden;
+    transition: all 0.35s ease-in-out;
 }
 
 .newsCard img {
     object-fit: cover;
     width: 200px;
     aspect-ratio: 1 / 1;
+    transition: all 0.35s ease-in-out;
+
 }
 
 .newsCard p {
     font-weight: 300;
     font-size: 1.5rem;
+    transition: all 0.35s ease-in-out;
+    z-index: 2;
 }
 
 .moreNewsFirst {
@@ -166,7 +188,9 @@ h1, h4 {
 }
 
 .nextArticle, .prevArticle {
-    font-size: 0.8rem !important
+    font-size: 0.8rem !important;
+    transition: all 0.35s ease-in-out;
+    z-index: 2;
 }
 
 .nextArticle {
@@ -183,6 +207,15 @@ h1, h4 {
     right: 80px;
     text-align: right;
 }
+
+/* .newsCard:hover img {
+    transform: scaleX(2) scaleY(0.02) rotate(90deg);
+    filter: blur(4px) brightness(0.4);
+} */
+
+/* .newsCard:hover {
+    transform: scaleX(1.2);
+} */
 
 @media (max-width: 1024px) {
     .moreNews {

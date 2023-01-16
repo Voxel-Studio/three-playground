@@ -3,6 +3,10 @@ import Footer from '../../components/footer';
 import titleStyles from '../../styles/TitleSection.module.css';
 import styles from '../../styles/Project.module.css';
 import { projectItems } from '../../utils/helper';
+import { useEffect } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+gsap.registerPlugin(ScrollTrigger);
 
 // using hard coded array in helper file for now
 // this needs to be converted to CMS using the commented out code
@@ -69,14 +73,53 @@ export const getStaticProps = async (context) => {
 };
 
 export default function Project({ item }) {
+    useEffect(() => {
+        let tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: `.${styles.projectItemWrapper}`,
+            },
+        });
+        tl.from(
+            `.${styles.projectItemWrapper}`,
+            {
+                duration: 4,
+                opacity: 0,
+                ease: 'power4.out',
+            },
+            '+=0'
+        );
+
+        const heroImg = document.querySelector(`.${styles.heroImg}`);
+        heroImg.style.backgroundPosition = `0% 0px`;
+        gsap.set(heroImg, { filter: 'blur(0px) brightness(0.3)' });
+        gsap.to(heroImg, {
+            backgroundPosition: `0% ${window.innerHeight / 2}px`,
+            scale: 1.2,
+            filter: 'blur(10px) brightness(0)',
+            ease: 'none',
+            scrollTrigger: {
+                trigger: heroImg,
+                start: 'top',
+                end: 'bottom top',
+                scrub: true,
+            },
+        });
+    });
     return (
         <>
-            <img className={styles.heroImg} src={item.image} alt='' />
-            <div className={styles.overlay} />
+            {/* <img className={styles.heroImg} src={item.image} alt='' /> */}
+            <div className={styles.fullscreenHero}>
+                <div
+                    className={styles.heroImg}
+                    style={{ backgroundImage: `url(${item.image})` }}
+                />
+            </div>
             <div className={titleStyles.container}>
                 <Header />
                 <div className='wrapper'>
-                    <h1 className={titleStyles.h1}>{item.title}</h1>
+                    <h1 className={titleStyles.h1} id='title'>
+                        {item.title}
+                    </h1>
                     <div className={titleStyles.line}></div>
                     <div className={titleStyles.detailGrid}>
                         <p className={titleStyles.detailGridTitle}>SOLUTION</p>
@@ -88,7 +131,7 @@ export default function Project({ item }) {
                     </div>
                 </div>
                 <div className={styles.projectItemWrapper}>
-                    <div className={styles.result}>
+                    <div className={styles.result} id='section'>
                         <div className={styles.left}>
                             <h4>The result</h4>
                             <div className={styles.line}></div>

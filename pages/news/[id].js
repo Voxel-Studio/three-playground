@@ -3,6 +3,10 @@ import Footer from '../../components/footer';
 import titleStyles from '../../styles/TitleSection.module.css';
 import styles from '../../styles/Article.module.css';
 import { newsItems } from '../../utils/helper';
+import { useEffect } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+gsap.registerPlugin(ScrollTrigger);
 
 // using hard coded array in helper file for now
 // this needs to be converted to CMS using the commented out code
@@ -54,6 +58,53 @@ export const getStaticProps = async (context) => {
 };
 
 export default function Article({ item }) {
+    useEffect(() => {
+        const heroImg = document.querySelector(`.${styles.heroImg}`);
+        heroImg.style.backgroundPosition = `0% 0px`;
+        gsap.to(heroImg, {
+            backgroundPosition: `0% ${window.innerHeight / 2}px`,
+            scale: 1.2,
+            ease: 'none',
+            scrollTrigger: {
+                trigger: heroImg,
+                start: 'top ' + heroImg.offsetHeight,
+                end: 'bottom top',
+                scrub: true,
+            },
+        });
+
+        gsap.utils
+            .toArray('#smallImageContainer')
+            .forEach((smallScreenImg, i) => {
+                const smallImg = smallScreenImg.querySelector(`div`);
+                console.log(smallImg);
+                smallImg.style.backgroundPosition = `50% ${
+                    -window.innerHeight / 12 - 150
+                }px`;
+                // smallImg.style.height = '150%';
+                gsap.to(smallImg, {
+                    backgroundPosition: `50% ${window.innerHeight / 12}px`,
+                    ease: 'none',
+                    scrollTrigger: {
+                        trigger: smallScreenImg,
+                        scrub: true,
+                    },
+                });
+            });
+
+        gsap.utils.toArray('.section').forEach((section, i) => {
+            // console.log(section);
+            gsap.from(section, {
+                opacity: 0,
+                duration: 2,
+                // ease: 'power4.out',
+                ease: 'none',
+                scrollTrigger: {
+                    trigger: section,
+                },
+            });
+        });
+    });
     return (
         <div className={titleStyles.container}>
             <Header />
@@ -61,9 +112,15 @@ export default function Article({ item }) {
                 <h1 className={titleStyles.h1}>{item.title}</h1>
                 <div className={titleStyles.line}></div>
             </div>
-            <img className={styles.heroImg} src={item.img} alt='' />
+            {/* <img className={styles.heroImg} src={item.img} alt='' /> */}
+            <div className={styles.fullscreenHero}>
+                <div
+                    className={styles.heroImg}
+                    style={{ backgroundImage: `url(${item.img})` }}
+                />
+            </div>
             <div className={styles.newsItemWrapper}>
-                <p>
+                <p className='section'>
                     In a enim non libero commodo dapibus. Curabitur ullamcorper,
                     orci ut ultricies imperdiet, tellus libero malesuada risus,
                     non commodo lectus eros vel risus. Interdum et malesuada
@@ -71,7 +128,7 @@ export default function Article({ item }) {
                     bibendum lectus, blandit ultrices nunc. Nunc laoreet purus
                     lacus, vitae pellentesque enim semper vitae.
                 </p>
-                <p>
+                <p className='section'>
                     Nulla feugiat sit amet nunc ac pulvinar. Etiam sapien dui,
                     tempor porttitor sollicitudin eget, commodo sed nisi.
                     Praesent urna nisl, convallis aliquam tempor quis, porta
@@ -81,8 +138,16 @@ export default function Article({ item }) {
                     porttitor neque. Duis magna erat, convallis a massa ut,
                     congue dapibus lectus.
                 </p>
-                <img src={item.img} alt='' />
-                <div className={styles.metaGrid}>
+                <div
+                    className={`${styles.smallScreenImg} section`}
+                    id='smallImageContainer'
+                >
+                    <div
+                        className={`${styles.smallImg}`}
+                        style={{ backgroundImage: `url(${item.img})` }}
+                    />
+                </div>
+                <div className={`${styles.metaGrid} section`}>
                     <p>Posted on:</p>
                     <p>18/12/2022</p>
                     <p>Tags:</p>

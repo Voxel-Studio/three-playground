@@ -74,21 +74,6 @@ export const getStaticProps = async (context) => {
 
 export default function Project({ item }) {
     useEffect(() => {
-        let tl = gsap.timeline({
-            scrollTrigger: {
-                trigger: `.${styles.projectItemWrapper}`,
-            },
-        });
-        tl.from(
-            `.${styles.projectItemWrapper}`,
-            {
-                duration: 4,
-                opacity: 0,
-                ease: 'power4.out',
-            },
-            '+=0'
-        );
-
         const heroImg = document.querySelector(`.${styles.heroImg}`);
         heroImg.style.backgroundPosition = `0% 0px`;
         gsap.set(heroImg, { filter: 'blur(0px) brightness(0.3)' });
@@ -104,10 +89,41 @@ export default function Project({ item }) {
                 scrub: true,
             },
         });
+
+        gsap.utils
+            .toArray('#smallImageContainer')
+            .forEach((smallScreenImg, i) => {
+                const smallImg = smallScreenImg.querySelector(`div`);
+                console.log(smallImg);
+                smallImg.style.backgroundPosition = `50% ${
+                    -window.innerHeight / 12 - 150
+                }px`;
+                // smallImg.style.height = '150%';
+                gsap.to(smallImg, {
+                    backgroundPosition: `50% ${window.innerHeight / 12}px`,
+                    ease: 'none',
+                    scrollTrigger: {
+                        trigger: smallScreenImg,
+                        scrub: true,
+                    },
+                });
+            });
+
+        gsap.utils.toArray('.section').forEach((section, i) => {
+            console.log(section);
+            gsap.from(section, {
+                opacity: 0,
+                duration: 2,
+                // ease: 'power4.out',
+                ease: 'none',
+                scrollTrigger: {
+                    trigger: section,
+                },
+            });
+        });
     });
     return (
         <>
-            {/* <img className={styles.heroImg} src={item.image} alt='' /> */}
             <div className={styles.fullscreenHero}>
                 <div
                     className={styles.heroImg}
@@ -131,7 +147,7 @@ export default function Project({ item }) {
                     </div>
                 </div>
                 <div className={styles.projectItemWrapper}>
-                    <div className={styles.result} id='section'>
+                    <div className={`${styles.result} section`}>
                         <div className={styles.left}>
                             <h4>The result</h4>
                             <div className={styles.line}></div>
@@ -145,12 +161,16 @@ export default function Project({ item }) {
                             </p>
                         </div>
                     </div>
-                    <img
-                        className={styles.imgLeft}
-                        src='/adidas-2.jpeg'
-                        alt=''
-                    />
-                    <div className={styles.row}>
+                    <div
+                        className={`${styles.imgLeftContainer} ${styles.smallScreenImg} section`}
+                        id='smallImageContainer'
+                    >
+                        <div
+                            className={`${styles.imgLeft} ${styles.smallImg}`}
+                            style={{ backgroundImage: `url(/adidas-2.jpeg)` }}
+                        />
+                    </div>
+                    <div className={`${styles.row} section`}>
                         <div className={`${styles.info} ${styles.infoFirst}`}>
                             <p>EVENT TECH</p>
                             <h3>Praesent urna nisl convallis aliquam</h3>
@@ -160,7 +180,7 @@ export default function Project({ item }) {
                             {/* <div className={styles.imgOverlayRight}></div> */}
                         </div>
                     </div>
-                    <div className={`${styles.row} ${styles.rowLast}`}>
+                    <div className={`${styles.row} ${styles.rowLast} section`}>
                         <div className={styles.rowImg}>
                             <img src='/news1-new.jpg' alt='' />
                             {/* <div className={styles.imgOverlayLeft}></div> */}
@@ -170,12 +190,16 @@ export default function Project({ item }) {
                             <h3>Praesent urna nisl convallis aliquam</h3>
                         </div>
                     </div>
-                    <img
-                        className={styles.imgRight}
-                        src='/adidas-1.jpeg'
-                        alt=''
-                    />
-                    <p>
+                    <div
+                        className={`${styles.imgRightContainer} ${styles.smallScreenImg} section`}
+                        id='smallImageContainer'
+                    >
+                        <div
+                            className={`${styles.imgRight} ${styles.smallImg}`}
+                            style={{ backgroundImage: `url(/adidas-1.jpeg)` }}
+                        />
+                    </div>
+                    <p className='section'>
                         In a enim non libero commodo dapibus. Curabitur
                         ullamcorper, orci ut ultricies imperdiet, tellus libero
                         malesuada risus, non commodo lectus eros vel risus.

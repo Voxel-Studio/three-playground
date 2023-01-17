@@ -53,6 +53,16 @@ const Header = ({ isHomepage = false }) => {
                             </div>
                         </Link>
                     </li>
+                    <li>
+                        <Link href='/news'>
+                            <div
+                                className={styles.hoverScroll}
+                                data-hover='NEWS'
+                            >
+                                NEWS
+                            </div>
+                        </Link>
+                    </li>
                 </ul>
                 <Link href='/contact'>
                     <button className={styles.buttonContact}>

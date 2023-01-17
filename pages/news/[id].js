@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import Header from '../../components/header';
 import Footer from '../../components/footer';
 import titleStyles from '../../styles/TitleSection.module.css';
@@ -107,6 +108,9 @@ export default function Article({ item }) {
     });
     return (
         <div className={titleStyles.container}>
+            <Head>
+                <title>Insert Productions Limited - {item.title}.</title>
+            </Head>
             <Header />
             <div className='wrapper'>
                 <h1 className={titleStyles.h1}>{item.title}</h1>

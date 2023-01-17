@@ -13,7 +13,9 @@ export default function CaseStudies() {
     };
     return (
         <div className={`${styles.container}`}>
-            {/* <h1>Yo</h1> */}
+            <Head>
+                <title>Insert Productions Limited - Case Studies.</title>
+            </Head>
             <Projects getSelected={getSelected} />
             <div className={styles.overlay} />
             <Header />

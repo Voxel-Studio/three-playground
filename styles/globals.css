@@ -55,6 +55,7 @@ h1, h4 {
 }
 
 .wrapper {
+    position: relative;
     width: 90%;
     max-width: 1600px;
 }
@@ -102,13 +103,16 @@ h1, h4 {
     justify-self: flex-start;
     align-self: flex-start;
     margin-top: 40px;
-    /* margin-bottom: -40px; */
+    padding: 40px;
+    margin-left: -20px;
 }
 
 .backToTop p {
     /* font-size: 1rem !important; */
+    font-size: 0.8rem;
     font-weight: 300 !important;
     margin: 0 !important;
+    transition: transform 0.35s ease-in-out, opacity 0.35s ease-in-out;
 }
 
 .backToTop div {
@@ -116,6 +120,17 @@ h1, h4 {
     height: 40px;
     margin-top: 20px;
     background: white;
+    transition: transform 0.35s ease-in-out, opacity 0.35s ease-in-out;
+}
+
+.backToTop:hover div {
+    transform: translateY(10px);
+    opacity: 0.5;
+}
+
+.backToTop:hover p {
+    transform: translateY(-10px);
+    opacity: 0.5;
 }
 
 .validation {

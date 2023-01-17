@@ -8,6 +8,12 @@ export default function Home() {
     const router = useRouter();
     return (
         <div className={styles.container}>
+            <Head>
+                <title>
+                    Insert Productions Limited - Live and virtual event
+                    technical production.
+                </title>
+            </Head>
             <Landing />
             <div className={styles.textContainer}>
                 <h1>

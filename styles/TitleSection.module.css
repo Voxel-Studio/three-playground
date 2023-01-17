@@ -6,13 +6,28 @@
     z-index: 10;
 }
 
+.headerImg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    /* width: 120%; */
+    /* width: 100%; */
+    /* height: 100%; */
+    width: 120%;
+    height: 280px;
+    /* height: 180px; */
+    object-fit: cover;
+}
+
 .h1 {
+    position: relative;
     font-size: 3rem;
     font-weight: 600;
     margin-top: 100px;
 }
 
 .line {
+    position: relative;
     width: 120px;
     height: 1px;
     background: white;

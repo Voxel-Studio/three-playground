@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import Header from '../../components/header';
 import Footer from '../../components/footer';
 import titleStyles from '../../styles/TitleSection.module.css';
@@ -94,6 +95,7 @@ export default function Project({ item }) {
             .toArray('#smallImageContainer')
             .forEach((smallScreenImg, i) => {
                 const smallImg = smallScreenImg.querySelector(`div`);
+                // gsap.set(smallImg, { filter: 'blur(2px) brightness(0)' });
                 console.log(smallImg);
                 smallImg.style.backgroundPosition = `50% ${
                     -window.innerHeight / 12 - 150
@@ -102,6 +104,7 @@ export default function Project({ item }) {
                 gsap.to(smallImg, {
                     backgroundPosition: `50% ${window.innerHeight / 12}px`,
                     ease: 'none',
+                    // filter: 'blur(0px) brightness(1)',
                     scrollTrigger: {
                         trigger: smallScreenImg,
                         scrub: true,
@@ -124,6 +127,9 @@ export default function Project({ item }) {
     });
     return (
         <>
+            <Head>
+                <title>Insert Productions Limited - {item.title}.</title>
+            </Head>
             <div className={styles.fullscreenHero}>
                 <div
                     className={styles.heroImg}

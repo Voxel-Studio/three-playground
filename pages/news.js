@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import Link from 'next/link';
 import Header from '../components/header';
 import Footer from '../components/footer';
@@ -26,8 +27,16 @@ import { newsItems } from '../utils/helper';
 export default function News() {
     return (
         <div className={titleStyles.container}>
+            <Head>
+                <title>Insert Productions Limited - News.</title>
+            </Head>
             <Header />
             <div className='wrapper'>
+                <img
+                    className={titleStyles.headerImg}
+                    src='/news-header.jpg'
+                    alt=''
+                />
                 <h1 className={titleStyles.h1}>News and insights</h1>
                 <div className={titleStyles.line}></div>
             </div>

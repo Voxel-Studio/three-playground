@@ -90,10 +90,8 @@ const init = (setSelected) => {
                  `,
         });
         const mesh = new THREE.Mesh(geo, mat);
-        // const angle = theta * i;
         const angle = theta * i + Math.PI;
-        // console.log(angle);
-        mesh.name = 'plane';
+        mesh.name = 'plane' + ' ' + i;
         group.add(mesh);
         mesh.position.set(
             radius * Math.cos(angle),
@@ -102,11 +100,9 @@ const init = (setSelected) => {
         );
         mesh.rotation.z = angle;
         mesh.scale.y *= -1;
-        // loader.load('/sharp-grotesk.json', function (font) {
         loader.load('/lexend-deca.json', function (font) {
             const textGeometry = new TextGeometry(titles[i], {
                 font: font,
-                // size: 0.4,
                 size: 0.2,
                 height: 0.01,
                 curveSegments: 8,
@@ -115,7 +111,7 @@ const init = (setSelected) => {
                 color: 'white',
             });
             const text = new THREE.Mesh(textGeometry, textMaterial);
-            text.name = 'text';
+            text.name = 'text' + ' ' + i;
             group.add(text);
             text.position.set(
                 // radius * 1 * Math.cos(angle),
@@ -184,6 +180,8 @@ const init = (setSelected) => {
     let yPos = 0;
     let xTargetPos = 0;
     let yTargetPos = 0;
+    const rayCaster = new THREE.Raycaster();
+    let mouse = new THREE.Vector2();
     const onMouseMove = (e) => {
         deltaX = Math.abs(e.clientX) < 10 && e.clientX - oldX;
         deltaY = Math.abs(e.clientY) < 10 && e.clientY - oldY;
@@ -194,8 +192,44 @@ const init = (setSelected) => {
         // console.log(deltaX, deltaY);
         xPos = e.clientX;
         yPos = e.clientY;
+
+        mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+        mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+        rayCaster.setFromCamera(mouse, camera);
+        let intersects = rayCaster.intersectObjects(scene.children);
+        if (intersects.length > 0) {
+            const hit = intersects[0].object;
+            if (hit) {
+                const name = hit.name;
+                const type = name.split(' ')[0];
+                if (type === 'plane') {
+                    document.body.style.cursor = 'pointer';
+                }
+            }
+        } else {
+            document.body.style.cursor = 'auto';
+        }
     };
     window.addEventListener('mousemove', onMouseMove);
+
+    const onClick = (e) => {
+        rayCaster.setFromCamera(mouse, camera);
+        let intersects = rayCaster.intersectObjects(scene.children);
+        if (intersects.length > 0) {
+            const hit = intersects[0].object;
+            if (hit) {
+                const name = hit.name;
+                const type = name.split(' ')[0];
+                console.log(type);
+                const num = name.split(' ')[1];
+                // if (type === 'plane' || type === 'text') {
+                if (type === 'plane') {
+                    window.location.href = `/case-studies/${projectItems[num].id}`;
+                }
+            }
+        }
+    };
+    window.addEventListener('click', onClick);
 
     // Rendering
     const render = () => {

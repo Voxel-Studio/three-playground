@@ -221,10 +221,12 @@ export default function Project({ item }) {
                         <img src='/more-news-1.jpg' alt='' />
                         <p className='moreNewsFirst'>Yamaha - WAY UP HOUSE</p>
                         <p className='prevArticle'>PREV</p>
+                        <div className='prevLine' />
                     </div>
                     <div className='newsCard'>
                         <p>TikTok - Transparency Forum</p>
                         <p className='nextArticle'>NEXT</p>
+                        <div className='nextLine' />
                         <img src='/more-news-2.jpg' alt='' />
                     </div>
                 </div>

@@ -335,11 +335,13 @@ const init = (setSelected) => {
 
         const progressNumbers = document.querySelectorAll('.progressNumber');
         progressNumbers.forEach((number) => (number.style.opacity = 0.25));
-        progressNumbers[selected].style.opacity = 1;
+        if (progressNumbers[selected])
+            progressNumbers[selected].style.opacity = 1;
         const brackets = document.querySelector('.brackets');
-        brackets.style.transform = `translateY(calc(${selected}em + ${
-            selected * 10
-        }px))`;
+        if (brackets)
+            brackets.style.transform = `translateY(calc(${selected}em + ${
+                selected * 10
+            }px))`;
 
         // for (let i = 0; i < group.children.length; i++) {
         //     group.children[i].translateX(0);

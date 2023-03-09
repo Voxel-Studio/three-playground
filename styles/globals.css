@@ -258,6 +258,10 @@ h1, h4 {
     transform: scaleX(1.2);
 } */
 
+.sectionHeader {
+    /* margin-bottom: 80px; */
+}
+
 @media (max-width: 1024px) {
     .moreNews {
         flex-direction: column;

@@ -8,15 +8,28 @@
 
 .headerImg {
     position: absolute;
-    top: 0;
+    /* top: 0; */
+    top: -120px;
     left: 0;
     /* width: 120%; */
     /* width: 100%; */
     /* height: 100%; */
     width: 120%;
-    height: 280px;
+    /* height: 280px; */
+    height: 400px;
     /* height: 180px; */
     object-fit: cover;
+}
+
+@media (max-width: 1024px) {
+    .headerImg {
+        width: 100%;
+    }
+}
+
+.headerAbout {
+    object-position: 30% 30%;
+    /* top: -50px; */
 }
 
 .h1 {

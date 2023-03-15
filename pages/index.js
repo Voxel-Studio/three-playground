@@ -5,38 +5,41 @@ import Header from '../components/header';
 import Footer from '../components/footer';
 import Landing from '../components/landing';
 import { useRouter } from 'next/router';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
     const router = useRouter();
     useEffect(() => {
-        // gsap.utils
-        //     .toArray('#smallImageContainer')
-        //     .forEach((smallScreenImg, i) => {
-        //         const smallImg = smallScreenImg.querySelector(`div`);
-        //         console.log(smallImg);
-        //         smallImg.style.backgroundPosition = `50% ${
-        //             -window.innerHeight / 12 - 150
-        //         }px`;
-        //         gsap.to(smallImg, {
-        //             backgroundPosition: `50% ${window.innerHeight / 12}px`,
-        //             ease: 'none',
-        //             scrollTrigger: {
-        //                 trigger: smallScreenImg,
-        //                 scrub: true,
-        //             },
-        //         });
-        //     });
-        // gsap.utils.toArray('.section').forEach((section, i) => {
-        //     console.log(section);
-        //     gsap.from(section, {
-        //         opacity: 0,
-        //         duration: 2,
-        //         ease: 'none',
-        //         scrollTrigger: {
-        //             trigger: section,
-        //         },
-        //     });
-        // });
+        gsap.utils
+            .toArray('#smallImageContainer')
+            .forEach((smallScreenImg, i) => {
+                const smallImg = smallScreenImg.querySelector(`div`);
+                console.log(smallImg);
+                smallImg.style.backgroundPosition = `50% ${
+                    -window.innerHeight / 12 - 150
+                }px`;
+                gsap.to(smallImg, {
+                    backgroundPosition: `50% ${window.innerHeight / 12}px`,
+                    ease: 'none',
+                    scrollTrigger: {
+                        trigger: smallScreenImg,
+                        scrub: true,
+                    },
+                });
+            });
+        gsap.utils.toArray('.section').forEach((section, i) => {
+            console.log(section);
+            gsap.from(section, {
+                opacity: 0,
+                duration: 2,
+                ease: 'none',
+                scrollTrigger: {
+                    trigger: section,
+                },
+            });
+        });
     });
     return (
         <div className={styles.container}>

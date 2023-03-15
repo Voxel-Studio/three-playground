@@ -13,56 +13,56 @@ const Header = ({ isHomepage = false }) => {
                     />
                 </Link>
                 <ul>
-                    <li>
-                        <Link href='/'>
+                    <Link href='/'>
+                        <li>
                             <div
                                 className={styles.hoverScroll}
                                 data-hover='HOME'
                             >
                                 HOME
                             </div>
-                        </Link>
-                    </li>
-                    <li>
-                        <Link href='/about'>
+                        </li>
+                    </Link>
+                    <Link href='/about'>
+                        <li>
                             <div
                                 className={styles.hoverScroll}
                                 data-hover='ABOUT'
                             >
                                 ABOUT
                             </div>
-                        </Link>
-                    </li>
-                    <li>
-                        <Link href='/services'>
+                        </li>
+                    </Link>
+                    <Link href='/services'>
+                        <li>
                             <div
                                 className={styles.hoverScroll}
                                 data-hover='SERVICES'
                             >
                                 SERVICES
                             </div>
-                        </Link>
-                    </li>
-                    <li>
-                        <Link href='/case-studies'>
+                        </li>
+                    </Link>
+                    <Link href='/case-studies'>
+                        <li>
                             <div
                                 className={styles.hoverScroll}
                                 data-hover='PORTFOLIO'
                             >
                                 PORTFOLIO
                             </div>
-                        </Link>
-                    </li>
-                    <li>
-                        <Link href='/news'>
+                        </li>
+                    </Link>
+                    <Link href='/news'>
+                        <li>
                             <div
                                 className={styles.hoverScroll}
                                 data-hover='NEWS'
                             >
                                 NEWS
                             </div>
-                        </Link>
-                    </li>
+                        </li>
+                    </Link>
                 </ul>
                 <Link href='/contact'>
                     <button className={styles.buttonContact}>

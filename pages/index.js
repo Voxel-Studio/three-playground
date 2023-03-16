@@ -16,7 +16,6 @@ export default function Home() {
             .toArray('#smallImageContainer')
             .forEach((smallScreenImg, i) => {
                 const smallImg = smallScreenImg.querySelector(`div`);
-                console.log(smallImg);
                 smallImg.style.backgroundPosition = `50% ${
                     -window.innerHeight / 12 - 150
                 }px`;
@@ -30,7 +29,6 @@ export default function Home() {
                 });
             });
         gsap.utils.toArray('.section').forEach((section, i) => {
-            console.log(section);
             gsap.from(section, {
                 opacity: 0,
                 duration: 2,
@@ -60,7 +58,9 @@ export default function Home() {
                 </h1>
             </div> */}
             <Header />
-            <div className={styles.hero}></div>
+            <div className={styles.hero}>
+                <Landing />
+            </div>
             <div className={styles.homeWrapper}>
                 <div className={`${styles.row} section`}>
                     <div className={styles.grid}>

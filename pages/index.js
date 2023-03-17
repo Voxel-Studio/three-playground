@@ -60,6 +60,14 @@ export default function Home() {
             <Header />
             <div className={styles.hero}>
                 <Landing />
+                {/* <div className={styles.blur1} />
+                <div className={styles.blur2} /> */}
+                <div className={styles.heroTitles}>
+                    <h1>Creative.</h1>
+                    <h1>Technical.</h1>
+                    <h1>Production.</h1>
+                    <div className={styles.heroLine} />
+                </div>
             </div>
             <div className={styles.homeWrapper}>
                 <div className={`${styles.row} section`}>

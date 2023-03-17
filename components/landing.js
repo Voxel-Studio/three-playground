@@ -183,8 +183,8 @@ const init = () => {
     // render();
 
     const SEPARATION = 100,
-        AMOUNTX = 50,
-        AMOUNTY = 50;
+        AMOUNTX = 100,
+        AMOUNTY = 100;
 
     // let container, stats;
     // let container;
@@ -194,6 +194,9 @@ const init = () => {
 
     let particles,
         count = 0;
+
+    // let mouseX = -100,
+    //     mouseY = -275;
 
     let mouseX = 0,
         mouseY = 0;
@@ -251,27 +254,25 @@ const init = () => {
         const material = new THREE.ShaderMaterial({
             uniforms: {
                 color: { value: new THREE.Color(0xffffff) },
+                scaleFactor: { value: 100.0 },
             },
             vertexShader: `
+                uniform float scaleFactor;
                 varying vec2 vUv;
                 attribute float scale;
                 void main() {
-                    vUv = uv;
                     vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );
-                    gl_PointSize = scale * ( 300.0 / - mvPosition.z );
+                    gl_PointSize = scale * ( scaleFactor / - mvPosition.z );
                     gl_Position = projectionMatrix * mvPosition;
                 }
             `,
             fragmentShader: `
-                uniform sampler2D uTexture;
-                varying vec2 vUv;
-                void main()	{
-                    gl_FragColor = texture2D(uTexture,vUv);
-                }
+			    uniform vec3 color;
+			    void main() {
+				    if ( length( gl_PointCoord - vec2( 0.5, 0.5 ) ) > 0.475 ) discard;
+				    gl_FragColor = vec4( color, 1.0 );
+			    }
             `,
-            // vertexShader: document.getElementById('vertexshader').textContent,
-            // fragmentShader:
-            //     document.getElementById('fragmentshader').textContent,
         });
 
         //
@@ -315,6 +316,7 @@ const init = () => {
 
         mouseX = event.clientX - windowHalfX;
         mouseY = event.clientY - windowHalfY;
+        console.log(mouseX, mouseY);
     }
 
     //

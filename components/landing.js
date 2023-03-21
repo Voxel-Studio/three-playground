@@ -6,6 +6,7 @@ import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js';
 import Header from './header';
 import VirtualScroll from 'virtual-scroll';
 import styles from '../styles/Landing.module.css';
+import glsl from 'glslify';
 import { Plane } from 'three';
 import { Loading } from './loading';
 import { loadingTimeMs } from '../utils/helper';
@@ -73,7 +74,59 @@ const init = () => {
     // });
     // const meshImage = new THREE.Mesh(geoImage, matImage);
     // scene.add(meshImage);
-    // meshImage.position.set(3, 1.5, 5);
+    // meshImage.position.set(5, 1.5, 5);
+    // meshImage.rotation.set(0, -Math.PI / 8, 0);
+
+    // const geoImage = new THREE.PlaneGeometry(4, 2.25, 16, 16);
+    // const matImage = new THREE.ShaderMaterial({
+    //     vertexShader: `
+    //         // varying vec2 vUv;
+    //         // uniform float uTime;
+
+    //         // void main() {
+    //         //     vUv = uv;
+
+    //         //     vec3 pos = position;
+    //         //     float noiseFreq = 3.5;
+    //         //     float noiseAmp = 0.15;
+    //         //     vec3 noisePos = vec3(pos.x * noiseFreq + uTime, pos.y, pos.z);
+    //         //     pos.z += snoise3(noisePos) * noiseAmp;
+
+    //         //     gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.);
+    //         // }
+
+    //         #define PI 3.1415926
+    //         #define PI2 PI*2.
+    //         uniform float time;
+    //         void main(){
+
+    //           vec3 pos = position;
+    //           pos.z = sin((length(uv - 0.5) - time) * 6. * PI2);
+
+    //           gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.);
+    //     `,
+    //     fragmentShader: `
+    //         varying vec2 vUv;
+    //         uniform sampler2D uTexture;
+
+    //         void main() {
+    //             vec3 texture = texture2D(uTexture, vUv).rgb;
+    //             gl_FragColor = vec4(texture, 1.);
+    //         }
+    //     `,
+    //     uniforms: {
+    //         uTime: { value: 0.0 },
+    //         uTexture: { value: new THREE.TextureLoader().load('/about4.jpg') },
+    //     },
+    // });
+    // const texImage = new THREE.TextureLoader().load('/about4.jpg');
+    // const matImage = new THREE.MeshBasicMaterial({
+    //     map: texImage,
+    //     transparent: true,
+    // });
+    // const meshImage = new THREE.Mesh(geoImage, matImage);
+    // scene.add(meshImage);
+    // meshImage.position.set(5, 1.5, 5);
     // meshImage.rotation.set(0, -Math.PI / 8, 0);
 
     for (let i = 0; i < numCubes; i++) {
@@ -199,18 +252,119 @@ const init = () => {
     };
     window.addEventListener('resize', onWindowResize, false);
 
+    // Image planes
+    let meshImages = [];
+    const geoImage = new THREE.PlaneGeometry(3, 3, 50, 50);
+    const matImage1 = new THREE.MeshBasicMaterial({
+        map: new THREE.TextureLoader().load('/about4.jpg'),
+        transparent: true,
+    });
+    const meshImage1 = new THREE.Mesh(geoImage, matImage1);
+    scene.add(meshImage1);
+    meshImage1.position.set(5, 1.5, 5);
+    meshImage1.rotation.set(0, -Math.PI / 8, 0);
+    meshImages.push(meshImage1);
+
+    const matImage2 = new THREE.MeshBasicMaterial({
+        map: new THREE.TextureLoader().load('/about3.jpeg'),
+        transparent: true,
+    });
+    const meshImage2 = new THREE.Mesh(geoImage, matImage2);
+    scene.add(meshImage2);
+    meshImage2.position.set(-5, 1.5, 5);
+    meshImage2.rotation.set(0, Math.PI / 8, 0);
+    meshImages.push(meshImage2);
+
+    const matImage3 = new THREE.MeshBasicMaterial({
+        map: new THREE.TextureLoader().load('/about2.jpeg'),
+        transparent: true,
+    });
+    const meshImage3 = new THREE.Mesh(geoImage, matImage3);
+    scene.add(meshImage3);
+    meshImage3.position.set(-2, 4.5, 5);
+    meshImage3.rotation.set(0, 0, 0);
+    meshImages.push(meshImage3);
+
+    const matImage4 = new THREE.MeshBasicMaterial({
+        map: new THREE.TextureLoader().load('/about1.jpeg'),
+        transparent: true,
+    });
+    const meshImage4 = new THREE.Mesh(geoImage, matImage4);
+    scene.add(meshImage4);
+    meshImage4.position.set(2, 4.5, 5);
+    meshImage4.rotation.set(0, 0, 0);
+    meshImages.push(meshImage4);
+
+    const matImage5 = new THREE.MeshBasicMaterial({
+        map: new THREE.TextureLoader().load('/about5.jpeg'),
+        transparent: true,
+    });
+    const meshImage5 = new THREE.Mesh(geoImage, matImage5);
+    scene.add(meshImage5);
+    meshImage5.position.set(3, 2.5, 10);
+    meshImage5.rotation.set(0, -Math.PI / 8, 0);
+    meshImages.push(meshImage5);
+
+    const matImage6 = new THREE.MeshBasicMaterial({
+        map: new THREE.TextureLoader().load('/adidas-1.jpeg'),
+        transparent: true,
+    });
+    const meshImage6 = new THREE.Mesh(geoImage, matImage6);
+    scene.add(meshImage6);
+    meshImage6.position.set(-3, 2.5, 10);
+    meshImage6.rotation.set(0, Math.PI / 8, 0);
+    meshImages.push(meshImage6);
+
+    // const matImage7 = new THREE.MeshBasicMaterial({
+    //     map: new THREE.TextureLoader().load('/about2.jpeg'),
+    //     transparent: true,
+    // });
+    // const meshImage7 = new THREE.Mesh(geoImage, matImage7);
+    // scene.add(meshImage7);
+    // meshImage7.position.set(-2, 1.5, 10);
+    // meshImage7.rotation.set(0, 0, 0);
+    // meshImages.push(meshImage7);
+
+    // const matImage8 = new THREE.MeshBasicMaterial({
+    //     map: new THREE.TextureLoader().load('/about1.jpeg'),
+    //     transparent: true,
+    // });
+    // const meshImage8 = new THREE.Mesh(geoImage, matImage8);
+    // scene.add(meshImage8);
+    // meshImage8.position.set(2, 1.5, 10);
+    // meshImage8.rotation.set(0, 0, 0);
+    // meshImages.push(meshImage8);
+
     // Rendering
     const clock = new THREE.Clock();
     const render = () => {
+        const delta = clock.getDelta();
+        const time = clock.getElapsedTime() * 10;
+
+        if (meshImages.length > 0) {
+            meshImages.forEach((meshImage) => {
+                const position = meshImage.geometry.attributes.position;
+                for (let i = 0; i < position.count; i++) {
+                    const z = Math.sin(i / 10 + (time + i) / 7) / 8;
+                    position.setZ(i, z);
+
+                    // const currentX = position.getY(i);
+                    // const waveX1 = 0.05 * Math.sin(currentX * 2 + time);
+                    // const waveX2 = 0.025 * Math.sin(currentX * 3 + time);
+                    // position.setZ(i, waveX1 + waveX2);
+                }
+                position.needsUpdate = true;
+            });
+        }
+
+        // let hovering = null;
+
         scrollTargetPos += (scrollPos - scrollTargetPos) * 0.1;
         camera.position.z = scrollTargetPos + 5;
 
         cubes.forEach((cube) => {
             cube.rotateY(Math.PI / 1000);
         });
-
-        const delta = clock.getDelta();
-        const time = clock.getElapsedTime() * 10;
 
         const position = plane.geometry.attributes.position;
         for (let i = 0; i < position.count; i++) {
@@ -241,10 +395,19 @@ const init = () => {
                 7
             );
 
-            // plane.material.opacity =
+            // meshImage.material.opacity =
             //     1 -
-            //     remap(camera.position.distanceTo(meshText.position), 12, 7) +
+            //     remap(camera.position.distanceTo(meshImage.position), 12, 7) +
             //     0.2;
+
+            meshImages.forEach((meshImage) => {
+                meshImage.material.opacity =
+                    remap(
+                        camera.position.distanceTo(meshImage.position),
+                        12,
+                        7
+                    ) + 0.2;
+            });
 
             // cubes.forEach((cube) => {
             //     cube.material.opacity =

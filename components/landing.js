@@ -71,7 +71,7 @@ const init = () => {
         transparent: true,
     });
     const meshText = new THREE.Mesh(geoText, matText);
-    meshText.position.x = -(visibleWidthAtZDepth(0, camera) / 5) + 2.875;
+    meshText.position.x = -(visibleWidthAtZDepth(0, camera) / 5) + 3;
     meshText.position.y = 2.25;
     meshText.name = 'text';
     scene.add(meshText);
@@ -130,6 +130,16 @@ const init = () => {
             scene.add(line);
             line.position.copy(cube.position);
             cubes.push(line);
+            const cubeScale = getRandomArbitrary(0.85, 1.15);
+            line.scale.set(cubeScale, cubeScale, cubeScale);
+            line.rotation.set(
+                // getRandomArbitrary(0, Math.PI * 2),
+                0,
+                // getRandomArbitrary(0, Math.PI * 2),
+                0,
+                // getRandomArbitrary(0, Math.PI * 2)
+                0
+            );
             const sphere = new THREE.SphereGeometry(1, 16, 16);
             const sphereMat = new THREE.MeshBasicMaterial({
                 color: 0xffffff,
@@ -157,6 +167,21 @@ const init = () => {
         },
         {
             position: new THREE.Vector3(1, 3, 3),
+        },
+        {
+            position: new THREE.Vector3(-5.5, 3.5, 6),
+        },
+        {
+            position: new THREE.Vector3(4.5, 4.75, 9),
+        },
+        {
+            position: new THREE.Vector3(-4.5, 4.75, 14),
+        },
+        {
+            position: new THREE.Vector3(2, 4.5, 21),
+        },
+        {
+            position: new THREE.Vector3(-3, 1.5, 24),
         },
     ]);
 
@@ -204,10 +229,64 @@ const init = () => {
         },
         {
             map: new THREE.TextureLoader().load('/about3.jpeg'),
-            position: new THREE.Vector3(5, 2.5, 5),
+            position: new THREE.Vector3(-5, 2.5, 5),
+            rotation: new THREE.Euler(0, Math.PI / 16, 0),
+            scale: {
+                x: 2,
+                y: 3,
+            },
+        },
+        {
+            map: new THREE.TextureLoader().load('/about2.jpeg'),
+            position: new THREE.Vector3(-2, 4, 10),
+            rotation: new THREE.Euler(0, Math.PI / 16, 0),
+            scale: {
+                x: 3,
+                y: 3,
+            },
+        },
+        {
+            map: new THREE.TextureLoader().load('/about1.jpeg'),
+            position: new THREE.Vector3(5, 2.5, 9),
             rotation: new THREE.Euler(0, -Math.PI / 16, 0),
             scale: {
                 x: 2,
+                y: 2,
+            },
+        },
+        {
+            map: new THREE.TextureLoader().load('/news2.jpg'),
+            position: new THREE.Vector3(3, 2.5, 15),
+            rotation: new THREE.Euler(0, -Math.PI / 16, 0),
+            scale: {
+                x: 2.5,
+                y: 3,
+            },
+        },
+        {
+            map: new THREE.TextureLoader().load('/adidas-1.jpeg'),
+            position: new THREE.Vector3(0, 5, 18),
+            rotation: new THREE.Euler(0, 0, 0),
+            scale: {
+                x: 4,
+                y: 3,
+            },
+        },
+        {
+            map: new THREE.TextureLoader().load('/adidas-2.jpeg'),
+            position: new THREE.Vector3(-5, 2, 18),
+            rotation: new THREE.Euler(0, 0, 0),
+            scale: {
+                x: 4,
+                y: 3,
+            },
+        },
+        {
+            map: new THREE.TextureLoader().load('/news1.jpg'),
+            position: new THREE.Vector3(5, 2, 18),
+            rotation: new THREE.Euler(0, 0, 0),
+            scale: {
+                x: 4,
                 y: 3,
             },
         },
@@ -238,6 +317,14 @@ const init = () => {
     addText([
         {
             position: new THREE.Vector3(3, 2.25, 7),
+            scale: {
+                x: 2.79 / 1.5,
+                y: 3 / 1.5,
+            },
+            map: new THREE.TextureLoader().load('/lorem-1.svg'),
+        },
+        {
+            position: new THREE.Vector3(-3, 1.75, 14),
             scale: {
                 x: 2.79 / 1.5,
                 y: 3 / 1.5,
@@ -332,7 +419,7 @@ const init = () => {
         if (meshText) {
             const position = meshText.geometry.attributes.position;
             for (let i = 0; i < position.count; i++) {
-                const z = Math.sin(i / 10 + (time + i) / 7) / 16;
+                const z = Math.sin(i / 10 + (time + i) / 7) / 8;
                 position.setZ(i, z);
             }
             position.needsUpdate = true;
@@ -621,7 +708,7 @@ const Landing = () => {
                 <div id='webglEl'></div>
             </div>
             <Header isHomepage={true} />
-            {/* <Loading /> */}
+            <Loading />
         </div>
     );
 };

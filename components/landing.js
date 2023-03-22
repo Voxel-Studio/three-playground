@@ -49,6 +49,7 @@ const init = () => {
         1100
     );
     camera.position.set(0, 1, 5);
+    camera.rotation.x = Math.PI / 32;
 
     const geo = new THREE.PlaneGeometry(50, 50, 15, 15);
     const mat = new THREE.MeshBasicMaterial({
@@ -63,117 +64,154 @@ const init = () => {
     plane.rotation.z = Math.PI / 4;
     scene.add(plane);
 
-    const numCubes = 1000;
-    let cubes = [];
-
-    // const geoImage = new THREE.PlaneGeometry(4, 2.25, 10, 10);
-    // const texImage = new THREE.TextureLoader().load('/bleach.jpg');
-    // const matImage = new THREE.MeshBasicMaterial({
-    //     map: texImage,
-    //     transparent: true,
-    // });
-    // const meshImage = new THREE.Mesh(geoImage, matImage);
-    // scene.add(meshImage);
-    // meshImage.position.set(5, 1.5, 5);
-    // meshImage.rotation.set(0, -Math.PI / 8, 0);
-
-    // const geoImage = new THREE.PlaneGeometry(4, 2.25, 16, 16);
-    // const matImage = new THREE.ShaderMaterial({
-    //     vertexShader: `
-    //         // varying vec2 vUv;
-    //         // uniform float uTime;
-
-    //         // void main() {
-    //         //     vUv = uv;
-
-    //         //     vec3 pos = position;
-    //         //     float noiseFreq = 3.5;
-    //         //     float noiseAmp = 0.15;
-    //         //     vec3 noisePos = vec3(pos.x * noiseFreq + uTime, pos.y, pos.z);
-    //         //     pos.z += snoise3(noisePos) * noiseAmp;
-
-    //         //     gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.);
-    //         // }
-
-    //         #define PI 3.1415926
-    //         #define PI2 PI*2.
-    //         uniform float time;
-    //         void main(){
-
-    //           vec3 pos = position;
-    //           pos.z = sin((length(uv - 0.5) - time) * 6. * PI2);
-
-    //           gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.);
-    //     `,
-    //     fragmentShader: `
-    //         varying vec2 vUv;
-    //         uniform sampler2D uTexture;
-
-    //         void main() {
-    //             vec3 texture = texture2D(uTexture, vUv).rgb;
-    //             gl_FragColor = vec4(texture, 1.);
-    //         }
-    //     `,
-    //     uniforms: {
-    //         uTime: { value: 0.0 },
-    //         uTexture: { value: new THREE.TextureLoader().load('/about4.jpg') },
-    //     },
-    // });
-    // const texImage = new THREE.TextureLoader().load('/about4.jpg');
-    // const matImage = new THREE.MeshBasicMaterial({
-    //     map: texImage,
-    //     transparent: true,
-    // });
-    // const meshImage = new THREE.Mesh(geoImage, matImage);
-    // scene.add(meshImage);
-    // meshImage.position.set(5, 1.5, 5);
-    // meshImage.rotation.set(0, -Math.PI / 8, 0);
-
-    for (let i = 0; i < numCubes; i++) {
-        const geo = new THREE.BoxGeometry(1, 1, 1);
-        const edges = new THREE.EdgesGeometry(geo, 1);
-        const line = new THREE.LineSegments(
-            edges,
-            new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true })
-        );
-        scene.add(line);
-        const posY = getRandomArbitrary(2, 7);
-        const posZ = getRandomArbitrary(-15, 15);
-        line.position.set(i - numCubes / 2, posY, posZ);
-        line.rotation.set(
-            getRandomArbitrary(0, Math.PI * 2),
-            getRandomArbitrary(0, Math.PI * 2),
-            getRandomArbitrary(0, Math.PI * 2)
-        );
-        cubes.push(line);
-        const sphere = new THREE.SphereGeometry(1, 16, 16);
-        const sphereMat = new THREE.MeshBasicMaterial({
-            color: 0xffffff,
-            transparent: true,
-        });
-        const sphereMesh = new THREE.Mesh(sphere, sphereMat);
-        scene.add(sphereMesh);
-        sphereMesh.position.set(i - numCubes / 2, posY, posZ);
-        sphereMesh.rotation.set(
-            getRandomArbitrary(0, Math.PI * 2),
-            getRandomArbitrary(0, Math.PI * 2),
-            getRandomArbitrary(0, Math.PI * 2)
-        );
-        const sphereScale = getRandomArbitrary(0.01, 0.15);
-        sphereMesh.scale.set(sphereScale, sphereScale, sphereScale);
-    }
-
-    const geoText = new THREE.PlaneGeometry(8, 2, 10, 10);
-    const textureText = new THREE.TextureLoader().load('/title-text.svg');
+    const geoText = new THREE.PlaneGeometry(5.74 / 1.5, 3 / 1.5, 10, 10);
+    const textureText = new THREE.TextureLoader().load('/logo-text.svg');
     const matText = new THREE.MeshBasicMaterial({
         map: textureText,
         transparent: true,
     });
     const meshText = new THREE.Mesh(geoText, matText);
-    meshText.position.x = -(visibleWidthAtZDepth(0, camera) / 5) + 2.75;
-    meshText.position.y = 1;
+    meshText.position.x = -(visibleWidthAtZDepth(0, camera) / 5) + 2.875;
+    meshText.position.y = 2.25;
     meshText.name = 'text';
     scene.add(meshText);
+
+    const numCubes = 100;
+    let cubes = [];
+
+    // for (let i = 0; i < numCubes; i++) {
+    //     const geo = new THREE.BoxGeometry(1, 1, 1);
+    //     const edges = new THREE.EdgesGeometry(geo, 1);
+    //     const line = new THREE.LineSegments(
+    //         edges,
+    //         new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true })
+    //     );
+    //     scene.add(line);
+    //     const posY = getRandomArbitrary(2, 7);
+    //     const posZ = getRandomArbitrary(-15, 15);
+    //     line.position.set(i - numCubes / 2, posY, posZ);
+    //     line.rotation.set(
+    //         getRandomArbitrary(0, Math.PI * 2),
+    //         getRandomArbitrary(0, Math.PI * 2),
+    //         getRandomArbitrary(0, Math.PI * 2)
+    //     );
+    //     // const cubeScale = getRandomArbitrary(0.25, 0.75);
+    //     // line.scale.set(cubeScale, cubeScale, cubeScale);
+    //     cubes.push(line);
+    //     const sphere = new THREE.SphereGeometry(1, 16, 16);
+    //     const sphereMat = new THREE.MeshBasicMaterial({
+    //         color: 0xffffff,
+    //         transparent: true,
+    //     });
+    //     const sphereMesh = new THREE.Mesh(sphere, sphereMat);
+    //     scene.add(sphereMesh);
+    //     sphereMesh.position.set(i - numCubes / 2, posY, posZ);
+    //     sphereMesh.rotation.set(
+    //         getRandomArbitrary(0, Math.PI * 2),
+    //         getRandomArbitrary(0, Math.PI * 2),
+    //         getRandomArbitrary(0, Math.PI * 2)
+    //     );
+    //     const sphereScale = getRandomArbitrary(0.01, 0.15);
+    //     sphereMesh.scale.set(sphereScale, sphereScale, sphereScale);
+    // }
+
+    // let cubes = [];
+    const addCube = (manualCubes) => {
+        manualCubes.forEach((cube) => {
+            const geo = new THREE.BoxGeometry(1, 1, 1);
+            const edges = new THREE.EdgesGeometry(geo, 1);
+            const line = new THREE.LineSegments(
+                edges,
+                new THREE.LineBasicMaterial({
+                    color: 0xffffff,
+                    transparent: true,
+                })
+            );
+            scene.add(line);
+            line.position.copy(cube.position);
+            cubes.push(line);
+            const sphere = new THREE.SphereGeometry(1, 16, 16);
+            const sphereMat = new THREE.MeshBasicMaterial({
+                color: 0xffffff,
+                transparent: true,
+            });
+            const sphereMesh = new THREE.Mesh(sphere, sphereMat);
+            scene.add(sphereMesh);
+            sphereMesh.position.copy(cube.position);
+            sphereMesh.rotation.set(
+                getRandomArbitrary(0, Math.PI * 2),
+                getRandomArbitrary(0, Math.PI * 2),
+                getRandomArbitrary(0, Math.PI * 2)
+            );
+            const sphereScale = getRandomArbitrary(0.05, 0.15);
+            sphereMesh.scale.set(sphereScale, sphereScale, sphereScale);
+        });
+    };
+
+    addCube([
+        {
+            position: new THREE.Vector3(5, 4, -1),
+        },
+        {
+            position: new THREE.Vector3(-3, 2, 2),
+        },
+        {
+            position: new THREE.Vector3(1, 3, 3),
+        },
+    ]);
+
+    // Image planes
+    let meshImages = [];
+    const addImagePlanes = (imagePlanes) => {
+        imagePlanes.forEach((imagePlane) => {
+            const geoImage = new THREE.PlaneGeometry(
+                imagePlane.scale.x,
+                imagePlane.scale.y,
+                1,
+                1
+            );
+            const matImage = new THREE.MeshBasicMaterial({
+                map: imagePlane.map,
+                transparent: true,
+            });
+            const meshImage = new THREE.Mesh(geoImage, matImage);
+            meshImage.position.copy(imagePlane.position);
+            meshImage.rotateOnWorldAxis(imagePlane.rotation);
+            meshImage.setRotationFromEuler(imagePlane.rotation);
+            scene.add(meshImage);
+            meshImages.push(meshImage);
+        });
+    };
+
+    addImagePlanes([
+        {
+            map: new THREE.TextureLoader().load('/about4.jpg'),
+            position: new THREE.Vector3(5, 3, -2),
+            rotation: new THREE.Euler(0, -Math.PI / 32, 0),
+            scale: {
+                x: 2.5,
+                y: 2.5,
+            },
+        },
+        {
+            map: new THREE.TextureLoader().load('/about2.jpeg'),
+            position: new THREE.Vector3(-7, 2.5, -3),
+            rotation: new THREE.Euler(0, -Math.PI / 16, 0),
+            scale: {
+                x: 2.5,
+                y: 2.5,
+            },
+        },
+        // {
+        //     map: new THREE.TextureLoader().load('/about3.jpeg'),
+        //     position: new THREE.Vector3(-4.5, 1, 0),
+        //     rotation: new THREE.Euler(0, Math.PI / 16, 0),
+        //     scale: {
+        //         x: 2,
+        //         y: 3,
+        //     },
+        // },
+    ]);
 
     // meshImage.position.set(3, 1.5, 5);
     // meshImage.rotation.set(0, -Math.PI / 8, 0);
@@ -252,112 +290,27 @@ const init = () => {
     };
     window.addEventListener('resize', onWindowResize, false);
 
-    // Image planes
-    let meshImages = [];
-    const geoImage = new THREE.PlaneGeometry(3, 3, 50, 50);
-    const matImage1 = new THREE.MeshBasicMaterial({
-        map: new THREE.TextureLoader().load('/about4.jpg'),
-        transparent: true,
-    });
-    const meshImage1 = new THREE.Mesh(geoImage, matImage1);
-    scene.add(meshImage1);
-    meshImage1.position.set(5, 1.5, 5);
-    meshImage1.rotation.set(0, -Math.PI / 8, 0);
-    meshImages.push(meshImage1);
-
-    const matImage2 = new THREE.MeshBasicMaterial({
-        map: new THREE.TextureLoader().load('/about3.jpeg'),
-        transparent: true,
-    });
-    const meshImage2 = new THREE.Mesh(geoImage, matImage2);
-    scene.add(meshImage2);
-    meshImage2.position.set(-5, 1.5, 5);
-    meshImage2.rotation.set(0, Math.PI / 8, 0);
-    meshImages.push(meshImage2);
-
-    const matImage3 = new THREE.MeshBasicMaterial({
-        map: new THREE.TextureLoader().load('/about2.jpeg'),
-        transparent: true,
-    });
-    const meshImage3 = new THREE.Mesh(geoImage, matImage3);
-    scene.add(meshImage3);
-    meshImage3.position.set(-2, 4.5, 5);
-    meshImage3.rotation.set(0, 0, 0);
-    meshImages.push(meshImage3);
-
-    const matImage4 = new THREE.MeshBasicMaterial({
-        map: new THREE.TextureLoader().load('/about1.jpeg'),
-        transparent: true,
-    });
-    const meshImage4 = new THREE.Mesh(geoImage, matImage4);
-    scene.add(meshImage4);
-    meshImage4.position.set(2, 4.5, 5);
-    meshImage4.rotation.set(0, 0, 0);
-    meshImages.push(meshImage4);
-
-    const matImage5 = new THREE.MeshBasicMaterial({
-        map: new THREE.TextureLoader().load('/about5.jpeg'),
-        transparent: true,
-    });
-    const meshImage5 = new THREE.Mesh(geoImage, matImage5);
-    scene.add(meshImage5);
-    meshImage5.position.set(3, 2.5, 10);
-    meshImage5.rotation.set(0, -Math.PI / 8, 0);
-    meshImages.push(meshImage5);
-
-    const matImage6 = new THREE.MeshBasicMaterial({
-        map: new THREE.TextureLoader().load('/adidas-1.jpeg'),
-        transparent: true,
-    });
-    const meshImage6 = new THREE.Mesh(geoImage, matImage6);
-    scene.add(meshImage6);
-    meshImage6.position.set(-3, 2.5, 10);
-    meshImage6.rotation.set(0, Math.PI / 8, 0);
-    meshImages.push(meshImage6);
-
-    // const matImage7 = new THREE.MeshBasicMaterial({
-    //     map: new THREE.TextureLoader().load('/about2.jpeg'),
-    //     transparent: true,
-    // });
-    // const meshImage7 = new THREE.Mesh(geoImage, matImage7);
-    // scene.add(meshImage7);
-    // meshImage7.position.set(-2, 1.5, 10);
-    // meshImage7.rotation.set(0, 0, 0);
-    // meshImages.push(meshImage7);
-
-    // const matImage8 = new THREE.MeshBasicMaterial({
-    //     map: new THREE.TextureLoader().load('/about1.jpeg'),
-    //     transparent: true,
-    // });
-    // const meshImage8 = new THREE.Mesh(geoImage, matImage8);
-    // scene.add(meshImage8);
-    // meshImage8.position.set(2, 1.5, 10);
-    // meshImage8.rotation.set(0, 0, 0);
-    // meshImages.push(meshImage8);
-
     // Rendering
     const clock = new THREE.Clock();
     const render = () => {
         const delta = clock.getDelta();
         const time = clock.getElapsedTime() * 10;
 
-        if (meshImages.length > 0) {
-            meshImages.forEach((meshImage) => {
-                const position = meshImage.geometry.attributes.position;
-                for (let i = 0; i < position.count; i++) {
-                    const z = Math.sin(i / 10 + (time + i) / 7) / 8;
-                    position.setZ(i, z);
+        // if (meshImages.length > 0) {
+        //     meshImages.forEach((meshImage) => {
+        //         const position = meshImage.geometry.attributes.position;
+        //         for (let i = 0; i < position.count; i++) {
+        //             const z = Math.sin(i / 10 + (time + i) / 7) / 8;
+        //             position.setZ(i, z);
 
-                    // const currentX = position.getY(i);
-                    // const waveX1 = 0.05 * Math.sin(currentX * 2 + time);
-                    // const waveX2 = 0.025 * Math.sin(currentX * 3 + time);
-                    // position.setZ(i, waveX1 + waveX2);
-                }
-                position.needsUpdate = true;
-            });
-        }
-
-        // let hovering = null;
+        //             // const currentX = position.getY(i);
+        //             // const waveX1 = 0.05 * Math.sin(currentX * 2 + time);
+        //             // const waveX2 = 0.025 * Math.sin(currentX * 3 + time);
+        //             // position.setZ(i, waveX1 + waveX2);
+        //         }
+        //         position.needsUpdate = true;
+        //     });
+        // }
 
         scrollTargetPos += (scrollPos - scrollTargetPos) * 0.1;
         camera.position.z = scrollTargetPos + 5;
@@ -400,14 +353,15 @@ const init = () => {
             //     remap(camera.position.distanceTo(meshImage.position), 12, 7) +
             //     0.2;
 
-            meshImages.forEach((meshImage) => {
-                meshImage.material.opacity =
-                    remap(
-                        camera.position.distanceTo(meshImage.position),
-                        12,
-                        7
-                    ) + 0.2;
-            });
+            meshImages &&
+                meshImages.forEach((meshImage) => {
+                    meshImage.material.opacity =
+                        remap(
+                            camera.position.distanceTo(meshImage.position),
+                            15,
+                            11
+                        ) + 0.2;
+                });
 
             // cubes.forEach((cube) => {
             //     cube.material.opacity =

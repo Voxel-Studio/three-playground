@@ -354,6 +354,17 @@ const init = () => {
             });
         }
 
+        if (texts.length > 0) {
+            texts.forEach((text, idx) => {
+                const position = text.geometry.attributes.position;
+                for (let i = 0; i < position.count; i++) {
+                    const z = Math.sin(i / 10 + (time + i) / 7) / 8;
+                    position.setZ(i, z);
+                }
+                position.needsUpdate = true;
+            });
+        }
+
         // if (cubes.length > 0) {
         //     cubes.forEach((cube) => {
         //         const position = cube.geometry.attributes.position;

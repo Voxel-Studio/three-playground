@@ -64,7 +64,7 @@ const init = () => {
     plane.rotation.z = Math.PI / 4;
     scene.add(plane);
 
-    const geoText = new THREE.PlaneGeometry(5.74 / 1.5, 3 / 1.5, 10, 10);
+    const geoText = new THREE.PlaneGeometry(5.74 / 1.5, 3 / 1.5, 1, 1);
     const textureText = new THREE.TextureLoader().load('/logo-text.svg');
     const matText = new THREE.MeshBasicMaterial({
         map: textureText,
@@ -202,15 +202,48 @@ const init = () => {
                 y: 2.5,
             },
         },
-        // {
-        //     map: new THREE.TextureLoader().load('/about3.jpeg'),
-        //     position: new THREE.Vector3(-4.5, 1, 0),
-        //     rotation: new THREE.Euler(0, Math.PI / 16, 0),
-        //     scale: {
-        //         x: 2,
-        //         y: 3,
-        //     },
-        // },
+        {
+            map: new THREE.TextureLoader().load('/about3.jpeg'),
+            position: new THREE.Vector3(5, 2.5, 5),
+            rotation: new THREE.Euler(0, -Math.PI / 16, 0),
+            scale: {
+                x: 2,
+                y: 3,
+            },
+        },
+    ]);
+
+    // Text
+    let texts = [];
+    const addText = (manualTexts) => {
+        manualTexts.forEach((text) => {
+            const geo = new THREE.PlaneGeometry(
+                text.scale.x,
+                text.scale.y,
+                1,
+                1
+            );
+            const mat = new THREE.MeshBasicMaterial({
+                map: text.map,
+                transparent: true,
+            });
+            const mesh = new THREE.Mesh(geo, mat);
+            mesh.position.copy(text.position);
+            mesh.name = 'text';
+            scene.add(mesh);
+            texts.push(mesh);
+        });
+    };
+
+    addText([
+        {
+            position: new THREE.Vector3(3, 2.25, 7),
+            scale: {
+                x: 2.79 / 1.5,
+                y: 3 / 1.5,
+            },
+            map: new THREE.TextureLoader().load('/lorem-1.svg'),
+        },
     ]);
 
     // meshImage.position.set(3, 1.5, 5);
@@ -296,17 +329,42 @@ const init = () => {
         const delta = clock.getDelta();
         const time = clock.getElapsedTime() * 10;
 
-        // if (meshImages.length > 0) {
-        //     meshImages.forEach((meshImage) => {
-        //         const position = meshImage.geometry.attributes.position;
-        //         for (let i = 0; i < position.count; i++) {
-        //             const z = Math.sin(i / 10 + (time + i) / 7) / 8;
-        //             position.setZ(i, z);
+        if (meshText) {
+            const position = meshText.geometry.attributes.position;
+            for (let i = 0; i < position.count; i++) {
+                const z = Math.sin(i / 10 + (time + i) / 7) / 16;
+                position.setZ(i, z);
+            }
+            position.needsUpdate = true;
+        }
 
-        //             // const currentX = position.getY(i);
-        //             // const waveX1 = 0.05 * Math.sin(currentX * 2 + time);
-        //             // const waveX2 = 0.025 * Math.sin(currentX * 3 + time);
-        //             // position.setZ(i, waveX1 + waveX2);
+        if (meshImages.length > 0) {
+            meshImages.forEach((meshImage, idx) => {
+                const position = meshImage.geometry.attributes.position;
+                for (let i = 0; i < position.count; i++) {
+                    const z = Math.sin(i / 10 + (time + i) / 7) / 8;
+                    position.setZ(i, z);
+
+                    // const currentX = position.getY(i);
+                    // const waveX1 = 0.05 * Math.sin(currentX * 2 + time);
+                    // const waveX2 = 0.025 * Math.sin(currentX * 3 + time);
+                    // position.setZ(i, waveX1 + waveX2);
+                }
+                position.needsUpdate = true;
+            });
+        }
+
+        // if (cubes.length > 0) {
+        //     cubes.forEach((cube) => {
+        //         const position = cube.geometry.attributes.position;
+        //         for (let i = 0; i < position.count; i++) {
+        //             // const z = Math.sin(i / 10 + (time + i) / 7) / 8;
+        //             // position.setZ(i, z);
+
+        //             const currentX = position.getY(i);
+        //             const waveX1 = 0.05 * Math.sin(currentX * 2 + time);
+        //             const waveX2 = 0.025 * Math.sin(currentX * 3 + time);
+        //             position.setY(i, waveX1 + waveX2);
         //         }
         //         position.needsUpdate = true;
         //     });
@@ -326,54 +384,33 @@ const init = () => {
         }
         position.needsUpdate = true;
 
-        // plane.rotation.x += ((scrollTargetPos / 1000) * Math.PI) / 400;
+        // plane.rotation.x += (scrollTargetPos / 1000) * Math.PI;
 
-        // if (text1 && plane) {
-        //     text1.material.opacity = remap(
-        //         camera.position.distanceTo(text1.position),
-        //         12,
-        //         7
-        //     );
-
-        //     plane.material.opacity =
-        //         1 -
-        //         remap(camera.position.distanceTo(text1.position), 12, 7) +
-        //         0.2;
-        // }
-
-        if (meshText && plane && cubes) {
+        if (meshText) {
             meshText.material.opacity = remap(
                 camera.position.distanceTo(meshText.position),
                 12,
                 7
             );
-
-            // meshImage.material.opacity =
-            //     1 -
-            //     remap(camera.position.distanceTo(meshImage.position), 12, 7) +
-            //     0.2;
-
-            meshImages &&
-                meshImages.forEach((meshImage) => {
-                    meshImage.material.opacity =
-                        remap(
-                            camera.position.distanceTo(meshImage.position),
-                            15,
-                            11
-                        ) + 0.2;
-                });
-
-            // cubes.forEach((cube) => {
-            //     cube.material.opacity =
-            //         1 -
-            //         remap(
-            //             camera.position.distanceTo(meshText.position),
-            //             12,
-            //             7
-            //         ) +
-            //         0.2;
-            // });
         }
+
+        meshImages &&
+            meshImages.forEach((meshImage) => {
+                meshImage.material.opacity = remap(
+                    camera.position.distanceTo(meshImage.position),
+                    15,
+                    11
+                );
+            });
+
+        texts &&
+            texts.forEach((text) => {
+                text.material.opacity = remap(
+                    camera.position.distanceTo(text.position),
+                    15,
+                    11
+                );
+            });
 
         requestAnimationFrame(render);
         renderer.render(scene, camera);

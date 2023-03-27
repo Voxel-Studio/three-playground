@@ -93,6 +93,7 @@ export default function Home() {
                                     <li>Sporting Events</li>
                                 </ul>
                                 <div className={styles.cardLine} />
+                                <div className={styles.cardLineHover} />
                             </div>
                             <div
                                 className={styles.card}
@@ -109,6 +110,7 @@ export default function Home() {
                                     <li>Extended Reality (xR)</li>
                                 </ul>
                                 <div className={styles.cardLine} />
+                                <div className={styles.cardLineHover} />
                             </div>
                             <div
                                 className={styles.card}
@@ -126,6 +128,7 @@ export default function Home() {
                                     <li>AR / xR / VR</li>
                                 </ul>
                                 <div className={styles.cardLine} />
+                                <div className={styles.cardLineHover} />
                             </div>
                             <div
                                 className={styles.card}
@@ -144,6 +147,7 @@ export default function Home() {
                                     <li>Festival</li>
                                 </ul>
                                 <div className={styles.cardLine} />
+                                <div className={styles.cardLineHover} />
                             </div>
                             <div
                                 className={styles.card}
@@ -157,6 +161,7 @@ export default function Home() {
                                     <li>Audio</li>
                                 </ul>
                                 <div className={styles.cardLine} />
+                                <div className={styles.cardLineHover} />
                             </div>
                         </div>
                     </div>

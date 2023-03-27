@@ -118,7 +118,8 @@ const init = () => {
     // let cubes = [];
     const addCube = (manualCubes) => {
         manualCubes.forEach((cube) => {
-            const geo = new THREE.BoxGeometry(1, 1, 1);
+            // const geo = new THREE.BoxGeometry(1, 1, 1);
+            const geo = new THREE.ConeGeometry(1, 1.5, 3);
             const edges = new THREE.EdgesGeometry(geo, 1);
             const line = new THREE.LineSegments(
                 edges,
@@ -166,7 +167,7 @@ const init = () => {
             position: new THREE.Vector3(-3, 2, 2),
         },
         {
-            position: new THREE.Vector3(1, 3, 3),
+            position: new THREE.Vector3(-2.5, 7, -4),
         },
         {
             position: new THREE.Vector3(-5.5, 3.5, 6),
@@ -183,6 +184,9 @@ const init = () => {
         {
             position: new THREE.Vector3(-3, 1.5, 24),
         },
+        {
+            position: new THREE.Vector3(0, 4.5, 31),
+        },
     ]);
 
     // Image planes
@@ -190,8 +194,10 @@ const init = () => {
     const addImagePlanes = (imagePlanes) => {
         imagePlanes.forEach((imagePlane) => {
             const geoImage = new THREE.PlaneGeometry(
-                imagePlane.scale.x,
-                imagePlane.scale.y,
+                // imagePlane.scale.x,
+                3.2,
+                // imagePlane.scale.y,
+                1.8,
                 1,
                 1
             );
@@ -203,6 +209,7 @@ const init = () => {
             meshImage.position.copy(imagePlane.position);
             meshImage.rotateOnWorldAxis(imagePlane.rotation);
             meshImage.setRotationFromEuler(imagePlane.rotation);
+            meshImage.name = 'image';
             scene.add(meshImage);
             meshImages.push(meshImage);
         });
@@ -219,7 +226,7 @@ const init = () => {
             },
         },
         {
-            map: new THREE.TextureLoader().load('/about2.jpeg'),
+            map: new THREE.TextureLoader().load('/tiktok-1.jpeg'),
             position: new THREE.Vector3(-7, 2.5, -3),
             rotation: new THREE.Euler(0, -Math.PI / 16, 0),
             scale: {
@@ -237,7 +244,7 @@ const init = () => {
             },
         },
         {
-            map: new THREE.TextureLoader().load('/about2.jpeg'),
+            map: new THREE.TextureLoader().load('/tiktok-1.jpeg'),
             position: new THREE.Vector3(-2, 4, 10),
             rotation: new THREE.Euler(0, Math.PI / 16, 0),
             scale: {
@@ -290,6 +297,24 @@ const init = () => {
                 y: 3,
             },
         },
+        {
+            map: new THREE.TextureLoader().load('/adidas-2.jpeg'),
+            position: new THREE.Vector3(-3, 2, 32),
+            rotation: new THREE.Euler(0, 0, 0),
+            scale: {
+                x: 4,
+                y: 3,
+            },
+        },
+        {
+            map: new THREE.TextureLoader().load('/news1.jpg'),
+            position: new THREE.Vector3(3, 2, 32),
+            rotation: new THREE.Euler(0, 0, 0),
+            scale: {
+                x: 4,
+                y: 3,
+            },
+        },
     ]);
 
     // Text
@@ -318,18 +343,24 @@ const init = () => {
         {
             position: new THREE.Vector3(3, 2.25, 7),
             scale: {
-                x: 2.79 / 1.5,
-                y: 3 / 1.5,
+                // x: 2.79 / 1.5,
+                // y: 3 / 1.5,
+                x: 5.6 / 2,
+                y: 1.5 / 2,
             },
-            map: new THREE.TextureLoader().load('/lorem-1.svg'),
+            // map: new THREE.TextureLoader().load('/lorem-1.svg'),
+            map: new THREE.TextureLoader().load('/lorem-wide.svg'),
         },
         {
             position: new THREE.Vector3(-3, 1.75, 14),
             scale: {
-                x: 2.79 / 1.5,
-                y: 3 / 1.5,
+                // x: 2.79 / 1.5,
+                // y: 3 / 1.5,
+                x: 5.6 / 2,
+                y: 1.5 / 2,
             },
-            map: new THREE.TextureLoader().load('/lorem-1.svg'),
+            // map: new THREE.TextureLoader().load('/lorem-1.svg'),
+            map: new THREE.TextureLoader().load('/lorem-wide.svg'),
         },
     ]);
 
@@ -383,15 +414,69 @@ const init = () => {
 
     let scrollPos = 0;
     let scrollTargetPos = 0;
-    document.addEventListener(
-        'wheel',
-        function (e) {
-            // scrollPos += e.deltaY / 250;
-            scrollPos += e.deltaY / 750;
-            return false;
-        },
-        true
-    );
+    let lastKnownScrollPosition = 0;
+    let deltaY = 0;
+
+    // document.addEventListener(
+    //     'wheel',
+    //     function (e) {
+    //         if (e.deltaY >= 0) {
+    //             if (window.scrollY < 19225) {
+    //                 scrollPos += e.deltaY / 750;
+    //             }
+    //         } else {
+    //             if (window.scrollY !== 0) {
+    // scrollPos += e.deltaY / 750;
+    //             }
+    //         }
+
+    //         return false;
+    //     },
+    //     true
+    // );
+
+    document.addEventListener('scroll', function (e) {
+        let ticking = false;
+        if (!ticking) {
+            // event throtteling
+            window.requestAnimationFrame(function () {
+                deltaY = window.scrollY - lastKnownScrollPosition;
+                lastKnownScrollPosition = window.scrollY;
+
+                if (deltaY >= 0) {
+                    if (window.scrollY < 19225) {
+                        scrollPos += deltaY / 250;
+                    }
+                } else {
+                    if (window.scrollY !== 0) {
+                        scrollPos += deltaY / 250;
+                    }
+                }
+
+                ticking = false;
+            });
+            ticking = true;
+        }
+    });
+
+    // Hovering hotspots
+    const rayCaster = new THREE.Raycaster();
+    document.addEventListener('mousemove', function (e) {
+        let mouse = new THREE.Vector2();
+        mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+        mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+        rayCaster.setFromCamera(mouse, camera);
+        let intersects = rayCaster.intersectObjects(scene.children);
+        // container.style.cursor = 'auto';
+        if (intersects.length > 0) {
+            intersects.forEach((intersect) => {
+                if (intersect.object.name === 'image') {
+                    console.log('hovering img');
+                    // container.style.cursor = 'pointer';
+                }
+            });
+        }
+    });
 
     // Renderer
     const renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -416,41 +501,36 @@ const init = () => {
         const delta = clock.getDelta();
         const time = clock.getElapsedTime() * 10;
 
-        if (meshText) {
-            const position = meshText.geometry.attributes.position;
-            for (let i = 0; i < position.count; i++) {
-                const z = Math.sin(i / 10 + (time + i) / 7) / 8;
-                position.setZ(i, z);
-            }
-            position.needsUpdate = true;
-        }
+        // if (meshText) {
+        //     const position = meshText.geometry.attributes.position;
+        //     for (let i = 0; i < position.count; i++) {
+        //         const z = Math.sin(i / 10 + (time + i) / 7) / 8;
+        //         position.setZ(i, z);
+        //     }
+        //     position.needsUpdate = true;
+        // }
 
-        if (meshImages.length > 0) {
-            meshImages.forEach((meshImage, idx) => {
-                const position = meshImage.geometry.attributes.position;
-                for (let i = 0; i < position.count; i++) {
-                    const z = Math.sin(i / 10 + (time + i) / 7) / 8;
-                    position.setZ(i, z);
+        // if (meshImages.length > 0) {
+        //     meshImages.forEach((meshImage, idx) => {
+        //         const position = meshImage.geometry.attributes.position;
+        //         for (let i = 0; i < position.count; i++) {
+        //             const z = Math.sin(i / 10 + (time + i) / 7) / 8;
+        //             position.setZ(i, z);
+        //         }
+        //         position.needsUpdate = true;
+        //     });
+        // }
 
-                    // const currentX = position.getY(i);
-                    // const waveX1 = 0.05 * Math.sin(currentX * 2 + time);
-                    // const waveX2 = 0.025 * Math.sin(currentX * 3 + time);
-                    // position.setZ(i, waveX1 + waveX2);
-                }
-                position.needsUpdate = true;
-            });
-        }
-
-        if (texts.length > 0) {
-            texts.forEach((text, idx) => {
-                const position = text.geometry.attributes.position;
-                for (let i = 0; i < position.count; i++) {
-                    const z = Math.sin(i / 10 + (time + i) / 7) / 8;
-                    position.setZ(i, z);
-                }
-                position.needsUpdate = true;
-            });
-        }
+        // if (texts.length > 0) {
+        //     texts.forEach((text, idx) => {
+        //         const position = text.geometry.attributes.position;
+        //         for (let i = 0; i < position.count; i++) {
+        //             const z = Math.sin(i / 10 + (time + i) / 7) / 8;
+        //             position.setZ(i, z);
+        //         }
+        //         position.needsUpdate = true;
+        //     });
+        // }
 
         // if (cubes.length > 0) {
         //     cubes.forEach((cube) => {

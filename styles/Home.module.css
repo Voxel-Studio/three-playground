@@ -21,7 +21,8 @@
     flex-direction: column;
     align-items: center;
     background-color: black;
-    margin-top: 10000px;
+    /* margin-top: 10000px; */
+    margin-top: 13000px;
 }
 
 .homeWrapper {
@@ -143,10 +144,12 @@
 }
 
 .card {
+    position: relative;
     cursor: pointer;
     display: flex;
     flex-direction: column;
     width: 100%;
+    overflow: hidden;
 }
 
 .card img {
@@ -154,6 +157,8 @@
     aspect-ratio: 1 / 1;
     object-fit: cover;
     margin-bottom: 40px;
+    opacity: 0.75;
+    transition: opacity 0.2s ease-in-out;
 }
 
 .card h3 {
@@ -172,6 +177,25 @@
     width: 100%;
     height: 10px;
     background-color: #333;
+}
+
+.cardLineHover {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 10px;
+    background-color: white;
+    transform: translateX(-100%);
+    transition: transform 0.2s ease-in-out;
+}
+
+.card:hover .cardLineHover {
+    transform: translateX(0);
+}
+
+.card:hover img {
+    opacity: 1;
 }
 
 .row {

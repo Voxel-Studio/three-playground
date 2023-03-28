@@ -4,6 +4,7 @@ import * as THREE from 'three';
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js';
 import Header from './header';
+import { gsap } from 'gsap';
 import VirtualScroll from 'virtual-scroll';
 import styles from '../styles/Landing.module.css';
 import glsl from 'glslify';
@@ -288,15 +289,15 @@ const init = () => {
                 y: 3,
             },
         },
-        {
-            map: new THREE.TextureLoader().load('/news1.jpg'),
-            position: new THREE.Vector3(5, 2, 18),
-            rotation: new THREE.Euler(0, 0, 0),
-            scale: {
-                x: 4,
-                y: 3,
-            },
-        },
+        // {
+        //     map: new THREE.TextureLoader().load('/news1.jpg'),
+        //     position: new THREE.Vector3(5, 2, 18),
+        //     rotation: new THREE.Euler(0, 0, 0),
+        //     scale: {
+        //         x: 4,
+        //         y: 3,
+        //     },
+        // },
         {
             map: new THREE.TextureLoader().load('/adidas-2.jpeg'),
             position: new THREE.Vector3(-3, 2, 32),
@@ -461,18 +462,28 @@ const init = () => {
 
     // Hovering hotspots
     const rayCaster = new THREE.Raycaster();
+    const hoverDuration = 2;
+    let hoveringImage = false;
     document.addEventListener('mousemove', function (e) {
         let mouse = new THREE.Vector2();
         mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
         mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
         rayCaster.setFromCamera(mouse, camera);
         let intersects = rayCaster.intersectObjects(scene.children);
-        // container.style.cursor = 'auto';
+
+        hoveringImage = false;
         if (intersects.length > 0) {
-            intersects.forEach((intersect) => {
+            intersects.forEach((intersect, i) => {
+                const obj = intersect.object;
+                const hoverScale = 1.2;
                 if (intersect.object.name === 'image') {
-                    console.log('hovering img');
-                    // container.style.cursor = 'pointer';
+                    hoveringImage = true;
+                    gsap.to(obj.scale, {
+                        duration: hoverDuration,
+                        ease: 'circ.out',
+                        x: hoverScale,
+                        y: hoverScale,
+                    });
                 }
             });
         }
@@ -589,6 +600,17 @@ const init = () => {
                     11
                 );
             });
+
+        scene.children.forEach((child) => {
+            if (child.name === 'image' && !hoveringImage) {
+                gsap.to(child.scale, {
+                    duration: hoverDuration,
+                    ease: 'circ.out',
+                    x: 1,
+                    y: 1,
+                });
+            }
+        });
 
         requestAnimationFrame(render);
         renderer.render(scene, camera);

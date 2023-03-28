@@ -4,6 +4,7 @@ import styles from '../styles/Home.module.css';
 import Header from '../components/header';
 import Footer from '../components/footer';
 import Landing from '../components/landing';
+import Pyramid from '../components/pyramid';
 import { useRouter } from 'next/router';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
@@ -13,7 +14,6 @@ gsap.registerPlugin(ScrollTrigger, SplitText);
 export default function Home() {
     const router = useRouter();
     useEffect(() => {
-        console.log(SplitText);
         gsap.utils
             .toArray('#smallImageContainer')
             .forEach((smallScreenImg, i) => {
@@ -32,15 +32,107 @@ export default function Home() {
             });
         gsap.utils.toArray('.section').forEach((section, i) => {
             gsap.from(section, {
-                opacity: 0,
+                // opacity: 0,
+                skewX: 2,
                 duration: 2,
-                ease: 'none',
+                ease: 'circ.out',
                 scrollTrigger: {
                     trigger: section,
                 },
             });
         });
+        const tlFirstInfo = gsap.timeline(),
+            splitFirstInfo = new SplitText('#firstSplit', {
+                type: 'words,chars',
+            }),
+            chars = splitFirstInfo.chars;
+        tlFirstInfo.from(
+            chars,
+            {
+                duration: 0.8,
+                opacity: 0,
+                y: 10,
+                ease: 'circ.out',
+                stagger: 0.02,
+                scrollTrigger: {
+                    trigger: '#first',
+                    //markers:true,
+                    start: 'top 75%',
+                    end: 'bottom center',
+                    scrub: 1,
+                },
+                //,   onComplete: () => {splitFirstInfo.revert()}
+            },
+            '+=0'
+        );
+        const tlSecondInfo = gsap.timeline(),
+            splitSecondInfo = new SplitText('#secondSplit', {
+                type: 'words,chars',
+            }),
+            charsSecond = splitSecondInfo.chars;
+        tlSecondInfo.from(
+            charsSecond,
+            {
+                duration: 0.8,
+                opacity: 0,
+                y: 10,
+                ease: 'circ.out',
+                stagger: 0.02,
+                scrollTrigger: {
+                    trigger: '#second',
+                    //markers:true,
+                    start: 'top 75%',
+                    end: 'bottom center',
+                    scrub: 1,
+                },
+                //,   onComplete: () => {splitFirstInfo.revert()}
+            },
+            '+=0'
+        );
+        const tlThirdInfo = gsap.timeline(),
+            splitThirdInfo = new SplitText('#thirdSplit', {
+                type: 'words,chars',
+            }),
+            charsThird = splitThirdInfo.chars;
+        tlThirdInfo.from(
+            charsThird,
+            {
+                duration: 0.8,
+                opacity: 0,
+                y: 10,
+                ease: 'circ.out',
+                stagger: 0.02,
+                scrollTrigger: {
+                    trigger: '#third',
+                    //markers:true,
+                    // start: 'top 75%',
+                    end: 'bottom 75%',
+                    scrub: 1,
+                },
+                //,   onComplete: () => {splitFirstInfo.revert()}
+            },
+            '+=0'
+        );
+        gsap.set('#pyramid-container-1', { yPercent: -20 });
+        gsap.to('#pyramid-container-1', {
+            yPercent: 20,
+            ease: 'none',
+            scrollTrigger: {
+                trigger: '#first',
+                scrub: 1,
+            },
+        });
+        gsap.set('#pyramid-container-2', { yPercent: -5 });
+        gsap.to('#pyramid-container-2', {
+            yPercent: 5,
+            ease: 'none',
+            scrollTrigger: {
+                trigger: '#second',
+                scrub: 1,
+            },
+        });
     });
+
     return (
         <div className={styles.container}>
             <Head>
@@ -74,6 +166,9 @@ export default function Home() {
                 </div> */}
             </div>
             <div className={styles.homeContainer}>
+                <div
+                    className={`${styles.row} ${styles.rowTransition} section`}
+                />
                 <div className={styles.homeWrapper}>
                     <div className={`${styles.row} section`}>
                         <div className={styles.grid}>
@@ -176,16 +271,23 @@ export default function Home() {
                             style={{ backgroundImage: `url(/about5.jpeg)` }}
                         />
                     </div>
-                    <div className={`${styles.row} ${styles.rowEnd} section`}>
+                    <div
+                        className={`${styles.row} ${styles.rowEnd} section`}
+                        id='first'
+                    >
                         <div className={`${styles.info} ${styles.infoFirst}`}>
                             <p>EVENT TECH</p>
-                            <h3>Praesent urna nisl convallis aliquam</h3>
+                            <h3 id='firstSplit'>
+                                Praesent urna nisl convallis aliquam
+                            </h3>
                             <button className={styles.viewButton}>
                                 <div className={styles.underlay}></div>
                                 <span>VIEW MORE</span>
                             </button>
                         </div>
-                        {/* <img className={styles.bg1} src='/bg1.jpg' alt='' /> */}
+                        <div className={styles.bg1} id='pyramid-container-1'>
+                            <Pyramid setId='pyramid-container-1' />
+                        </div>
                     </div>
                     <div className={`${styles.row} section`}>
                         <div
@@ -197,11 +299,19 @@ export default function Home() {
                             />
                         </div>
                     </div>
-                    <div className={`${styles.row} ${styles.rowStart} section`}>
+                    <div
+                        className={`${styles.row} ${styles.rowStart} section`}
+                        id='second'
+                    >
                         {/* <img className={styles.bg2} src='/bg2.jpg' alt='' /> */}
+                        <div className={styles.bg2} id='pyramid-container-2'>
+                            <Pyramid setId='pyramid-container-2' />
+                        </div>
                         <div className={`${styles.info} ${styles.infoFirst}`}>
                             <p>EVENT TECH</p>
-                            <h3>Praesent urna nisl convallis aliquam</h3>
+                            <h3 id='secondSplit'>
+                                Praesent urna nisl convallis aliquam
+                            </h3>
                             <button className={styles.viewButton}>
                                 <div className={styles.underlay}></div>
                                 <span>VIEW MORE</span>
@@ -244,7 +354,10 @@ export default function Home() {
                             <img src='/logo-yamaha.svg' alt='' />
                         </div>
                     </div>
-                    <div className={`${styles.contentLeftContainer} section`}>
+                    <div
+                        className={`${styles.contentLeftContainer} section`}
+                        id='third'
+                    >
                         <div className={styles.contentLeft}>
                             <div className={styles.content}>
                                 <h2>Lorem ipsum</h2>
@@ -254,7 +367,7 @@ export default function Home() {
                                     <span>VIEW MORE</span>
                                 </button>
                             </div>
-                            <p>
+                            <p id='thirdSplit'>
                                 Vivamus ac venenatis enim. In et iaculis nisi.
                                 Nulla posuere aliquam bibendum. Cras blandit
                                 volutpat euismod. Nullam nunc augue, blandit

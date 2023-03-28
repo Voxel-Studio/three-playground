@@ -7,11 +7,13 @@ import Landing from '../components/landing';
 import { useRouter } from 'next/router';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
-gsap.registerPlugin(ScrollTrigger);
+import { SplitText } from 'gsap/dist/SplitText';
+gsap.registerPlugin(ScrollTrigger, SplitText);
 
 export default function Home() {
     const router = useRouter();
     useEffect(() => {
+        console.log(SplitText);
         gsap.utils
             .toArray('#smallImageContainer')
             .forEach((smallScreenImg, i) => {

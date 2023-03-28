@@ -788,7 +788,7 @@ const Landing = () => {
                 <div id='webglEl'></div>
             </div>
             <Header isHomepage={true} />
-            <Loading />
+            {/* <Loading /> */}
         </div>
     );
 };

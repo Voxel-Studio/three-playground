@@ -13,7 +13,11 @@ gsap.registerPlugin(ScrollTrigger, SplitText);
 
 export default function Home() {
     const router = useRouter();
+    const [showScrollDown, setShowScrollDown] = useState(true);
     useEffect(() => {
+        document.addEventListener('scroll', function (e) {
+            setShowScrollDown(false);
+        });
         gsap.utils
             .toArray('#smallImageContainer')
             .forEach((smallScreenImg, i) => {
@@ -30,17 +34,17 @@ export default function Home() {
                     },
                 });
             });
-        gsap.utils.toArray('.section').forEach((section, i) => {
-            gsap.from(section, {
-                // opacity: 0,
-                skewX: 2,
-                duration: 2,
-                ease: 'circ.out',
-                scrollTrigger: {
-                    trigger: section,
-                },
-            });
-        });
+        // gsap.utils.toArray('.section').forEach((section, i) => {
+        //     gsap.from(section, {
+        //         // opacity: 0,
+        //         skewX: 2,
+        //         duration: 2,
+        //         ease: 'circ.out',
+        //         scrollTrigger: {
+        //             trigger: section,
+        //         },
+        //     });
+        // });
         const tlFirstInfo = gsap.timeline(),
             splitFirstInfo = new SplitText('#firstSplit', {
                 type: 'words,chars',
@@ -164,11 +168,15 @@ export default function Home() {
                     <h1>Production.</h1>
                     <div className={styles.heroLine} />
                 </div> */}
+                <div
+                    className={styles.scrollDown}
+                    style={{ opacity: showScrollDown ? 1 : 0 }}
+                />
             </div>
             <div className={styles.homeContainer}>
-                <div
+                {/* <div
                     className={`${styles.row} ${styles.rowTransition} section`}
-                />
+                /> */}
                 <div className={styles.homeWrapper}>
                     <div className={`${styles.row} section`}>
                         <div className={styles.grid}>

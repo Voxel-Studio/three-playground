@@ -61,8 +61,8 @@ const init = () => {
     });
     const plane = new THREE.Mesh(geo, mat);
     plane.rotation.x = Math.PI / 2;
-    // plane.rotation.x = Math.PI / 2 - Math.PI / 8;
-    plane.rotation.z = Math.PI / 4;
+    // plane.rotation.z = Math.PI / 4;
+    plane.rotation.z = Math.PI;
     scene.add(plane);
 
     const geoText = new THREE.PlaneGeometry(5.74 / 1.5, 3 / 1.5, 1, 1);
@@ -79,6 +79,7 @@ const init = () => {
 
     const numCubes = 100;
     let cubes = [];
+    let spheres = [];
 
     // for (let i = 0; i < numCubes; i++) {
     //     const geo = new THREE.BoxGeometry(1, 1, 1);
@@ -157,6 +158,7 @@ const init = () => {
             );
             const sphereScale = getRandomArbitrary(0.05, 0.15);
             sphereMesh.scale.set(sphereScale, sphereScale, sphereScale);
+            spheres.push(sphereMesh);
         });
     };
 
@@ -300,7 +302,7 @@ const init = () => {
         // },
         {
             map: new THREE.TextureLoader().load('/adidas-2.jpeg'),
-            position: new THREE.Vector3(-3, 2, 32),
+            position: new THREE.Vector3(-3, 2, 26),
             rotation: new THREE.Euler(0, 0, 0),
             scale: {
                 x: 4,
@@ -309,7 +311,7 @@ const init = () => {
         },
         {
             map: new THREE.TextureLoader().load('/news1.jpg'),
-            position: new THREE.Vector3(3, 2, 32),
+            position: new THREE.Vector3(3, 2, 26),
             rotation: new THREE.Euler(0, 0, 0),
             scale: {
                 x: 4,
@@ -362,6 +364,14 @@ const init = () => {
             },
             // map: new THREE.TextureLoader().load('/lorem-1.svg'),
             map: new THREE.TextureLoader().load('/lorem-wide.svg'),
+        },
+        {
+            position: new THREE.Vector3(0, 1.75, 40),
+            scale: {
+                x: 10 / 2,
+                y: 2.44 / 2,
+            },
+            map: new THREE.TextureLoader().load('/insert-logo-full.png'),
         },
     ]);
 
@@ -456,6 +466,7 @@ const init = () => {
 
                 ticking = false;
             });
+            // console.log(scrollPos);
             ticking = true;
         }
     });
@@ -611,6 +622,66 @@ const init = () => {
                 });
             }
         });
+
+        // Fade out planes and cubes
+        if (scrollPos > 35) {
+            if (plane) {
+                gsap.to(plane.material, {
+                    duration: 2,
+                    ease: 'circ.out',
+                    opacity: 0,
+                });
+            }
+            if (cubes.length > 0) {
+                cubes.forEach((cube, i) => {
+                    gsap.to(cube.material, {
+                        duration: 0.1,
+                        delay: i * 0.1,
+                        ease: 'circ.out',
+                        opacity: 0,
+                    });
+                });
+            }
+            // if (spheres.length > 0) {
+            //     spheres.forEach((sphere, i) => {
+            //         gsap.to(sphere.material, {
+            //             duration: 1,
+            //             delay: 10,
+            //             ease: 'circ.out',
+            //             opacity: 0,
+            //         });
+            //     });
+            // }
+        } else {
+            if (plane) {
+                gsap.to(plane.material, {
+                    duration: 4,
+                    ease: 'circ.out',
+                    opacity: 1,
+                });
+            }
+            if (cubes.length > 0) {
+                cubes.forEach((cube, i) => {
+                    gsap.to(cube.material, {
+                        duration: 0.1,
+                        delay: i * 0.1,
+                        ease: 'circ.out',
+                        opacity: 1,
+                    });
+                });
+            }
+            // if (spheres.length > 0) {
+            //     spheres.forEach((sphere, i) => {
+            //         gsap.to(sphere.material, {
+            //             duration: 1,
+            //             ease: 'circ.out',
+            //             opacity: 1,
+            //         });
+            //     });
+            // }
+        }
+
+        // Fade out pyramids
 
         requestAnimationFrame(render);
         renderer.render(scene, camera);
@@ -810,7 +881,7 @@ const Landing = () => {
                 <div id='webglEl'></div>
             </div>
             <Header isHomepage={true} />
-            <Loading />
+            {/* <Loading /> */}
         </div>
     );
 };

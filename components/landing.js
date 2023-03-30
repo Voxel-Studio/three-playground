@@ -65,14 +65,21 @@ const init = () => {
     plane.rotation.z = Math.PI;
     scene.add(plane);
 
-    const geoText = new THREE.PlaneGeometry(5.74 / 1.5, 3 / 1.5, 1, 1);
+    const textScaling = 1.75;
+    const geoText = new THREE.PlaneGeometry(
+        5.74 / textScaling,
+        3 / textScaling,
+        1,
+        1
+    );
     const textureText = new THREE.TextureLoader().load('/logo-text.svg');
     const matText = new THREE.MeshBasicMaterial({
         map: textureText,
         transparent: true,
     });
     const meshText = new THREE.Mesh(geoText, matText);
-    meshText.position.x = -(visibleWidthAtZDepth(0, camera) / 5) + 3;
+    // meshText.position.x = -(visibleWidthAtZDepth(0, camera) / 5) + 3;
+    // meshText.position.x = -(5.74 / 1.5 / 2);
     meshText.position.y = 2.25;
     meshText.name = 'text';
     scene.add(meshText);
@@ -881,7 +888,7 @@ const Landing = () => {
                 <div id='webglEl'></div>
             </div>
             <Header isHomepage={true} />
-            <Loading />
+            {/* <Loading /> */}
         </div>
     );
 };

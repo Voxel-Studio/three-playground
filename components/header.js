@@ -1,7 +1,11 @@
+import { useState } from 'react';
+import { useRouter } from 'next/router';
 import Link from 'next/link';
 import styles from '../styles/Header.module.css';
 
 const Header = ({ isHomepage = false }) => {
+    const router = useRouter();
+    const [showMobile, setShowMobile] = useState(false);
     return (
         <div className={isHomepage ? 'wrapper centred' : 'wrapper'}>
             <nav className={styles.header}>
@@ -12,7 +16,7 @@ const Header = ({ isHomepage = false }) => {
                         alt=''
                     />
                 </Link>
-                <ul>
+                <ul className={styles.desktop}>
                     <Link href='/'>
                         <li>
                             <div
@@ -74,7 +78,51 @@ const Header = ({ isHomepage = false }) => {
                     className={styles.buttonHamburger}
                     src='/menu.png'
                     alt=''
+                    onClick={() => setShowMobile(true)}
                 />
+                <ul
+                    // className={
+                    //     showMobile
+                    //         ? `${styles.mobile} ${styles.mobileShow}`
+                    //         : `${styles.mobile}`
+                    // }
+                    className={`${styles.mobile}`}
+                    style={{
+                        transform:
+                            router.pathname === '/'
+                                ? showMobile
+                                    ? 'translateX(-5%)'
+                                    : 'translateX(-105%)'
+                                : showMobile
+                                ? 'translateX(0)'
+                                : 'translateX(-100%)',
+                    }}
+                >
+                    <Link href='/'>
+                        <li>HOME</li>
+                    </Link>
+                    <Link href='/about'>
+                        <li>ABOUT</li>
+                    </Link>
+                    <Link href='/services'>
+                        <li>SERVICES</li>
+                    </Link>
+                    <Link href='/case-studies'>
+                        <li>PORTFOLIO</li>
+                    </Link>
+                    <Link href='/news'>
+                        <li>NEWS</li>
+                    </Link>
+                    <Link href='/contact'>
+                        <li>CONTACT</li>
+                    </Link>
+                    <img
+                        className={styles.buttonClose}
+                        src='/close.png'
+                        alt=''
+                        onClick={() => setShowMobile(false)}
+                    />
+                </ul>
             </nav>
         </div>
     );

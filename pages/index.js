@@ -135,6 +135,15 @@ export default function Home() {
                 scrub: 1,
             },
         });
+        gsap.set('#pyramid-container-3', { yPercent: -20 });
+        gsap.to('#pyramid-container-3', {
+            yPercent: 20,
+            ease: 'none',
+            scrollTrigger: {
+                trigger: '#third',
+                scrub: 1,
+            },
+        });
     });
 
     return (
@@ -294,7 +303,10 @@ export default function Home() {
                             </button>
                         </div>
                         <div className={styles.bg1} id='pyramid-container-1'>
-                            <Pyramid setId='pyramid-container-1' />
+                            <Pyramid
+                                setId='pyramid-container-1'
+                                shapeType='pyramid'
+                            />
                         </div>
                     </div>
                     <div className={`${styles.row} section`}>
@@ -313,7 +325,10 @@ export default function Home() {
                     >
                         {/* <img className={styles.bg2} src='/bg2.jpg' alt='' /> */}
                         <div className={styles.bg2} id='pyramid-container-2'>
-                            <Pyramid setId='pyramid-container-2' />
+                            <Pyramid
+                                setId='pyramid-container-2'
+                                shapeType='cube'
+                            />
                         </div>
                         <div className={`${styles.info} ${styles.infoFirst}`}>
                             <p>EVENT TECH</p>
@@ -346,7 +361,14 @@ export default function Home() {
                     </div>
                     <div
                         className={`${styles.row} ${styles.rowCentre} section`}
+                        style={{ position: 'relative' }}
                     >
+                        <div className={styles.bg3} id='pyramid-container-3'>
+                            <Pyramid
+                                setId='pyramid-container-3'
+                                shapeType='cylinder'
+                            />
+                        </div>
                         <div className={styles.brands}>
                             <h1>Brands we work with</h1>
                             <div className={styles.brandsLine}></div>

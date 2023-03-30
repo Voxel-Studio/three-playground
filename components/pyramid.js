@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import * as THREE from 'three';
 
-const init = (containerId) => {
+const init = (containerId, shapeType) => {
     const webglEl = document.getElementById(containerId);
 
     const scene = new THREE.Scene();
@@ -30,7 +30,15 @@ const init = (containerId) => {
     const addCube = (manualCubes) => {
         manualCubes.forEach((cube) => {
             // const geo = new THREE.BoxGeometry(1, 1, 1);
-            const geo = new THREE.ConeGeometry(1, 1.5, 3);
+            // const geo = new THREE.ConeGeometry(1, 1.5, 3);
+            let geo;
+            if (shapeType === 'pyramid') {
+                geo = new THREE.ConeGeometry(1, 1.5, 3);
+            } else if (shapeType === 'cube') {
+                geo = new THREE.BoxGeometry(1, 1, 1);
+            } else {
+                geo = new THREE.CylinderGeometry(0.75, 0.75, 1.5, 12);
+            }
             const edges = new THREE.EdgesGeometry(geo, 1);
             const line = new THREE.LineSegments(
                 edges,
@@ -101,10 +109,10 @@ const init = (containerId) => {
     render();
 };
 
-const Pyramid = ({ setId }) => {
+const Pyramid = ({ setId, shapeType }) => {
     const containerId = setId;
     useEffect(() => {
-        init(containerId);
+        init(containerId, shapeType);
     }, []);
     return (
         <div id='container'>

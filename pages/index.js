@@ -144,6 +144,57 @@ export default function Home() {
                 scrub: 1,
             },
         });
+        // const tlHover = gsap.timeline(),
+        //     splitHover = new SplitText('.hoverText', {
+        //         type: 'words,chars',
+        //     }),
+        //     charsHover = splitHover.chars;
+        // tlHover.to(
+        //     charsHover,
+        //     {
+        //         paused: true,
+        //         color: 'green',
+        //         // duration: 0.8,
+        //         // opacity: 0.5,
+        //         // y: 10,
+        //         // ease: 'circ.out',
+        //         // stagger: 0.02,
+        //         //,   onComplete: () => {splitFirstInfo.revert()}
+        //     },
+        //     '+=0'
+        // );
+        // // tlHover.play();
+        // const hoverCards = document.querySelectorAll('.hoverCard');
+        // hoverCards.forEach((hoverCard) => {
+        //     hoverCard.addEventListener('mouseenter', () => tlHover.play());
+        //     hoverCard.addEventListener('mouseleave', () => tlHover.reverse());
+        // });
+        // let anims = [];
+        // gsap.utils.toArray('.hoverCard').forEach((card, cardIndex) => {
+        //     gsap.utils
+        //         .toArray('.hoverCard ul li')
+        //         .forEach((text, textIndex) => {
+        //             let animation = gsap.to('.hoverCard ul li', {
+        //                 paused: true,
+        //                 color: 'green',
+        //                 duration: 0.8,
+        //             });
+        //             anims.push(animation);
+        //         });
+        // });
+        // const hoverCards = document.querySelectorAll('.hoverCard');
+        // hoverCards.forEach((hoverCard) => {
+        //     hoverCard.addEventListener('mouseenter', () => {
+        //         anims.forEach((anim) => {
+        //             anim.play();
+        //         });
+        //     });
+        //     hoverCard.addEventListener('mouseleave', () => {
+        //         anims.forEach((anim) => {
+        //             anim.reverse();
+        //         });
+        //     });
+        // });
     });
 
     return (
@@ -190,7 +241,7 @@ export default function Home() {
                     <div className={`${styles.row} section`}>
                         <div className={styles.grid}>
                             <div
-                                className={styles.card}
+                                className={`${styles.card} hoverCard`}
                                 onClick={() =>
                                     router.push('/services/live-events')
                                 }
@@ -210,7 +261,7 @@ export default function Home() {
                                 <div className={styles.cardLineHover} />
                             </div>
                             <div
-                                className={styles.card}
+                                className={`${styles.card} hoverCard`}
                                 onClick={() =>
                                     router.push('/services/virtual-events')
                                 }
@@ -227,7 +278,7 @@ export default function Home() {
                                 <div className={styles.cardLineHover} />
                             </div>
                             <div
-                                className={styles.card}
+                                className={`${styles.card} hoverCard`}
                                 onClick={() => router.push('/services/digital')}
                             >
                                 <img src='/services-card3.jpeg' alt='' />
@@ -245,7 +296,7 @@ export default function Home() {
                                 <div className={styles.cardLineHover} />
                             </div>
                             <div
-                                className={styles.card}
+                                className={`${styles.card} hoverCard`}
                                 onClick={() =>
                                     router.push('/services/experiential')
                                 }
@@ -264,7 +315,7 @@ export default function Home() {
                                 <div className={styles.cardLineHover} />
                             </div>
                             <div
-                                className={styles.card}
+                                className={`${styles.card} hoverCard`}
                                 onClick={() => router.push('/services/av-hire')}
                             >
                                 <img src='/services-card5.jpeg' alt='' />

@@ -631,7 +631,7 @@ const init = () => {
         });
 
         // Fade out planes and cubes
-        if (scrollPos > 35) {
+        if (scrollPos > 35 && scrollPos < 60) {
             if (plane) {
                 gsap.to(plane.material, {
                     duration: 2,

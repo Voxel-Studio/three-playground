@@ -463,11 +463,15 @@ const init = () => {
 
                 if (deltaY >= 0) {
                     if (window.scrollY < 19225) {
+                        // if (scrollPos < 50) {
                         scrollPos += deltaY / 250;
+                        // }
                     }
                 } else {
                     if (window.scrollY !== 0) {
+                        // if (scrollPos < 50) {
                         scrollPos += deltaY / 250;
+                        // }
                     }
                 }
 

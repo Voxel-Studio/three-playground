@@ -28,8 +28,9 @@
 }
 
 .scrollDown {
-	width: 50px;
-	height: 90px;
+	width: 40px;
+    aspect-ratio: 5 / 9;
+	/* height: 90px; */
 	border: 1px solid white;
 	border-radius: 60px;
 	/* position: relative; */
@@ -59,14 +60,14 @@
 @keyframes wheel {
 	to {
 		opacity: 0;
-		top: 60px;
+		top: 40px;
 	}
 }
 
 @-webkit-keyframes wheel {
 	to {
 		opacity: 0;
-		top: 60px;
+		top: 40px;
 	}
 }
 

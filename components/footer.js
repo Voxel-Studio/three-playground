@@ -1,8 +1,8 @@
 import styles from '../styles/Footer.module.css';
 
-const Footer = ({ showContact = false }) => {
+const Footer = ({ showContact = false, top = 40, bg }) => {
     return (
-        <footer className={styles.footer}>
+        <footer className={styles.footer} style={{ marginTop: top }}>
             <div
                 className={styles.contact}
                 style={{ display: showContact ? 'flex' : 'none' }}
@@ -68,7 +68,10 @@ const Footer = ({ showContact = false }) => {
                     </form>
                 </div>
             </div>
-            <div className={`${styles.about} wrapper`}>
+            <div
+                className={`${styles.about} wrapper`}
+                style={{ background: bg }}
+            >
                 <div className={styles.aboutCol}>
                     <img
                         className={styles.aboutLogo}

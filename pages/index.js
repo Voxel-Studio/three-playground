@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import Header from '../components/header';
 import Footer from '../components/footer';
 import Landing from '../components/landing';
 import Pyramid from '../components/pyramid';
-import { useRouter } from 'next/router';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { SplitText } from 'gsap/dist/SplitText';
@@ -481,7 +481,7 @@ export default function Home() {
                     </div>
                 </div>
             </div>
-            <div className='wrapper'>
+            <div className='wrapper' style={{ background: 'black' }}>
                 <div
                     className='backToTop'
                     onClick={() =>
@@ -492,7 +492,7 @@ export default function Home() {
                     <div />
                 </div>
             </div>
-            <Footer />
+            <Footer top={-1} bg={router.pathname === '/' ? 'black' : 'none'} />
         </div>
     );
 }

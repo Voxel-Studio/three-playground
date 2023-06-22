@@ -42,12 +42,12 @@ function Scene({ p = new THREE.Vector3() }) {
     const scrollPos = useRef(0);
     // const floor = useTexture('/floor-tile-black.png');
     const floor = useTexture('/floor2.png');
-    floor.repeat.set(20, 20);
-    floor.offset.set(0.49, 0.49);
+    floor.repeat.set(22, 22);
+    floor.offset.set(0.5, 0.5);
     floor.wrapS = floor.wrapT = THREE.RepeatWrapping;
     const ceiling = useTexture('/ceiling2.png');
-    ceiling.repeat.set(10, 10);
-    ceiling.offset.set(0.49, 0.49);
+    ceiling.repeat.set(11, 11);
+    ceiling.offset.set(0.5, 0.5);
     ceiling.wrapS = ceiling.wrapT = THREE.RepeatWrapping;
     useEffect(() => {
         let lastKnownScrollPosition = 0;
@@ -108,22 +108,22 @@ function Scene({ p = new THREE.Vector3() }) {
                 (1 - (state.camera.position.z - 15) / (20 - 15));
         } else if (
             state.camera.position.z >= 20 &&
-            state.camera.position.z < 25
+            state.camera.position.z < 29
         ) {
             cameraTargetRotation.y =
-                ((-Math.PI / 4) * (state.camera.position.z - 20)) / (25 - 20);
+                ((-Math.PI / 4) * (state.camera.position.z - 20)) / (29 - 20);
         } else if (
-            state.camera.position.z >= 25 &&
-            state.camera.position.z < 30
+            state.camera.position.z >= 29 &&
+            state.camera.position.z < 35
         ) {
             cameraTargetRotation.y =
                 (-Math.PI / 4) *
-                (1 - (state.camera.position.z - 25) / (30 - 25));
+                (1 - (state.camera.position.z - 29) / (35 - 29));
         } else {
             cameraTargetRotation.y = 0;
         }
 
-        easing.damp3(state.camera.rotation, cameraTargetRotation, 0.1, dt);
+        easing.damp3(state.camera.rotation, cameraTargetRotation, 0.2, dt);
     });
 
     return (
@@ -131,12 +131,12 @@ function Scene({ p = new THREE.Vector3() }) {
             <ambientLight intensity={1} />
             {/* Ceiling */}
             <mesh position={[0, 10, 0]} rotation={[Math.PI / 2, 0, Math.PI]}>
-                <planeGeometry args={[50, 50]} />
+                <planeGeometry args={[50, 70]} />
                 <meshStandardMaterial map={ceiling} />
             </mesh>
             {/* Floor */}
             <mesh position={[0, 0, 0]} rotation={[-Math.PI / 2, 0, 0]}>
-                <planeGeometry args={[50, 50]} />
+                <planeGeometry args={[50, 70]} />
                 <meshStandardMaterial map={floor} opacity='0.5' transparent />
             </mesh>
             {/* Block text reflection */}
@@ -146,7 +146,7 @@ function Scene({ p = new THREE.Vector3() }) {
             </mesh> */}
             {/* Reflections */}
             <mesh position={[0, -0.01, 0]} rotation={[-Math.PI / 2, 0, 0]}>
-                <planeGeometry args={[50, 50]} />
+                <planeGeometry args={[50, 70]} />
                 <MeshReflectorMaterial
                     blur={[300, 100]}
                     resolution={2048}
@@ -165,10 +165,6 @@ function Scene({ p = new THREE.Vector3() }) {
                 <planeGeometry args={[55, 10]} />
                 <meshStandardMaterial color={'#181818'} />
             </mesh>
-            <mesh position={[0, 0, 0]} rotation={[-Math.PI / 2, 0, 0]}>
-                <planeGeometry args={[50, 50]} />
-                <meshStandardMaterial map={floor} opacity='0.5' transparent />
-            </mesh>
             {/* Main logo */}
             <Image
                 url='/logo-text-old.svg'
@@ -179,16 +175,16 @@ function Scene({ p = new THREE.Vector3() }) {
             {/* Slab */}
             <Image
                 url='/slab.png'
-                position={[-1.5, 1.25, 0.1]}
+                position={[-1.5, 1.25, 0.6]}
                 scale={[11.13 / 1, 3.31 / 1, 1]}
                 transparent
             />
             {/* Left dots */}
             <Image
                 url='/grid.png'
-                position={[-4, 1, 4.5]}
+                position={[-4, 1, 4]}
                 rotation={[0, Math.PI / 2, 0]}
-                scale={[3.5 / 2, 3.9 / 2, 1]}
+                scale={[1.972 / 2, 2.86 / 2, 1]}
                 transparent
             />
             {/* Top dots */}
@@ -196,7 +192,7 @@ function Scene({ p = new THREE.Vector3() }) {
                 url='/grid.png'
                 position={[3.5, 2.5, 2]}
                 rotation={[Math.PI / 2, 0, 0]}
-                scale={[3.5 / 2, 3.9 / 2, 1]}
+                scale={[1.972 / 2, 2.86 / 2, 1]}
                 transparent
             />
             {/* Pole */}
@@ -226,6 +222,145 @@ function Scene({ p = new THREE.Vector3() }) {
                 r={[0, -Math.PI / 2 + Math.PI / 8, 0]}
                 s={[0.9, GOLDEN_RATIO, 0.075]}
                 url='/about3.jpeg'
+            />
+            {/* Pole */}
+            <Image
+                url='/pole.png'
+                position={[-5, 0.92, 5.5]}
+                rotation={[0, 0, 0]}
+                scale={[0.045 / 1, 1.85 / 1, 1]}
+                transparent
+            />
+            {/* Left tall dots */}
+            <Image
+                url='/grid-tall.png'
+                position={[-3.5, 1.1, 6.5]}
+                rotation={[0, 0, 0]}
+                scale={[1.972 / 2, 4.34 / 2, 1]}
+                transparent
+            />
+            {/* Purple one */}
+            <Frame
+                p={[-3.75, 0, 9.5]}
+                r={[0, Math.PI / 2, 0]}
+                s={[2.5, GOLDEN_RATIO, 0.075]}
+                url='/tiktok-1.jpeg'
+            />
+            {/* Transforming spaces */}
+            <Image
+                url='/transforming.svg'
+                position={[-3.75, 1, 12]}
+                rotation={[0, Math.PI / 2, 0]}
+                scale={[6.19 / 4, 2.7 / 4, 1]}
+                transparent
+            />
+            {/* Pole */}
+            <Image
+                url='/pole.png'
+                position={[-3.75, 0.92, 13]}
+                rotation={[0, 0, 0]}
+                scale={[0.045 / 1, 1.85 / 1, 1]}
+                transparent
+            />
+            {/* Second purple one */}
+            <Frame
+                p={[-5.5, 0, 13.5]}
+                r={[0, Math.PI / 2 - Math.PI / 4, 0]}
+                s={[0.9, GOLDEN_RATIO, 0.075]}
+                url='/more-news-1.jpg'
+            />
+            {/* Arch back dots */}
+            <Image
+                url='/grid-tall.png'
+                position={[-6.5, 1.1, 12]}
+                rotation={[0, 0, 0]}
+                scale={[1.972 / 2, 4.34 / 2, 1]}
+                transparent
+            />
+            {/* Arch top dots */}
+            <Image
+                url='/grid-tall.png'
+                position={[-6.5, 2.2, 13.1]}
+                rotation={[Math.PI / 2, 0, 0]}
+                scale={[1.972 / 2, 4.34 / 2, 1]}
+                transparent
+            />
+            {/* Pole */}
+            <Image
+                url='/pole.png'
+                position={[0.75, 0.92, 12]}
+                rotation={[0, 0, 0]}
+                scale={[0.045 / 1, 1.85 / 1, 1]}
+                transparent
+            />
+            {/* Second purple one */}
+            <Frame
+                p={[2, 0, 14]}
+                r={[0, 0, 0]}
+                s={[1.5, GOLDEN_RATIO, 0.075]}
+                url='/more-news-2.jpg'
+            />
+            {/* Front dots */}
+            <Image
+                url='/grid.png'
+                position={[2.75, 1.5, 14.2]}
+                rotation={[0, 0, 0]}
+                scale={[1.972 / 2, 2.86 / 2, 1]}
+                transparent
+            />
+            {/* Right dots */}
+            <Image
+                url='/grid.png'
+                position={[3.25, 1.5, 14.75]}
+                rotation={[0, -Math.PI / 2, 0]}
+                scale={[1.972 / 2, 2.86 / 2, 1]}
+                transparent
+            />
+            {/* Pole */}
+            <Image
+                url='/pole.png'
+                position={[3.75, 0.92, 15.5]}
+                rotation={[0, 0, 0]}
+                scale={[0.045 / 1, 1.85 / 1, 1]}
+                transparent
+            />
+            {/* More tall dots */}
+            <Image
+                url='/grid-tall.png'
+                position={[3, 1.1, 18.75]}
+                rotation={[0, 0, 0]}
+                scale={[1.972 / 2, 4.34 / 2, 1]}
+                transparent
+            />
+            {/* Third purple one */}
+            <Frame
+                p={[2.85, 0, 20.5]}
+                r={[0, -Math.PI / 2 + Math.PI / 4, 0]}
+                s={[1.5, GOLDEN_RATIO, 0.075]}
+                url='/adidas-1.jpeg'
+            />
+            {/* Pole */}
+            <Image
+                url='/pole.png'
+                position={[4.5, 0.92, 22]}
+                rotation={[0, 0, 0]}
+                scale={[0.045 / 1, 1.85 / 1, 1]}
+                transparent
+            />
+            {/* Innovative */}
+            <Image
+                url='/innovative.svg'
+                position={[2.85, 1, 24]}
+                rotation={[0, -Math.PI / 2, 0]}
+                scale={[5.04 / 4, 2.51 / 4, 1]}
+                transparent
+            />
+            {/* Teal one */}
+            <Frame
+                p={[2.85, 0, 26]}
+                r={[0, -Math.PI / 2, 0]}
+                s={[1.8, GOLDEN_RATIO, 0.075]}
+                url='/services-card3.jpeg'
             />
         </group>
     );

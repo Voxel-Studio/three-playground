@@ -5,6 +5,7 @@ import styles from '../styles/Home.module.css';
 import Header from '../components/header';
 import Footer from '../components/footer';
 import Landing from '../components/landing';
+// import Landing from '../components/archived/landing';
 import Pyramid from '../components/pyramid';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';

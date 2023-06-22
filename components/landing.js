@@ -11,6 +11,7 @@ import {
 import * as THREE from 'three';
 import { easing } from 'maath';
 import Header from './header';
+import { Loading } from './loading';
 import styles from '../styles/Landing.module.css';
 
 const GOLDEN_RATIO = 1.61803398875;
@@ -50,7 +51,7 @@ const Landing = () => {
                 </Canvas>
             </div>
             <Header isHomepage={true} />
-            {/* <Loading /> */}
+            <Loading />
         </div>
     );
 };

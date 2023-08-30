@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef } from 'react';
-import { Canvas, useFrame, useThree, useLoader } from '@react-three/fiber';
+import { useState, useEffect, useRef } from "react";
+import { Canvas, useFrame, useThree, useLoader } from "@react-three/fiber";
 import {
     useCursor,
     MeshReflectorMaterial,
@@ -7,12 +7,12 @@ import {
     Image,
     Text,
     Environment,
-} from '@react-three/drei';
-import * as THREE from 'three';
-import { easing } from 'maath';
-import Header from './header';
-import { Loading } from './loading';
-import styles from '../styles/Landing.module.css';
+} from "@react-three/drei";
+import * as THREE from "three";
+import { easing } from "maath";
+import Header from "./header";
+import { Loading } from "./loading";
+import styles from "../styles/Landing.module.css";
 
 const GOLDEN_RATIO = 1.61803398875;
 const CAMERA_START = 8;
@@ -20,22 +20,24 @@ const CAMERA_START = 8;
 const Landing = () => {
     const [windowWidth, setWindowWidth] = useState(0);
     const [windowHeight, setWindowHeight] = useState(0);
+
     useEffect(() => {
         // setWindowWidth(window.innerWidth);
         // setWindowHeight(window.innerHeight);
 
         const onWindowResize = () => {
-            // setWindowWidth(window.innerWidth);
-            // setWindowHeight(window.innerHeight);
+            setWindowWidth(window.innerWidth);
+            setWindowHeight(window.innerHeight);
             // camera.aspect = window.innerWidth / window.innerHeight;
             // camera.updateProjectionMatrix();
             // gl.setSize(window.innerWidth, window.innerHeight);
         };
-        window.addEventListener('resize', onWindowResize, false);
+        window.addEventListener("resize", onWindowResize, false);
     }, []);
+
     return (
-        <div className='wrapper'>
-            <div className={styles.container} id='canvas-container'>
+        <div className="wrapper">
+            <div className={styles.container} id="canvas-container">
                 <Canvas
                     // dpr={[1, 1.5]}
                     camera={{
@@ -58,23 +60,29 @@ const Landing = () => {
 
 function Scene({ p = new THREE.Vector3() }) {
     const slab = useRef();
-    const { camera, gl, scene } = useThree();
+    const { camera, gl, scene, viewport } = useThree();
     const logoScale = 1.25;
     const scrollPos = useRef(0);
     // const floor = useTexture('/floor-tile-black.png');
-    const floor = useTexture('/floor2.png');
+    const floor = useTexture("/floor2.png");
     floor.repeat.set(22, 22);
     floor.offset.set(0.5, 0.5);
     floor.wrapS = floor.wrapT = THREE.RepeatWrapping;
-    const ceiling = useTexture('/ceiling2.png');
+    const ceiling = useTexture("/ceiling2.png");
     ceiling.repeat.set(11, 11);
     ceiling.offset.set(0.5, 0.5);
     ceiling.wrapS = ceiling.wrapT = THREE.RepeatWrapping;
+
+    const isMobile = window.innerWidth < 768;
+    const responsiveRatio = viewport.width / 10;
+    const imageScale = (n) => {
+        return Math.max(0.5 * n, Math.min(n * responsiveRatio, n));
+    };
     useEffect(() => {
         let lastKnownScrollPosition = 0;
         let deltaY = 0;
 
-        document.addEventListener('scroll', function (e) {
+        document.addEventListener("scroll", function (e) {
             let ticking = false;
             if (!ticking) {
                 window.requestAnimationFrame(function () {
@@ -104,7 +112,7 @@ function Scene({ p = new THREE.Vector3() }) {
             camera.updateProjectionMatrix();
             gl.setSize(window.innerWidth, window.innerHeight);
         };
-        window.addEventListener('resize', onWindowResize, false);
+        window.addEventListener("resize", onWindowResize, false);
 
         slab.current.material.depthWrite = false;
 
@@ -159,7 +167,7 @@ function Scene({ p = new THREE.Vector3() }) {
 
         scene.traverse((child) => {
             if (child instanceof THREE.Mesh) {
-                if (child.name !== 'noFade') {
+                if (child.name !== "noFade") {
                     // child.material.transparent = true;
                     // child.material.color.set(0x555555);
                     // child.material.combine = THREE.MultiplyOperation;
@@ -182,7 +190,7 @@ function Scene({ p = new THREE.Vector3() }) {
             {/* Floor */}
             <mesh position={[0, 0, 0]} rotation={[-Math.PI / 2, 0, 0]}>
                 <planeGeometry args={[50, 70]} />
-                <meshStandardMaterial map={floor} opacity='0.5' transparent />
+                <meshStandardMaterial map={floor} opacity="0.5" transparent />
             </mesh>
             {/* Block text reflection */}
             {/* <mesh position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]}>
@@ -193,7 +201,7 @@ function Scene({ p = new THREE.Vector3() }) {
             <mesh
                 position={[0, -0.01, 0]}
                 rotation={[-Math.PI / 2, 0, 0]}
-                name='noFade'
+                name="noFade"
             >
                 <planeGeometry args={[50, 70]} />
                 <MeshReflectorMaterial
@@ -205,142 +213,202 @@ function Scene({ p = new THREE.Vector3() }) {
                     depthScale={1.6}
                     minDepthThreshold={0.4}
                     maxDepthThreshold={1.6}
-                    color='#111111'
+                    color="#111111"
                     metalness={0.1}
                 />
             </mesh>
             {/* Back wall */}
             <mesh position={[0, 0, -10]} rotation={[0, 0, 0]}>
                 <planeGeometry args={[55, 10]} />
-                <meshStandardMaterial color={'#181818'} />
+                <meshStandardMaterial color={"#181818"} />
             </mesh>
             {/* Main logo */}
             <Image
                 // url='/logo-text-old.svg'
-                url='/creative.svg'
+                url="/creative.svg"
                 position={[0, 1, 4.5]}
                 scale={[5.26 / 4, 2.51 / 4, 1]}
                 transparent
             />
             {/* Slab */}
             <Image
-                url='/slab.svg'
-                position={[-1.25, 1.48, 0.1]}
-                scale={[6.549 * 1.25, 1.7 * 1.25, 1]}
+                url="/slab.svg"
+                position={[-1.25 * responsiveRatio, 1.48, 0.1]}
+                scale={[
+                    imageScale(6.549 * 1.25),
+                    imageScale(1.7 * 1.25),
+                    imageScale(1),
+                ]}
                 transparent
                 ref={slab}
             />
             {/* Left dots */}
             <Image
-                url='/grid.png'
-                position={[-4, 1, 4]}
+                url="/grid.png"
+                position={[-4 * responsiveRatio, 1, 4]}
                 rotation={[0, Math.PI / 2, 0]}
-                scale={[1.972 / 2, 2.86 / 2, 1]}
+                scale={[
+                    imageScale(1.972 / 2),
+                    imageScale(2.86 / 2),
+                    imageScale(1),
+                ]}
                 transparent
             />
             {/* Top dots */}
             <Image
-                url='/grid.png'
-                position={[3.5, 2.5, 2]}
+                url="/grid.png"
+                position={[3.5 * responsiveRatio, 2.5, 2]}
                 rotation={[Math.PI / 2, 0, 0]}
-                scale={[1.972 / 2, 2.86 / 2, 1]}
+                scale={[
+                    imageScale(1.972 / 2),
+                    imageScale(2.86 / 2),
+                    imageScale(1),
+                ]}
                 transparent
             />
             {/* Pole */}
             <Image
-                url='/pole.png'
-                position={[2.5, 0.92, 2]}
+                url="/pole.png"
+                position={[2.5 * responsiveRatio, 0.92, 2]}
                 rotation={[0, 0, 0]}
-                scale={[0.045 / 1, 1.85 / 1, 1]}
+                scale={[
+                    imageScale(0.045 / 1),
+                    imageScale(1.85 / 1),
+                    imageScale(1),
+                ]}
                 transparent
             />
             {/* Yellow one */}
             <Frame
-                p={[-3, 0, 1]}
+                p={[-3 * responsiveRatio, 0, 1]}
                 r={[0, 0, 0]}
-                s={[0.9, GOLDEN_RATIO, 0.075]}
-                url='/pepsi1.jpeg'
+                s={[
+                    imageScale(0.9),
+                    imageScale(GOLDEN_RATIO),
+                    imageScale(0.075),
+                ]}
+                url="/pepsi1.jpeg"
             />
             {/* Pink one */}
             <Frame
-                p={[-2, 0, 5]}
+                p={[-2 * responsiveRatio, 0, 5]}
                 r={[0, Math.PI / 2, 0]}
-                s={[0.9, GOLDEN_RATIO, 0.075]}
-                url='/about1.jpeg'
+                s={[
+                    imageScale(0.9),
+                    imageScale(GOLDEN_RATIO),
+                    imageScale(0.075),
+                ]}
+                url="/about1.jpeg"
             />
             <Frame
-                p={[2, 0, 5]}
+                p={[2 * responsiveRatio, 0, 5]}
                 r={[0, -Math.PI / 2 + Math.PI / 8, 0]}
-                s={[0.9, GOLDEN_RATIO, 0.075]}
-                url='/about3.jpeg'
+                s={[
+                    imageScale(0.9),
+                    imageScale(GOLDEN_RATIO),
+                    imageScale(0.075),
+                ]}
+                url="/about3.jpeg"
             />
             {/* Pole */}
             <Image
-                url='/pole.png'
-                position={[-5, 0.92, 5.5]}
+                url="/pole.png"
+                position={[-5 * responsiveRatio, 0.92 * responsiveRatio, 5.5]}
                 rotation={[0, 0, 0]}
-                scale={[0.045 / 1, 1.85 / 1, 1]}
+                scale={[imageScale(0.045), imageScale(1.85), imageScale(1)]}
                 transparent
             />
             {/* Left tall dots */}
             <Image
-                url='/grid-tall.png'
-                position={[-3.5, 1.1, 6.5]}
+                url="/grid-tall.png"
+                position={[-3.5 * responsiveRatio, 1.1 * responsiveRatio, 6.5]}
                 rotation={[0, 0, 0]}
-                scale={[1.972 / 2, 4.34 / 2, 1]}
+                scale={[
+                    imageScale(1.972 / 2),
+                    imageScale(4.34 / 2),
+                    imageScale(1),
+                ]}
                 transparent
             />
             {/* Purple one */}
             <Frame
-                p={[-3.75, 0, 9.5]}
+                p={[-3.75 * responsiveRatio, 0, 9.5]}
                 r={[0, Math.PI / 2, 0]}
-                s={[2.5, GOLDEN_RATIO, 0.075]}
-                url='/tiktok-1.jpeg'
+                s={[
+                    imageScale(2.5),
+                    imageScale(GOLDEN_RATIO),
+                    imageScale(0.075),
+                ]}
+                url="/tiktok-1.jpeg"
             />
             {/* Transforming spaces */}
             <Image
-                url='/transforming.svg'
-                position={[-3.75, 1, 12]}
+                url="/transforming.svg"
+                position={[-3.75 * responsiveRatio, 1 * responsiveRatio, 12]}
                 rotation={[0, Math.PI / 2, 0]}
-                scale={[6.19 / 4, 2.7 / 4, 1]}
+                scale={[
+                    imageScale(6.19 / 4),
+                    imageScale(2.7 / 4),
+                    imageScale(1),
+                ]}
                 transparent
             />
             {/* Pole */}
             <Image
-                url='/pole.png'
-                position={[-3.75, 0.92, 13]}
+                url="/pole.png"
+                position={[-3.75 * responsiveRatio, 0.92 * responsiveRatio, 13]}
                 rotation={[0, 0, 0]}
-                scale={[0.045 / 1, 1.85 / 1, 1]}
+                scale={[
+                    imageScale(0.045 / 1),
+                    imageScale(1.85 / 1),
+                    imageScale(1),
+                ]}
                 transparent
             />
             {/* Second purple one */}
             <Frame
-                p={[-5.5, 0, 13.5]}
+                p={[-5.5 * responsiveRatio, 0, 13.5]}
                 r={[0, Math.PI / 2 - Math.PI / 4, 0]}
-                s={[0.9, GOLDEN_RATIO, 0.075]}
-                url='/more-news-1.jpg'
+                s={[
+                    imageScale(0.9),
+                    imageScale(GOLDEN_RATIO),
+                    imageScale(0.075),
+                ]}
+                url="/more-news-1.jpg"
             />
             {/* Arch back dots */}
             <Image
-                url='/grid-tall.png'
-                position={[-6.5, 1.1, 12]}
+                url="/grid-tall.png"
+                position={[-6.5 * responsiveRatio, 1.1, 12]}
                 rotation={[0, 0, 0]}
-                scale={[1.972 / 2, 4.34 / 2, 1]}
+                scale={[
+                    imageScale(1.972 / 2),
+                    imageScale(4.34 / 2),
+                    imageScale(1),
+                ]}
                 transparent
             />
             {/* Arch top dots */}
             <Image
-                url='/grid-tall.png'
-                position={[-6.5, 2.2, 13.1]}
+                url="/grid-tall.png"
+                position={[-6.5 * responsiveRatio, 2.2, 13.1]}
                 rotation={[Math.PI / 2, 0, 0]}
-                scale={[1.972 / 2, 4.34 / 2, 1]}
+                scale={[
+                    imageScale(1.972 / 2),
+                    imageScale(4.34 / 2),
+                    imageScale(1),
+                ]}
                 transparent
             />
             {/* Bg slab */}
             <Image
-                url='/slab-r.svg'
-                position={[-7, 1.48, 10]}
-                scale={[6.549 * 1.25, 1.7 * 1.25, 1]}
+                url="/slab-r.svg"
+                position={[-7 * responsiveRatio, 1.48, 10]}
+                scale={[
+                    imageScale(6.549 * 1.25),
+                    imageScale(1.7 * 1.25),
+                    imageScale(1),
+                ]}
                 rotation={[0, Math.PI / 2, 0]}
                 transparent
                 ref={slab}
@@ -348,15 +416,15 @@ function Scene({ p = new THREE.Vector3() }) {
             {/* Top logo */}
             <group>
                 <Image
-                    url='/bracket-l.svg'
-                    position={[-4, 5, 7]}
+                    url="/bracket-l.svg"
+                    position={[-4 * responsiveRatio, 5, 7]}
                     scale={[1.899 * logoScale, 7.367 * logoScale, 1]}
                     rotation={[Math.PI / 2, 0, 0]}
                     transparent
                     ref={slab}
                 />
                 <Image
-                    url='/middle.svg'
+                    url="/middle.svg"
                     position={[0, 5, 7]}
                     scale={[1.042 * logoScale, 5.891 * logoScale, 1]}
                     rotation={[Math.PI / 2, 0, 0]}
@@ -364,8 +432,8 @@ function Scene({ p = new THREE.Vector3() }) {
                     ref={slab}
                 />
                 <Image
-                    url='/bracket-r.svg'
-                    position={[4, 5, 7]}
+                    url="/bracket-r.svg"
+                    position={[4 * responsiveRatio, 5, 7]}
                     scale={[1.899 * logoScale, 7.367 * logoScale, 1]}
                     rotation={[Math.PI / 2, 0, 0]}
                     transparent
@@ -374,56 +442,84 @@ function Scene({ p = new THREE.Vector3() }) {
             </group>
             {/* Pole */}
             <Image
-                url='/pole.png'
-                position={[0.75, 0.92, 12]}
+                url="/pole.png"
+                position={[0.75 * responsiveRatio, 0.92, 12]}
                 rotation={[0, 0, 0]}
-                scale={[0.045 / 1, 1.85 / 1, 1]}
+                scale={[
+                    imageScale(0.045 / 1),
+                    imageScale(1.85 / 1),
+                    imageScale(1),
+                ]}
                 transparent
             />
             {/* Second purple one */}
             <Frame
                 p={[2, 0, 14]}
                 r={[0, 0, 0]}
-                s={[1.5, GOLDEN_RATIO, 0.075]}
-                url='/more-news-2.jpg'
+                s={[
+                    imageScale(1.5),
+                    imageScale(GOLDEN_RATIO),
+                    imageScale(0.075),
+                ]}
+                url="/more-news-2.jpg"
             />
             {/* Front dots */}
             <Image
-                url='/grid.png'
-                position={[2.75, 1.5, 14.5]}
+                url="/grid.png"
+                position={[2.75 * responsiveRatio, 1.5, 14.5]}
                 rotation={[0, 0, 0]}
-                scale={[1.972 / 2, 2.86 / 2, 1]}
+                scale={[
+                    imageScale(1.972 / 2),
+                    imageScale(2.86 / 2),
+                    imageScale(1),
+                ]}
                 transparent
             />
             {/* Right dots */}
             <Image
-                url='/grid.png'
-                position={[3.25, 1.5, 15.05]}
+                url="/grid.png"
+                position={[3.25 * responsiveRatio, 1.5, 15.05]}
                 rotation={[0, -Math.PI / 2, 0]}
-                scale={[1.972 / 2, 2.86 / 2, 1]}
+                scale={[
+                    imageScale(1.972 / 2),
+                    imageScale(2.86 / 2),
+                    imageScale(1),
+                ]}
                 transparent
             />
             {/* Pole */}
             <Image
-                url='/pole.png'
-                position={[3.75, 0.92, 15.5]}
+                url="/pole.png"
+                position={[3.75 * responsiveRatio, 0.92, 15.5]}
                 rotation={[0, 0, 0]}
-                scale={[0.045 / 1, 1.85 / 1, 1]}
+                scale={[
+                    imageScale(0.045 / 1),
+                    imageScale(1.85 / 1),
+                    imageScale(1),
+                ]}
                 transparent
             />
             {/* More tall dots */}
             <Image
-                url='/grid-tall.png'
-                position={[3, 1.1, 18.75]}
+                url="/grid-tall.png"
+                position={[3 * responsiveRatio, 1.1, 18.75]}
                 rotation={[0, 0, 0]}
-                scale={[1.972 / 2, 4.34 / 2, 1]}
+                scale={[
+                    imageScale(1.972 / 2),
+                    imageScale(4.34 / 2),
+                    imageScale(1),
+                ]}
                 transparent
             />
             {/* Bg slab two */}
             <Image
-                url='/slab.svg'
-                position={[7, 1.48, 19]}
-                scale={[6.549 * 1.25, 1.7 * 1.25, 1]}
+                url="/slab.svg"
+                position={[7 * responsiveRatio, 1.48, 19]}
+                scale={[
+                    imageScale(6.549 * 1.25),
+                    imageScale(1.7 * 1.25),
+                    imageScale(1),
+                ]}
                 rotation={[0, -Math.PI / 2, 0]}
                 transparent
                 ref={slab}
@@ -432,64 +528,96 @@ function Scene({ p = new THREE.Vector3() }) {
             <Frame
                 p={[2.85, 0, 20.5]}
                 r={[0, -Math.PI / 2 + Math.PI / 4, 0]}
-                s={[1.5, GOLDEN_RATIO, 0.075]}
-                url='/adidas-1.jpeg'
+                s={[
+                    imageScale(1.5),
+                    imageScale(GOLDEN_RATIO),
+                    imageScale(0.075),
+                ]}
+                url="/adidas-1.jpeg"
             />
             {/* Pole */}
             <Image
-                url='/pole.png'
-                position={[4.5, 0.92, 22]}
+                url="/pole.png"
+                position={[4.5 * responsiveRatio, 0.92, 22]}
                 rotation={[0, 0, 0]}
-                scale={[0.045 / 1, 1.85 / 1, 1]}
+                scale={[
+                    imageScale(0.045 / 1),
+                    imageScale(1.85 / 1),
+                    imageScale(1),
+                ]}
                 transparent
             />
             {/* Innovative */}
             <Image
-                url='/innovative.svg'
-                position={[2.85, 1, 24]}
+                url="/innovative.svg"
+                position={[2.85 * responsiveRatio, 1, 24]}
                 rotation={[0, -Math.PI / 2, 0]}
-                scale={[5.04 / 4, 2.51 / 4, 1]}
+                scale={[
+                    imageScale(5.04 / 4),
+                    imageScale(2.51 / 4),
+                    imageScale(1),
+                ]}
                 transparent
             />
             {/* Teal one */}
             <Frame
-                p={[2.85, 0, 26]}
+                p={[2.85 * responsiveRatio, 0, 26]}
                 r={[0, -Math.PI / 2, 0]}
-                s={[1.8, GOLDEN_RATIO, 0.075]}
-                url='/services-card3.jpeg'
+                s={[
+                    imageScale(1.8),
+                    imageScale(GOLDEN_RATIO),
+                    imageScale(0.075),
+                ]}
+                url="/services-card3.jpeg"
             />
             {/* Second arch back dots */}
             <Image
-                url='/grid-tall.png'
-                position={[4, 1.1, 26]}
+                url="/grid-tall.png"
+                position={[4 * responsiveRatio, 1.1, 26]}
                 rotation={[0, -Math.PI / 2, 0]}
-                scale={[1.972 / 2, 4.34 / 2, 1]}
+                scale={[
+                    imageScale(1.972 / 2),
+                    imageScale(4.34 / 2),
+                    imageScale(1),
+                ]}
                 transparent
             />
             {/* Second arch top dots */}
             <Image
-                url='/grid-tall.png'
-                position={[2.9, 2.2, 26]}
+                url="/grid-tall.png"
+                position={[2.9 * responsiveRatio, 2.2, 26]}
                 rotation={[Math.PI / 2, 0, Math.PI / 2]}
-                scale={[1.972 / 2, 4.34 / 2, 1]}
+                scale={[
+                    imageScale(1.972 / 2),
+                    imageScale(4.34 / 2),
+                    imageScale(1),
+                ]}
                 transparent
             />
             {/* Pole */}
             <Image
-                url='/pole.png'
-                position={[4.5, 0.92, 27.5]}
+                url="/pole.png"
+                position={[4.5 * responsiveRatio, 0.92, 27.5]}
                 rotation={[0, 0, 0]}
-                scale={[0.045 / 1, 1.85 / 1, 1]}
+                scale={[
+                    imageScale(0.045 / 1),
+                    imageScale(1.85 / 1),
+                    imageScale(1),
+                ]}
                 transparent
             />
             {/* Final logo */}
             <Image
-                url='/logo-full.svg'
+                url="/logo-full.svg"
                 position={[0, 1, 38]}
                 rotation={[0, 0, 0]}
-                scale={[7 / 2, 1.517 / 2, 1]}
+                scale={[
+                    imageScale(7 / 2),
+                    imageScale(1.517 / 2),
+                    imageScale(1),
+                ]}
                 transparent
-                name='noFade'
+                name="noFade"
             />
         </group>
     );
@@ -504,7 +632,7 @@ function Frame({ p, r, s, url }) {
                 scale={s}
             >
                 <boxGeometry />
-                <meshStandardMaterial color='#191919' />
+                <meshStandardMaterial color="#191919" />
 
                 <Image
                     url={url}

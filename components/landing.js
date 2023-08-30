@@ -74,7 +74,7 @@ function Scene({ p = new THREE.Vector3() }) {
     ceiling.wrapS = ceiling.wrapT = THREE.RepeatWrapping;
 
     const isMobile = window.innerWidth < 768;
-    const responsiveRatio = viewport.width / 10;
+    const responsiveRatio = viewport.width / 14;
     const imageScale = (n) => {
         return Math.max(0.5 * n, Math.min(n * responsiveRatio, n));
     };
@@ -313,7 +313,7 @@ function Scene({ p = new THREE.Vector3() }) {
             {/* Pole */}
             <Image
                 url="/pole.png"
-                position={[-5 * responsiveRatio, 0.92 * responsiveRatio, 5.5]}
+                position={[-5 * responsiveRatio, 0.92, 5.5]}
                 rotation={[0, 0, 0]}
                 scale={[imageScale(0.045), imageScale(1.85), imageScale(1)]}
                 transparent
@@ -321,7 +321,7 @@ function Scene({ p = new THREE.Vector3() }) {
             {/* Left tall dots */}
             <Image
                 url="/grid-tall.png"
-                position={[-3.5 * responsiveRatio, 1.1 * responsiveRatio, 6.5]}
+                position={[-3.5 * responsiveRatio, 1.1, 6.5]}
                 rotation={[0, 0, 0]}
                 scale={[
                     imageScale(1.972 / 2),
@@ -344,7 +344,7 @@ function Scene({ p = new THREE.Vector3() }) {
             {/* Transforming spaces */}
             <Image
                 url="/transforming.svg"
-                position={[-3.75 * responsiveRatio, 1 * responsiveRatio, 12]}
+                position={[-3.75 * responsiveRatio, 1, 12]}
                 rotation={[0, Math.PI / 2, 0]}
                 scale={[
                     imageScale(6.19 / 4),
@@ -356,7 +356,7 @@ function Scene({ p = new THREE.Vector3() }) {
             {/* Pole */}
             <Image
                 url="/pole.png"
-                position={[-3.75 * responsiveRatio, 0.92 * responsiveRatio, 13]}
+                position={[-3.75 * responsiveRatio, 0.92, 13]}
                 rotation={[0, 0, 0]}
                 scale={[
                     imageScale(0.045 / 1),

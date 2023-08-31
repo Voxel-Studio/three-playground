@@ -29,6 +29,8 @@ const visibleWidthAtZDepth = (depth, camera) => {
 };
 
 const init = (setSelected) => {
+    //Ratio
+    let ratio = window.innerWidth / window.innerHeight / 2;
     // Element variables
     const container = document.getElementById("container");
     const webglEl = document.getElementById("webglEl");
@@ -42,8 +44,6 @@ const init = (setSelected) => {
         1100
     );
     camera.position.z = 5;
-    //Ratio
-    let ratio = window.innerWidth / 1500;
     // Points
     const totalPoints = 8;
     const theta = (Math.PI * 2) / totalPoints;
@@ -59,11 +59,10 @@ const init = (setSelected) => {
         titles.push(item.title);
     });
     // const radius = 7;
-    const radius = 5.5 * ratio;
+    let radius = 5.5 * ratio;
     const group = new THREE.Group();
     const loader = new FontLoader();
     for (let i = 0; i < totalPoints; i++) {
-        // const geo = new THREE.PlaneGeometry(5, 2.8, 10, 10);
         const geo = new THREE.PlaneGeometry(4, 2.25, 10, 10);
         const mat = new THREE.ShaderMaterial({
             uniforms: {
@@ -101,12 +100,13 @@ const init = (setSelected) => {
             0
         );
         mesh.rotation.z = angle;
+        console.log(mesh.scale);
         mesh.scale.x *= ratio;
         mesh.scale.y *= -1 * ratio;
         loader.load("/lexend-deca.json", function (font) {
             const textGeometry = new TextGeometry(titles[i], {
                 font: font,
-                size: 0.2 * ratio * 0.75,
+                size: 0.16,
                 height: 0.01,
                 curveSegments: 8,
             });
@@ -126,8 +126,8 @@ const init = (setSelected) => {
                 2
             );
             text.rotation.z = angle;
-            text.scale.y *= -1;
-            text.scale.x *= -1;
+            text.scale.y *= -1 * ratio;
+            text.scale.x *= -1 * ratio;
             // console.log(text.position);
         });
     }
@@ -169,7 +169,35 @@ const init = (setSelected) => {
         camera.aspect = window.innerWidth / window.innerHeight;
         camera.updateProjectionMatrix();
         renderer.setSize(window.innerWidth, window.innerHeight);
-        ratio = window.innerWidth / window.innerHeight;
+        ratio = window.innerWidth / window.innerHeight / 2;
+        radius = 5.5 * ratio;
+        scene.traverse((object) => {
+            if (object.name.includes("plane")) {
+                const angle =
+                    theta * object.name[object.name.length - 1] + Math.PI;
+                // Scale the mesh
+                object.scale.x = ratio;
+                object.scale.y = -1 * ratio;
+                //Reposition the mesh
+                object.position.set(
+                    radius * Math.cos(angle),
+                    radius * Math.sin(angle),
+                    0
+                );
+            }
+            if (object.name.includes("text")) {
+                const angle =
+                    theta * object.name[object.name.length - 1] + Math.PI;
+                object.position.set(
+                    radius * 2 * Math.cos(angle),
+                    radius * 2 * Math.sin(angle),
+                    2
+                );
+                object.scale.x = -1 * ratio;
+                object.scale.y = -1 * ratio;
+            }
+        });
+        group.position.x = visibleWidthAtZDepth(0, camera) / 2 + 1;
     };
     window.addEventListener("resize", onWindowResize, false);
 

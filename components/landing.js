@@ -74,7 +74,7 @@ function Scene({ p = new THREE.Vector3() }) {
     ceiling.wrapS = ceiling.wrapT = THREE.RepeatWrapping;
 
     const isMobile = window.innerWidth < 768;
-    const responsiveRatio = viewport.width / 14;
+    const responsiveRatio = window.innerWidth / window.innerHeight / 2; //viewport.width / 14;
     const imageScale = (n) => {
         return Math.max(0.5 * n, Math.min(n * responsiveRatio, n));
     };
@@ -110,7 +110,7 @@ function Scene({ p = new THREE.Vector3() }) {
         const onWindowResize = () => {
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();
-            gl.setSize(window.innerWidth, window.innerHeight);
+            // gl.setSize(window.innerWidth, window.innerHeight);
         };
         window.addEventListener("resize", onWindowResize, false);
 

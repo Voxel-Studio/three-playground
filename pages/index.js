@@ -1,26 +1,82 @@
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
-import Head from 'next/head';
-import styles from '../styles/Home.module.css';
-import Header from '../components/header';
-import Footer from '../components/footer';
-import Landing from '../components/landing';
+import { useState, useEffect, useRef } from "react";
+import { useRouter } from "next/router";
+import Head from "next/head";
+import styles from "../styles/Home.module.css";
+import Header from "../components/header";
+import Footer from "../components/footer";
+import Landing from "../components/landing";
 // import Landing from '../components/archived/landing';
-import Pyramid from '../components/pyramid';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
-import { SplitText } from 'gsap/dist/SplitText';
+import Pyramid from "../components/pyramid";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import { SplitText } from "gsap/dist/SplitText";
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
 export default function Home() {
     const router = useRouter();
     const [showScrollDown, setShowScrollDown] = useState(true);
+    const logoRef = useRef(null);
+    const cardRef = useRef(null);
+    const path = router.asPath;
+
     useEffect(() => {
-        document.addEventListener('scroll', function (e) {
+        const logos = logoRef.current.children;
+        const cards = cardRef.current.children;
+        const handleScroll = () => {
             setShowScrollDown(false);
-        });
+            // if (path === "/") {
+            const scrollTop =
+                window.scrollY || document.documentElement.scrollTop;
+            const logoContainerTop = logoRef
+                ? logoRef.current.getBoundingClientRect().top + scrollTop
+                : null;
+            const logoContainerBottom =
+                logoContainerTop + logoRef.current.offsetHeight;
+            const logoContainerHeight = logoRef.current.offsetHeight;
+
+            const cardContainerTop = cardRef
+                ? cardRef.current.getBoundingClientRect().top + scrollTop
+                : null;
+            // const cardContainerBottom =
+            //     cardContainerTop + cardRef.current.offsetHeight;
+            const cardContainerHeight = cardRef.current.offsetHeight;
+
+            if (
+                scrollTop + window.innerHeight > logoContainerTop &&
+                scrollTop < logoContainerTop + logoContainerHeight
+            ) {
+                Array.from(logos).forEach((logo, index) => {
+                    setTimeout(() => {
+                        logo.style.opacity = 1;
+                        logo.style.transform = "translateY(0)";
+                    }, index * 300);
+                });
+            } else if (
+                scrollTop + window.innerHeight < logoContainerTop ||
+                scrollTop > logoContainerBottom
+            ) {
+                Array.from(logos).forEach((logo) => {
+                    logo.style.opacity = 0;
+                    logo.style.transform = "translateY(-30px)";
+                });
+            }
+
+            if (
+                scrollTop + window.innerHeight > cardContainerTop &&
+                scrollTop < cardContainerTop + cardContainerHeight
+            ) {
+                Array.from(cards).forEach((card, index) => {
+                    setTimeout(() => {
+                        card.style.opacity = 1;
+                        card.style.transform = "translateY(0)";
+                    }, index * 300);
+                });
+            }
+            // }
+        };
+        document.addEventListener("scroll", handleScroll);
         gsap.utils
-            .toArray('#smallImageContainer')
+            .toArray("#smallImageContainer")
             .forEach((smallScreenImg, i) => {
                 const smallImg = smallScreenImg.querySelector(`div`);
                 smallImg.style.backgroundPosition = `50% ${
@@ -28,7 +84,7 @@ export default function Home() {
                 }px`;
                 gsap.to(smallImg, {
                     backgroundPosition: `50% ${window.innerHeight / 12}px`,
-                    ease: 'none',
+                    ease: "none",
                     scrollTrigger: {
                         trigger: smallScreenImg,
                         scrub: true,
@@ -47,8 +103,8 @@ export default function Home() {
         //     });
         // });
         const tlFirstInfo = gsap.timeline(),
-            splitFirstInfo = new SplitText('#firstSplit', {
-                type: 'words,chars',
+            splitFirstInfo = new SplitText("#firstSplit", {
+                type: "words,chars",
             }),
             chars = splitFirstInfo.chars;
         tlFirstInfo.from(
@@ -57,22 +113,22 @@ export default function Home() {
                 duration: 0.8,
                 opacity: 0,
                 y: 10,
-                ease: 'circ.out',
+                ease: "circ.out",
                 stagger: 0.02,
                 scrollTrigger: {
-                    trigger: '#first',
+                    trigger: "#first",
                     //markers:true,
-                    start: 'top 75%',
-                    end: 'bottom center',
+                    start: "top 75%",
+                    end: "bottom center",
                     scrub: 1,
                 },
                 //,   onComplete: () => {splitFirstInfo.revert()}
             },
-            '+=0'
+            "+=0"
         );
         const tlSecondInfo = gsap.timeline(),
-            splitSecondInfo = new SplitText('#secondSplit', {
-                type: 'words,chars',
+            splitSecondInfo = new SplitText("#secondSplit", {
+                type: "words,chars",
             }),
             charsSecond = splitSecondInfo.chars;
         tlSecondInfo.from(
@@ -81,22 +137,22 @@ export default function Home() {
                 duration: 0.8,
                 opacity: 0,
                 y: 10,
-                ease: 'circ.out',
+                ease: "circ.out",
                 stagger: 0.02,
                 scrollTrigger: {
-                    trigger: '#second',
+                    trigger: "#second",
                     //markers:true,
-                    start: 'top 75%',
-                    end: 'bottom center',
+                    start: "top 75%",
+                    end: "bottom center",
                     scrub: 1,
                 },
                 //,   onComplete: () => {splitFirstInfo.revert()}
             },
-            '+=0'
+            "+=0"
         );
         const tlThirdInfo = gsap.timeline(),
-            splitThirdInfo = new SplitText('#thirdSplit', {
-                type: 'words,chars',
+            splitThirdInfo = new SplitText("#thirdSplit", {
+                type: "words,chars",
             }),
             charsThird = splitThirdInfo.chars;
         tlThirdInfo.from(
@@ -105,46 +161,46 @@ export default function Home() {
                 duration: 0.8,
                 opacity: 0,
                 y: 10,
-                ease: 'circ.out',
+                ease: "circ.out",
                 stagger: 0.02,
                 scrollTrigger: {
-                    trigger: '#third',
+                    trigger: "#third",
                     //markers:true,
                     // start: 'top 75%',
-                    end: 'bottom 75%',
+                    end: "bottom 75%",
                     scrub: 1,
                 },
                 //,   onComplete: () => {splitFirstInfo.revert()}
             },
-            '+=0'
+            "+=0"
         );
-        gsap.set('#pyramid-container-1', { yPercent: -20 });
-        gsap.to('#pyramid-container-1', {
-            yPercent: 20,
-            ease: 'none',
-            scrollTrigger: {
-                trigger: '#first',
-                scrub: 1,
-            },
-        });
-        gsap.set('#pyramid-container-2', { yPercent: -5 });
-        gsap.to('#pyramid-container-2', {
-            yPercent: 5,
-            ease: 'none',
-            scrollTrigger: {
-                trigger: '#second',
-                scrub: 1,
-            },
-        });
-        gsap.set('#pyramid-container-3', { yPercent: -20 });
-        gsap.to('#pyramid-container-3', {
-            yPercent: 20,
-            ease: 'none',
-            scrollTrigger: {
-                trigger: '#third',
-                scrub: 1,
-            },
-        });
+        // gsap.set("#pyramid-container-1", { yPercent: -20 });
+        // gsap.to("#pyramid-container-1", {
+        //     yPercent: 20,
+        //     ease: "none",
+        //     scrollTrigger: {
+        //         trigger: "#first",
+        //         scrub: 1,
+        //     },
+        // });
+        // gsap.set("#pyramid-container-2", { yPercent: -5 });
+        // gsap.to("#pyramid-container-2", {
+        //     yPercent: 5,
+        //     ease: "none",
+        //     scrollTrigger: {
+        //         trigger: "#second",
+        //         scrub: 1,
+        //     },
+        // });
+        // gsap.set("#pyramid-container-3", { yPercent: -20 });
+        // gsap.to("#pyramid-container-3", {
+        //     yPercent: 20,
+        //     ease: "none",
+        //     scrollTrigger: {
+        //         trigger: "#third",
+        //         scrub: 1,
+        //     },
+        // });
         // const tlHover = gsap.timeline(),
         //     splitHover = new SplitText('.hoverText', {
         //         type: 'words,chars',
@@ -196,6 +252,7 @@ export default function Home() {
         //         });
         //     });
         // });
+        // return () => window.removeEventListener("scroll", handleScroll);
     });
 
     return (
@@ -240,14 +297,14 @@ export default function Home() {
                 /> */}
                 <div className={styles.homeWrapper}>
                     <div className={`${styles.row} section`}>
-                        <div className={styles.grid}>
+                        <div className={styles.grid} ref={cardRef}>
                             <div
-                                className={`${styles.card} hoverCard`}
+                                className={`${styles.card} hoverCard card`}
                                 onClick={() =>
-                                    router.push('/services/live-events')
+                                    router.push("/services/live-events")
                                 }
                             >
-                                <img src='/about5.jpeg' alt='' />
+                                <img src="/about5.jpeg" alt="" />
                                 <h3>Live Events</h3>
                                 <ul>
                                     <li>Conference</li>
@@ -262,12 +319,12 @@ export default function Home() {
                                 <div className={styles.cardLineHover} />
                             </div>
                             <div
-                                className={`${styles.card} hoverCard`}
+                                className={`${styles.card} hoverCard card`}
                                 onClick={() =>
-                                    router.push('/services/virtual-events')
+                                    router.push("/services/virtual-events")
                                 }
                             >
-                                <img src='/services-card2.jpg' alt='' />
+                                <img src="/services-card2.jpg" alt="" />
                                 <h3>Virtual Events</h3>
                                 <ul>
                                     <li>Remote</li>
@@ -279,10 +336,10 @@ export default function Home() {
                                 <div className={styles.cardLineHover} />
                             </div>
                             <div
-                                className={`${styles.card} hoverCard`}
-                                onClick={() => router.push('/services/digital')}
+                                className={`${styles.card} hoverCard card`}
+                                onClick={() => router.push("/services/digital")}
                             >
-                                <img src='/services-card3.jpeg' alt='' />
+                                <img src="/services-card3.jpeg" alt="" />
                                 <h3>Digital</h3>
                                 <ul>
                                     <li>Software Applications</li>
@@ -297,12 +354,12 @@ export default function Home() {
                                 <div className={styles.cardLineHover} />
                             </div>
                             <div
-                                className={`${styles.card} hoverCard`}
+                                className={`${styles.card} hoverCard card`}
                                 onClick={() =>
-                                    router.push('/services/experiential')
+                                    router.push("/services/experiential")
                                 }
                             >
-                                <img src='/services-card4.jpeg' alt='' />
+                                <img src="/services-card4.jpeg" alt="" />
                                 <h3>Experiential</h3>
                                 <ul>
                                     <li>Retail</li>
@@ -316,10 +373,10 @@ export default function Home() {
                                 <div className={styles.cardLineHover} />
                             </div>
                             <div
-                                className={`${styles.card} hoverCard`}
-                                onClick={() => router.push('/services/av-hire')}
+                                className={`${styles.card} hoverCard card`}
+                                onClick={() => router.push("/services/av-hire")}
                             >
-                                <img src='/services-card5.jpeg' alt='' />
+                                <img src="/services-card5.jpeg" alt="" />
                                 <h3>AV Hire</h3>
                                 <ul>
                                     <li>Video</li>
@@ -333,20 +390,24 @@ export default function Home() {
                     </div>
                     <div
                         className={`${styles.imgLeftContainer} ${styles.smallScreenImg} section`}
-                        id='smallImageContainer'
+                        id="smallImageContainer"
                     >
                         <div
                             className={`${styles.imgLeft} ${styles.smallImg}`}
-                            style={{ backgroundImage: `url(/about5.jpeg)` }}
+                            style={{ backgroundImage: `url(/home-1.png)` }}
                         />
                     </div>
                     <div
                         className={`${styles.row} ${styles.rowEnd} section`}
-                        id='first'
+                        id="first"
                     >
                         <div className={`${styles.info} ${styles.infoFirst}`}>
                             <p>EVENT TECH</p>
-                            <h3 id='firstSplit'>
+                            <img
+                                className={`${styles.bts} ${styles.bts1}`}
+                                src="/home-2.png"
+                            />
+                            <h3 id="firstSplit">
                                 Praesent urna nisl convallis aliquam
                             </h3>
                             <button className={styles.viewButton}>
@@ -354,12 +415,12 @@ export default function Home() {
                                 <span>VIEW MORE</span>
                             </button>
                         </div>
-                        <div className={styles.bg1} id='pyramid-container-1'>
+                        {/* <div className={styles.bg1} id='pyramid-container-1'>
                             <Pyramid
                                 setId='pyramid-container-1'
                                 shapeType='pyramid'
                             />
-                        </div>
+                        </div> */}
                     </div>
                     <div className={`${styles.row} section`}>
                         <div
@@ -367,24 +428,28 @@ export default function Home() {
                             className={`${styles.fullImg}`}
                         >
                             <div
-                                style={{ backgroundImage: `url(/about2.jpeg)` }}
+                                style={{ backgroundImage: `url(/home-3.png)` }}
                             />
                         </div>
                     </div>
                     <div
                         className={`${styles.row} ${styles.rowStart} section`}
-                        id='second'
+                        id="second"
                     >
                         {/* <img className={styles.bg2} src='/bg2.jpg' alt='' /> */}
-                        <div className={styles.bg2} id='pyramid-container-2'>
+                        {/* <div className={styles.bg2} id='pyramid-container-2'>
                             <Pyramid
                                 setId='pyramid-container-2'
                                 shapeType='cube'
                             />
-                        </div>
+                        </div> */}
                         <div className={`${styles.info} ${styles.infoFirst}`}>
                             <p>EVENT TECH</p>
-                            <h3 id='secondSplit'>
+                            <h3 id="secondSplit">
+                                <img
+                                    className={`${styles.bts} ${styles.bts2}`}
+                                    src="/home-4.png"
+                                />
                                 Praesent urna nisl convallis aliquam
                             </h3>
                             <button className={styles.viewButton}>
@@ -397,48 +462,55 @@ export default function Home() {
                         className={`${styles.row} ${styles.rowImages} ${styles.rowShort} section`}
                     >
                         <div
-                            id='smallImageContainer'
+                            id="smallImageContainer"
                             className={`${styles.fullImg} ${styles.mobileRemoveImg}`}
                         >
                             <div />
                         </div>
+
                         <div
-                            id='smallImageContainer'
+                            id="smallImageContainer"
                             className={`${styles.fullImg}`}
                         >
                             <div
-                                style={{ backgroundImage: `url(/about4.jpg)` }}
+                                style={{
+                                    backgroundImage: `url(/home-5.png)`,
+                                    width: "400px",
+                                    marginTop: 25,
+                                    marginBottom: 50,
+                                }}
                             />
                         </div>
+                        <img className={`${styles.bts}`} src="/home-6.png" />
                     </div>
                     <div
                         className={`${styles.row} ${styles.rowCentre} section`}
-                        style={{ position: 'relative' }}
+                        style={{ position: "relative" }}
                     >
-                        <div className={styles.bg3} id='pyramid-container-3'>
+                        {/* <div className={styles.bg3} id="pyramid-container-3">
                             <Pyramid
-                                setId='pyramid-container-3'
-                                shapeType='cylinder'
+                                setId="pyramid-container-3"
+                                shapeType="cylinder"
                             />
-                        </div>
+                        </div> */}
                         <div className={styles.brands}>
-                            <h1>Brands we work with</h1>
                             <div className={styles.brandsLine}></div>
+                            <h1>Brands we work with</h1>
                         </div>
-                        <div className={styles.logoGrid}>
-                            <img src='/logo-tiktok.svg' alt='' />
-                            <img src='/logo-adidas.svg' alt='' />
-                            <img src='/logo-kambi.png' alt='' />
-                            <img src='/logo-digitain.png' alt='' />
-                            <img src='/logo-adidas-2.svg' alt='' />
-                            <img src='/logo-samsung.svg' alt='' />
-                            <img src='/logo-loose-fest.svg' alt='' />
-                            <img src='/logo-yamaha.svg' alt='' />
+                        <div className={styles.logoGrid} ref={logoRef}>
+                            <img src="/logo-tiktok.svg" alt="" />
+                            <img src="/logo-adidas.svg" alt="" />
+                            <img src="/logo-kambi.png" alt="" />
+                            <img src="/logo-digitain.png" alt="" />
+                            <img src="/logo-adidas-2.svg" alt="" />
+                            <img src="/logo-samsung.svg" alt="" />
+                            <img src="/logo-loose-fest.svg" alt="" />
+                            <img src="/logo-yamaha.svg" alt="" />
                         </div>
                     </div>
                     <div
                         className={`${styles.contentLeftContainer} section`}
-                        id='third'
+                        id="third"
                     >
                         <div className={styles.contentLeft}>
                             <div className={styles.content}>
@@ -449,7 +521,7 @@ export default function Home() {
                                     <span>VIEW MORE</span>
                                 </button>
                             </div>
-                            <p id='thirdSplit'>
+                            <p id="thirdSplit">
                                 Vivamus ac venenatis enim. In et iaculis nisi.
                                 Nulla posuere aliquam bibendum. Cras blandit
                                 volutpat euismod. Nullam nunc augue, blandit
@@ -458,7 +530,7 @@ export default function Home() {
                         </div>
                     </div>
                     <div className={`${styles.contentFull} section`}>
-                        <img src='/about5.jpeg' alt='' />
+                        <img src="/about5.jpeg" alt="" />
                         <div>
                             <h1>Praesent urna nisl convallis</h1>
                             <ul>
@@ -482,18 +554,21 @@ export default function Home() {
                     </div>
                 </div>
             </div>
-            <div className='wrapper' style={{ background: 'black' }}>
+            <div className="wrapper" style={{ background: "#070707" }}>
                 <div
-                    className='backToTop'
+                    className="backToTop"
                     onClick={() =>
-                        window.scrollTo({ top: 0, behavior: 'smooth' })
+                        window.scrollTo({ top: 0, behavior: "smooth" })
                     }
                 >
                     <p>BACK TO TOP</p>
                     <div />
                 </div>
             </div>
-            <Footer top={-1} bg={router.pathname === '/' ? 'black' : 'none'} />
+            <Footer
+                top={-1}
+                bg={router.pathname === "/" ? "#070707" : "none"}
+            />
         </div>
     );
 }

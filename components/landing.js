@@ -7,6 +7,7 @@ import {
     Image,
     Text,
     Environment,
+    useFBX,
 } from "@react-three/drei";
 import * as THREE from "three";
 import { easing } from "maath";
@@ -178,6 +179,8 @@ function Scene({ p = new THREE.Vector3() }) {
             }
         });
     });
+
+    const logo = useFBX("/Insert - main.fbx");
 
     return (
         <group>
@@ -608,7 +611,7 @@ function Scene({ p = new THREE.Vector3() }) {
             />
             {/* Final logo */}
             <Image
-                url="/logo-full.svg"
+                url="/insert-logo-full.png" //url="/logo-full.svg"
                 position={[0, 1, 38]}
                 rotation={[0, 0, 0]}
                 scale={[

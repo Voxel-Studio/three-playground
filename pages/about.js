@@ -1,17 +1,17 @@
-import Head from 'next/head';
-import Header from '../components/header';
-import Footer from '../components/footer';
-import titleStyles from '../styles/TitleSection.module.css';
-import styles from '../styles/About.module.css';
-import { useEffect } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+import Head from "next/head";
+import Header from "../components/header";
+import Footer from "../components/footer";
+import titleStyles from "../styles/TitleSection.module.css";
+import styles from "../styles/About.module.css";
+import { useEffect } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 export default function About() {
     useEffect(() => {
         gsap.utils
-            .toArray('#smallImageContainer')
+            .toArray("#smallImageContainer")
             .forEach((smallScreenImg, i) => {
                 const smallImg = smallScreenImg.querySelector(`div`);
                 console.log(smallImg);
@@ -20,19 +20,19 @@ export default function About() {
                 }px`;
                 gsap.to(smallImg, {
                     backgroundPosition: `50% ${window.innerHeight / 12}px`,
-                    ease: 'none',
+                    ease: "none",
                     scrollTrigger: {
                         trigger: smallScreenImg,
                         scrub: true,
                     },
                 });
             });
-        gsap.utils.toArray('.section').forEach((section, i) => {
+        gsap.utils.toArray(".section").forEach((section, i) => {
             console.log(section);
             gsap.from(section, {
                 opacity: 0,
                 duration: 2,
-                ease: 'none',
+                ease: "none",
                 scrollTrigger: {
                     trigger: section,
                 },
@@ -46,18 +46,18 @@ export default function About() {
             </Head>
             <div className={titleStyles.container}>
                 <Header />
-                <div className='wrapper' style={{ marginBottom: 80 }}>
-                    <img
-                        className={`${titleStyles.headerImg} ${titleStyles.headerAbout}`}
-                        src='/about-header.png'
-                        alt=''
-                    />
+                <img
+                    className={`${titleStyles.headerImg} ${titleStyles.headerAbout}`}
+                    src="/about-bg.png"
+                    alt=""
+                />
+                <div className="wrapper" style={{ marginBottom: 80 }}>
                     <h1 className={titleStyles.h1}>About</h1>
                     <div className={titleStyles.line}></div>
                 </div>
                 <div className={styles.aboutWrapper}>
                     <div className={`${styles.row} section`}>
-                        <p className='sectionHeader'>
+                        <p className="sectionHeader">
                             In a enim non libero commodo dapibus. Curabitur
                             ullamcorper, orci ut ultricies imperdiet, tellus
                             libero malesuada risus, non commodo lectus eros vel
@@ -69,7 +69,7 @@ export default function About() {
                     </div>
                     <div
                         className={`${styles.imgRightContainer} ${styles.smallScreenImg} section`}
-                        id='smallImageContainer'
+                        id="smallImageContainer"
                     >
                         <div
                             className={`${styles.imgRight} ${styles.smallImg}`}
@@ -85,7 +85,7 @@ export default function About() {
                                 <span>VIEW MORE</span>
                             </button>
                         </div>
-                        <img className={styles.bg1} src='/bg1.jpg' alt='' />
+                        {/* <img className={styles.bg1} src='/bg1.jpg' alt='' /> */}
                     </div>
                     <div className={`${styles.row} section`}>
                         <div
@@ -98,7 +98,7 @@ export default function About() {
                         </div>
                     </div>
                     <div className={`${styles.row} ${styles.rowStart} section`}>
-                        <img className={styles.bg2} src='/bg2.jpg' alt='' />
+                        {/* <img className={styles.bg2} src="/bg2.jpg" alt="" /> */}
                         <div className={`${styles.info} ${styles.infoFirst}`}>
                             <p>EVENT TECH</p>
                             <h3>Praesent urna nisl convallis aliquam</h3>
@@ -112,7 +112,7 @@ export default function About() {
                         className={`${styles.row} ${styles.rowImages} section`}
                     >
                         <div
-                            id='smallImageContainer'
+                            id="smallImageContainer"
                             className={`${styles.fullImg}`}
                         >
                             <div
@@ -120,7 +120,7 @@ export default function About() {
                             />
                         </div>
                         <div
-                            id='smallImageContainer'
+                            id="smallImageContainer"
                             className={`${styles.fullImg}`}
                         >
                             <div
@@ -130,7 +130,7 @@ export default function About() {
                     </div>
                     <div
                         className={`${styles.imgLeftContainer} ${styles.smallScreenImg} section`}
-                        id='smallImageContainer'
+                        id="smallImageContainer"
                     >
                         <div
                             className={`${styles.imgLeft} ${styles.smallImg}`}
@@ -172,7 +172,7 @@ export default function About() {
                         </div>
                     </div>
                     <div className={`${styles.row} ${styles.rowStart} section`}>
-                        <img className={styles.bg3} src='/bg3.jpg' alt='' />
+                        {/* <img className={styles.bg3} src="/bg3.jpg" alt="" /> */}
                         <div
                             className={`${styles.info} ${styles.infoFirst} ${styles.infoFirstStart}`}
                         >
@@ -185,11 +185,11 @@ export default function About() {
                         </div>
                     </div>
                 </div>
-                <div className='wrapper'>
+                <div className="wrapper">
                     <div
-                        className='backToTop'
+                        className="backToTop"
                         onClick={() =>
-                            window.scrollTo({ top: 0, behavior: 'smooth' })
+                            window.scrollTo({ top: 0, behavior: "smooth" })
                         }
                     >
                         <p>BACK TO TOP</p>

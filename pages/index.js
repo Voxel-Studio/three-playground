@@ -17,62 +17,12 @@ export default function Home() {
     const [showScrollDown, setShowScrollDown] = useState(true);
     const logoRef = useRef(null);
     const cardRef = useRef(null);
-    const path = router.asPath;
 
     useEffect(() => {
         const logos = logoRef.current.children;
         const cards = cardRef.current.children;
         const handleScroll = () => {
             setShowScrollDown(false);
-            // if (path === "/") {
-            const scrollTop =
-                window.scrollY || document.documentElement.scrollTop;
-            const logoContainerTop = logoRef
-                ? logoRef.current.getBoundingClientRect().top + scrollTop
-                : null;
-            const logoContainerBottom =
-                logoContainerTop + logoRef.current.offsetHeight;
-            const logoContainerHeight = logoRef.current.offsetHeight;
-
-            const cardContainerTop = cardRef
-                ? cardRef.current.getBoundingClientRect().top + scrollTop
-                : null;
-            // const cardContainerBottom =
-            //     cardContainerTop + cardRef.current.offsetHeight;
-            const cardContainerHeight = cardRef.current.offsetHeight;
-
-            if (
-                scrollTop + window.innerHeight > logoContainerTop &&
-                scrollTop < logoContainerTop + logoContainerHeight
-            ) {
-                Array.from(logos).forEach((logo, index) => {
-                    setTimeout(() => {
-                        logo.style.opacity = 1;
-                        logo.style.transform = "translateY(0)";
-                    }, index * 300);
-                });
-            } else if (
-                scrollTop + window.innerHeight < logoContainerTop ||
-                scrollTop > logoContainerBottom
-            ) {
-                Array.from(logos).forEach((logo) => {
-                    logo.style.opacity = 0;
-                    logo.style.transform = "translateY(-30px)";
-                });
-            }
-
-            if (
-                scrollTop + window.innerHeight > cardContainerTop &&
-                scrollTop < cardContainerTop + cardContainerHeight
-            ) {
-                Array.from(cards).forEach((card, index) => {
-                    setTimeout(() => {
-                        card.style.opacity = 1;
-                        card.style.transform = "translateY(0)";
-                    }, index * 300);
-                });
-            }
-            // }
         };
         document.addEventListener("scroll", handleScroll);
         gsap.utils
@@ -174,6 +124,45 @@ export default function Home() {
             },
             "+=0"
         );
+        gsap.fromTo(
+            logos,
+            { opacity: 0, y: -30 },
+            {
+                opacity: 1,
+                y: 0,
+                stagger: 0.2,
+                scrollTrigger: {
+                    trigger: logoRef.current,
+                    start: "top bottom",
+                    end: "bottom top",
+                    toggleActions: "play none none reverse",
+                },
+            }
+        );
+        gsap.fromTo(
+            cards,
+            { opacity: 0, y: 50 },
+            {
+                opacity: 1,
+                y: 0,
+                stagger: 0.2,
+                scrollTrigger: {
+                    trigger: "#grid",
+                    start: "top bottom",
+                    end: "bottom top",
+                    toggleActions: "play none none reverse",
+                },
+            }
+        );
+        gsap.from("#grid", {
+            backgroundColor: "rgba(0,0,0,0)",
+            scrollTrigger: {
+                trigger: "#grid",
+                start: "top bottom",
+                end: "bottom top",
+                toggleActions: "play none none reverse",
+            },
+        });
         // gsap.set("#pyramid-container-1", { yPercent: -20 });
         // gsap.to("#pyramid-container-1", {
         //     yPercent: 20,
@@ -296,7 +285,7 @@ export default function Home() {
                     className={`${styles.row} ${styles.rowTransition} section`}
                 /> */}
                 <div className={styles.homeWrapper}>
-                    <div className={`${styles.row} section`}>
+                    <div id="grid" className={`${styles.row} section`}>
                         <div className={styles.grid} ref={cardRef}>
                             <div
                                 className={`${styles.card} hoverCard card`}

@@ -197,6 +197,7 @@
     grid-template-columns: repeat(5, 1fr);
     grid-column-gap: 20px;
     background-color: rgba(0, 0, 0, 0.5);
+    transition: background-color 0.2s ease-in-out;
 }
 
 .card {
@@ -209,7 +210,7 @@
     transform: translateY(30);
     background-color: #0f0f0f;
     transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out,
-        transform 1s ease-in;
+        transform 1s ease-in, opacity 1s ease-in;
 }
 
 .card img {
@@ -400,6 +401,7 @@
     width: 100%;
     height: 100%;
     background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .fullImgMarginLeft {

@@ -7,6 +7,7 @@ import styles from "../styles/Services.module.css";
 import { useEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import { SplitText } from "gsap/dist/SplitText";
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Services() {
@@ -55,12 +56,10 @@ export default function Services() {
                 stagger: 0.02,
                 scrollTrigger: {
                     trigger: "#first",
-                    //markers:true,
                     start: "top 75%",
                     end: "bottom center",
                     scrub: 1,
                 },
-                //,   onComplete: () => {splitFirstInfo.revert()}
             },
             "+=0"
         );
@@ -79,12 +78,10 @@ export default function Services() {
                 stagger: 0.02,
                 scrollTrigger: {
                     trigger: "#second",
-                    //markers:true,
                     start: "top 75%",
                     end: "bottom center",
                     scrub: 1,
                 },
-                //,   onComplete: () => {splitFirstInfo.revert()}
             },
             "+=0"
         );
@@ -103,12 +100,54 @@ export default function Services() {
                 stagger: 0.02,
                 scrollTrigger: {
                     trigger: "#third",
-                    //markers:true,
-                    // start: 'top 75%',
-                    end: "bottom 75%",
+                    start: "top 75%",
+                    end: "bottom center",
                     scrub: 1,
                 },
-                //,   onComplete: () => {splitFirstInfo.revert()}
+            },
+            "+=0"
+        );
+        const tlFourthInfo = gsap.timeline(),
+            splitFourthInfo = new SplitText("#fourthSplit", {
+                type: "words,chars",
+            }),
+            charsFourth = splitFourthInfo.chars;
+        tlFourthInfo.from(
+            charsFourth,
+            {
+                duration: 0.8,
+                opacity: 0,
+                y: 10,
+                ease: "circ.out",
+                stagger: 0.02,
+                scrollTrigger: {
+                    trigger: "#fourth",
+                    start: "top 75%",
+                    end: "bottom center",
+                    scrub: 1,
+                },
+            },
+            "+=0"
+        );
+        const tlFifthInfo = gsap.timeline(),
+            splitFifthInfo = new SplitText("#fifthSplit", {
+                type: "words,chars",
+            }),
+            charsFifth = splitFifthInfo.chars;
+        tlFifthInfo.from(
+            charsFifth,
+            {
+                duration: 0.8,
+                opacity: 0,
+                y: 10,
+                ease: "circ.out",
+                stagger: 0.02,
+                scrollTrigger: {
+                    trigger: "#fifth",
+                    start: "top 75%",
+                    end: "bottom center",
+                    scrub: 1,
+                },
             },
             "+=0"
         );
@@ -224,7 +263,7 @@ export default function Services() {
                         style={{ marginBottom: 40 }}
                         // id='smallImageContainer'
                     >
-                        <div className={styles.contentLeft}>
+                        <div id="first" className={styles.contentLeft}>
                             <div className={styles.content}>
                                 <h2>Live Events</h2>
                                 <div className={styles.sectionLine} />
@@ -233,7 +272,7 @@ export default function Services() {
                                     <span>VIEW MORE</span>
                                 </button>
                             </div>
-                            <p>
+                            <p id="firstSplit">
                                 Vivamus ac venenatis enim. In et iaculis nisi.
                                 Nulla posuere aliquam bibendum. Cras blandit
                                 volutpat euismod. Nullam nunc augue, blandit
@@ -256,7 +295,7 @@ export default function Services() {
                         // id='smallImageContainer'
                     >
                         <div className={styles.block}></div>
-                        <div className={styles.contentLeft}>
+                        <div id="second" className={styles.contentLeft}>
                             <div className={styles.content}>
                                 <h2>Virtual Events</h2>
                                 <div className={styles.sectionLine} />
@@ -265,7 +304,7 @@ export default function Services() {
                                     <span>VIEW MORE</span>
                                 </button>
                             </div>
-                            <p>
+                            <p id="secondSplit">
                                 Vivamus ac venenatis enim. In et iaculis nisi.
                                 Nulla posuere aliquam bibendum. Cras blandit
                                 volutpat euismod. Nullam nunc augue, blandit
@@ -289,7 +328,7 @@ export default function Services() {
                         style={{ marginBottom: 40 }}
                         // id='smallImageContainer'
                     >
-                        <div className={styles.contentLeft}>
+                        <div id="third" className={styles.contentLeft}>
                             <div className={styles.content}>
                                 <h2>Digital</h2>
                                 <div className={styles.sectionLine} />
@@ -298,7 +337,7 @@ export default function Services() {
                                     <span>VIEW MORE</span>
                                 </button>
                             </div>
-                            <p>
+                            <p id="thirdSplit">
                                 Vivamus ac venenatis enim. In et iaculis nisi.
                                 Nulla posuere aliquam bibendum. Cras blandit
                                 volutpat euismod. Nullam nunc augue, blandit
@@ -323,7 +362,7 @@ export default function Services() {
                         // id='smallImageContainer'
                     >
                         <div className={styles.block}></div>
-                        <div className={styles.contentLeft}>
+                        <div id="fourth" className={styles.contentLeft}>
                             <div className={styles.content}>
                                 <h2>Experiential</h2>
                                 <div className={styles.sectionLine} />
@@ -332,7 +371,7 @@ export default function Services() {
                                     <span>VIEW MORE</span>
                                 </button>
                             </div>
-                            <p>
+                            <p id="fourthSplit">
                                 Vivamus ac venenatis enim. In et iaculis nisi.
                                 Nulla posuere aliquam bibendum. Cras blandit
                                 volutpat euismod. Nullam nunc augue, blandit
@@ -356,7 +395,7 @@ export default function Services() {
                         style={{ marginBottom: 40 }}
                         // id='smallImageContainer'
                     >
-                        <div className={styles.contentLeft}>
+                        <div id="fifth" className={styles.contentLeft}>
                             <div className={styles.content}>
                                 <h2>AV Hire</h2>
                                 <div className={styles.sectionLine} />
@@ -365,7 +404,7 @@ export default function Services() {
                                     <span>VIEW MORE</span>
                                 </button>
                             </div>
-                            <p>
+                            <p id="fifthSplit">
                                 Vivamus ac venenatis enim. In et iaculis nisi.
                                 Nulla posuere aliquam bibendum. Cras blandit
                                 volutpat euismod. Nullam nunc augue, blandit

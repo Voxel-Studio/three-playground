@@ -1,19 +1,19 @@
-import Head from 'next/head';
-import { useRouter } from 'next/router';
-import Header from '../components/header';
-import Footer from '../components/footer';
-import titleStyles from '../styles/TitleSection.module.css';
-import styles from '../styles/Services.module.css';
-import { useEffect } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+import Head from "next/head";
+import { useRouter } from "next/router";
+import Header from "../components/header";
+import Footer from "../components/footer";
+import titleStyles from "../styles/TitleSection.module.css";
+import styles from "../styles/Services.module.css";
+import { useEffect } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Services() {
     const router = useRouter();
     useEffect(() => {
         gsap.utils
-            .toArray('#smallImageContainer')
+            .toArray("#smallImageContainer")
             .forEach((smallScreenImg, i) => {
                 const smallImg = smallScreenImg.querySelector(`div`);
                 console.log(smallImg);
@@ -22,19 +22,19 @@ export default function Services() {
                 }px`;
                 gsap.to(smallImg, {
                     backgroundPosition: `50% ${window.innerHeight / 12}px`,
-                    ease: 'none',
+                    ease: "none",
                     scrollTrigger: {
                         trigger: smallScreenImg,
                         scrub: true,
                     },
                 });
             });
-        gsap.utils.toArray('.section').forEach((section, i) => {
+        gsap.utils.toArray(".section").forEach((section, i) => {
             console.log(section);
             gsap.from(section, {
                 opacity: 0,
                 duration: 2,
-                ease: 'none',
+                ease: "none",
                 scrollTrigger: {
                     trigger: section,
                 },
@@ -50,12 +50,12 @@ export default function Services() {
             </Head>
             <div className={titleStyles.container}>
                 <Header />
-                <div className='wrapper' style={{ marginBottom: 80 }}>
-                    <img
-                        className={`${titleStyles.headerImg} ${titleStyles.headerAbout}`}
-                        src='/services-header.jpg'
-                        alt=''
-                    />
+                <img
+                    className={`${titleStyles.headerImg} ${titleStyles.headerAbout}`}
+                    src="/services-header.png"
+                    alt=""
+                />
+                <div className="wrapper" style={{ marginBottom: 80 }}>
                     <h1 className={titleStyles.h1}>Solutions and services</h1>
                     <div className={titleStyles.line}></div>
                 </div>
@@ -65,10 +65,10 @@ export default function Services() {
                             <div
                                 className={styles.card}
                                 onClick={() =>
-                                    router.push('/services/live-events')
+                                    router.push("/services/live-events")
                                 }
                             >
-                                <img src='/about5.jpeg' alt='' />
+                                <img src="/about5.jpeg" alt="" />
                                 <h3>Live Events</h3>
                                 <ul>
                                     <li>Conference</li>
@@ -84,10 +84,10 @@ export default function Services() {
                             <div
                                 className={styles.card}
                                 onClick={() =>
-                                    router.push('/services/virtual-events')
+                                    router.push("/services/virtual-events")
                                 }
                             >
-                                <img src='/services-card2.jpg' alt='' />
+                                <img src="/services-card2.jpg" alt="" />
                                 <h3>Virtual Events</h3>
                                 <ul>
                                     <li>Remote</li>
@@ -99,9 +99,9 @@ export default function Services() {
                             </div>
                             <div
                                 className={styles.card}
-                                onClick={() => router.push('/services/digital')}
+                                onClick={() => router.push("/services/digital")}
                             >
-                                <img src='/services-card3.jpeg' alt='' />
+                                <img src="/services-card3.jpeg" alt="" />
                                 <h3>Digital</h3>
                                 <ul>
                                     <li>Software Applications</li>
@@ -117,10 +117,10 @@ export default function Services() {
                             <div
                                 className={styles.card}
                                 onClick={() =>
-                                    router.push('/services/experiential')
+                                    router.push("/services/experiential")
                                 }
                             >
-                                <img src='/services-card4.jpeg' alt='' />
+                                <img src="/services-card4.jpeg" alt="" />
                                 <h3>Experiential</h3>
                                 <ul>
                                     <li>Retail</li>
@@ -134,9 +134,9 @@ export default function Services() {
                             </div>
                             <div
                                 className={styles.card}
-                                onClick={() => router.push('/services/av-hire')}
+                                onClick={() => router.push("/services/av-hire")}
                             >
-                                <img src='/services-card5.jpeg' alt='' />
+                                <img src="/services-card5.jpeg" alt="" />
                                 <h3>AV Hire</h3>
                                 <ul>
                                     <li>Video</li>
@@ -171,11 +171,11 @@ export default function Services() {
                     </div>
                     <div
                         className={`${styles.imgLeftContainer} ${styles.smallScreenImg} section`}
-                        id='smallImageContainer'
+                        id="smallImageContainer"
                     >
                         <div
                             className={`${styles.imgLeft} ${styles.smallImg}`}
-                            style={{ backgroundImage: `url(/about5.jpeg)` }}
+                            style={{ backgroundImage: `url(/services1.png)` }}
                         />
                     </div>
                     <div
@@ -203,12 +203,12 @@ export default function Services() {
                     </div>
                     <div
                         className={`${styles.imgRightContainer} ${styles.smallScreenImg} section`}
-                        id='smallImageContainer'
+                        id="smallImageContainer"
                     >
                         <div
                             className={`${styles.imgRight} ${styles.smallImg}`}
                             style={{
-                                backgroundImage: `url(/services-card2.jpg)`,
+                                backgroundImage: `url(/services2.png)`,
                             }}
                         />
                     </div>
@@ -236,7 +236,7 @@ export default function Services() {
                     </div>
                     <div
                         className={`${styles.imgLeftContainer} ${styles.smallScreenImg} section`}
-                        id='smallImageContainer'
+                        id="smallImageContainer"
                     >
                         <div
                             className={`${styles.imgLeft} ${styles.smallImg}`}
@@ -270,12 +270,12 @@ export default function Services() {
                     </div>
                     <div
                         className={`${styles.imgRightContainer} ${styles.smallScreenImg} section`}
-                        id='smallImageContainer'
+                        id="smallImageContainer"
                     >
                         <div
                             className={`${styles.imgRight} ${styles.smallImg}`}
                             style={{
-                                backgroundImage: `url(/services-card4.jpeg)`,
+                                backgroundImage: `url(/services4.png)`,
                             }}
                         />
                     </div>
@@ -303,21 +303,21 @@ export default function Services() {
                     </div>
                     <div
                         className={`${styles.imgLeftContainer} ${styles.smallScreenImg} section`}
-                        id='smallImageContainer'
+                        id="smallImageContainer"
                     >
                         <div
                             className={`${styles.imgLeft} ${styles.smallImg}`}
                             style={{
-                                backgroundImage: `url(/services-card5.jpeg)`,
+                                backgroundImage: `url(/services5.png)`,
                             }}
                         />
                     </div>
                 </div>
-                <div className='wrapper'>
+                <div className="wrapper">
                     <div
-                        className='backToTop'
+                        className="backToTop"
                         onClick={() =>
-                            window.scrollTo({ top: 0, behavior: 'smooth' })
+                            window.scrollTo({ top: 0, behavior: "smooth" })
                         }
                     >
                         <p>BACK TO TOP</p>

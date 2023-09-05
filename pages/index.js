@@ -444,12 +444,13 @@ export default function Home() {
                             />
                         </div> */}
                         <div className={`${styles.info} ${styles.infoFirst}`}>
+                            <img
+                                className={`${styles.bts} ${styles.bts2}`}
+                                src="/home-4.png"
+                            />
                             <p>EVENT TECH</p>
+
                             <h3 id="secondSplit">
-                                <img
-                                    className={`${styles.bts} ${styles.bts2}`}
-                                    src="/home-4.png"
-                                />
                                 Praesent urna nisl convallis aliquam
                             </h3>
                             <button className={styles.viewButton}>

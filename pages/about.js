@@ -5,6 +5,7 @@ import titleStyles from "../styles/TitleSection.module.css";
 import styles from "../styles/About.module.css";
 import { useEffect } from "react";
 import { gsap } from "gsap";
+import { SplitText } from "gsap/dist/SplitText";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
@@ -38,6 +39,94 @@ export default function About() {
                 },
             });
         });
+        const tlFirstInfo = gsap.timeline(),
+            splitFirstInfo = new SplitText("#firstSplit", {
+                type: "words,chars",
+            }),
+            chars = splitFirstInfo.chars;
+        tlFirstInfo.from(
+            chars,
+            {
+                duration: 0.8,
+                opacity: 0,
+                y: 10,
+                ease: "circ.out",
+                stagger: 0.02,
+                scrollTrigger: {
+                    trigger: "#first",
+                    start: "top 75%",
+                    end: "bottom center ",
+                    scrub: 1,
+                },
+            },
+            "+=0"
+        );
+        const tlSecondInfo = gsap.timeline(),
+            splitSecondInfo = new SplitText("#secondSplit", {
+                type: "words,chars",
+            }),
+            charsSecond = splitSecondInfo.chars;
+        tlSecondInfo.from(
+            charsSecond,
+            {
+                duration: 0.8,
+                opacity: 0,
+                y: 10,
+                ease: "circ.out",
+                stagger: 0.02,
+                scrollTrigger: {
+                    trigger: "#second",
+                    start: "top 75%",
+                    end: "bottom center",
+                    scrub: 1,
+                },
+            },
+            "+=0"
+        );
+        const tlThirdInfo = gsap.timeline(),
+            splitThirdInfo = new SplitText("#thirdSplit", {
+                type: "words,chars",
+            }),
+            charsThird = splitThirdInfo.chars;
+        tlThirdInfo.from(
+            charsThird,
+            {
+                duration: 0.8,
+                opacity: 0,
+                y: 10,
+                ease: "circ.out",
+                stagger: 0.02,
+                scrollTrigger: {
+                    trigger: "#third",
+                    start: "top 75%",
+                    end: "bottom center",
+                    scrub: 1,
+                },
+            },
+            "+=0"
+        );
+        const tlFourthInfo = gsap.timeline(),
+            splitFourthInfo = new SplitText("#fourthSplit", {
+                type: "words,chars",
+            }),
+            charsFourth = splitFourthInfo.chars;
+        tlFourthInfo.from(
+            charsFourth,
+            {
+                duration: 0.8,
+                opacity: 0,
+                y: 10,
+                ease: "circ.out",
+                stagger: 0.02,
+                scrollTrigger: {
+                    trigger: "#fourth",
+                    start: "top 75%",
+                    end: "bottom center",
+                    scrub: 1,
+                },
+            },
+            "+=0"
+        );
     });
     return (
         <>
@@ -76,10 +165,15 @@ export default function About() {
                             style={{ backgroundImage: `url(/about1.jpeg)` }}
                         />
                     </div>
-                    <div className={`${styles.row} ${styles.rowEnd} section`}>
+                    <div
+                        id="first"
+                        className={`${styles.row} ${styles.rowEnd} section`}
+                    >
                         <div className={`${styles.info} ${styles.infoFirst}`}>
                             <p>EVENT TECH</p>
-                            <h3>Praesent urna nisl convallis aliquam</h3>
+                            <h3 id="firstSplit">
+                                Praesent urna nisl convallis aliquam
+                            </h3>
                             <button className={styles.viewButton}>
                                 <div className={styles.underlay}></div>
                                 <span>VIEW MORE</span>
@@ -103,6 +197,7 @@ export default function About() {
                         </div>
                     </div>
                     <div
+                        id="second"
                         className={`${styles.row} ${styles.rowStart} section`}
                         style={{ marginRight: "10vw" }}
                     >
@@ -114,7 +209,9 @@ export default function About() {
                         />
                         <div className={`${styles.info} ${styles.infoFirst}`}>
                             <p>EVENT TECH</p>
-                            <h3>Praesent urna nisl convallis aliquam</h3>
+                            <h3 id="secondSplit">
+                                Praesent urna nisl convallis aliquam
+                            </h3>
                             <button className={styles.viewButton}>
                                 <div className={styles.underlay}></div>
                                 <span>VIEW MORE</span>
@@ -168,9 +265,14 @@ export default function About() {
                                 alt=""
                             />
                         </div>
-                        <div className={`${styles.info} ${styles.infoFirst}`}>
+                        <div
+                            id="third"
+                            className={`${styles.info} ${styles.infoFirst}`}
+                        >
                             <p>EVENT TECH</p>
-                            <h3>Praesent urna nisl convallis aliquam</h3>
+                            <h3 id="thirdSplit">
+                                Praesent urna nisl convallis aliquam
+                            </h3>
                             <button className={styles.viewButton}>
                                 <div className={styles.underlay}></div>
                                 <span>VIEW MORE</span>
@@ -189,12 +291,17 @@ export default function About() {
                             />
                         </div>
                     </div>
-                    <div className={`${styles.row} ${styles.rowStart} section`}>
+                    <div
+                        id="fourth"
+                        className={`${styles.row} ${styles.rowStart} section`}
+                    >
                         <div
                             className={`${styles.info} ${styles.infoFirst} ${styles.infoFirstStart}`}
                         >
                             <p>EVENT TECH</p>
-                            <h3>Praesent urna nisl convallis aliquam</h3>
+                            <h3 id="fourthSplit">
+                                Praesent urna nisl convallis aliquam
+                            </h3>
                             <button className={styles.viewButton}>
                                 <div className={styles.underlay}></div>
                                 <span>VIEW MORE</span>

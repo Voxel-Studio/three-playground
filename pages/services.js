@@ -40,6 +40,78 @@ export default function Services() {
                 },
             });
         });
+        const tlFirstInfo = gsap.timeline(),
+            splitFirstInfo = new SplitText("#firstSplit", {
+                type: "words,chars",
+            }),
+            chars = splitFirstInfo.chars;
+        tlFirstInfo.from(
+            chars,
+            {
+                duration: 0.8,
+                opacity: 0,
+                y: 10,
+                ease: "circ.out",
+                stagger: 0.02,
+                scrollTrigger: {
+                    trigger: "#first",
+                    //markers:true,
+                    start: "top 75%",
+                    end: "bottom center",
+                    scrub: 1,
+                },
+                //,   onComplete: () => {splitFirstInfo.revert()}
+            },
+            "+=0"
+        );
+        const tlSecondInfo = gsap.timeline(),
+            splitSecondInfo = new SplitText("#secondSplit", {
+                type: "words,chars",
+            }),
+            charsSecond = splitSecondInfo.chars;
+        tlSecondInfo.from(
+            charsSecond,
+            {
+                duration: 0.8,
+                opacity: 0,
+                y: 10,
+                ease: "circ.out",
+                stagger: 0.02,
+                scrollTrigger: {
+                    trigger: "#second",
+                    //markers:true,
+                    start: "top 75%",
+                    end: "bottom center",
+                    scrub: 1,
+                },
+                //,   onComplete: () => {splitFirstInfo.revert()}
+            },
+            "+=0"
+        );
+        const tlThirdInfo = gsap.timeline(),
+            splitThirdInfo = new SplitText("#thirdSplit", {
+                type: "words,chars",
+            }),
+            charsThird = splitThirdInfo.chars;
+        tlThirdInfo.from(
+            charsThird,
+            {
+                duration: 0.8,
+                opacity: 0,
+                y: 10,
+                ease: "circ.out",
+                stagger: 0.02,
+                scrollTrigger: {
+                    trigger: "#third",
+                    //markers:true,
+                    // start: 'top 75%',
+                    end: "bottom 75%",
+                    scrub: 1,
+                },
+                //,   onComplete: () => {splitFirstInfo.revert()}
+            },
+            "+=0"
+        );
     });
     return (
         <>

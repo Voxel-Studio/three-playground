@@ -48,7 +48,7 @@ const Landing = () => {
                         // aspect: windowWidth / windowHeight,
                         resize: { resize: 1 },
                     }}
-                    updateDefaultCamera={true}
+                    // updateDefaultCamera={true}
                 >
                     <Scene />
                 </Canvas>

@@ -86,6 +86,11 @@ export default function About() {
                             </button>
                         </div>
                         {/* <img className={styles.bg1} src='/bg1.jpg' alt='' /> */}
+                        <img
+                            className={`${styles.bts} ${styles.bts1}`}
+                            src="/about-bw1.png"
+                            alt=""
+                        />
                     </div>
                     <div className={`${styles.row} section`}>
                         <div
@@ -93,12 +98,20 @@ export default function About() {
                             className={`${styles.fullImg}`}
                         >
                             <div
-                                style={{ backgroundImage: `url(/about2.jpeg)` }}
+                                style={{ backgroundImage: `url(/about2.png)` }}
                             />
                         </div>
                     </div>
-                    <div className={`${styles.row} ${styles.rowStart} section`}>
+                    <div
+                        className={`${styles.row} ${styles.rowStart} section`}
+                        style={{ marginRight: "10vw" }}
+                    >
                         {/* <img className={styles.bg2} src="/bg2.jpg" alt="" /> */}
+                        <img
+                            className={`${styles.bts} ${styles.bts2}`}
+                            src="/about-bw2.png"
+                            alt=""
+                        />
                         <div className={`${styles.info} ${styles.infoFirst}`}>
                             <p>EVENT TECH</p>
                             <h3>Praesent urna nisl convallis aliquam</h3>
@@ -124,13 +137,13 @@ export default function About() {
                             className={`${styles.fullImg}`}
                         >
                             <div
-                                style={{ backgroundImage: `url(/about4.jpg)` }}
+                                style={{ backgroundImage: `url(/about3.png)` }}
                             />
                         </div>
                     </div>
                     <div
                         className={`${styles.imgLeftContainer} ${styles.smallScreenImg} section`}
-                        id="smallImageContainer"
+                        // id="smallImageContainer"
                     >
                         <div
                             className={`${styles.imgLeft} ${styles.smallImg}`}
@@ -144,10 +157,15 @@ export default function About() {
                             className={`${styles.rowImg}`}
                             // id='smallImageContainer'
                         >
-                            <div
+                            {/* <div
                                 style={{
-                                    backgroundImage: `url(/adidas-1.jpeg)`,
+                                    backgroundImage: `url(/about-bw3.png)`,
                                 }}
+                            /> */}
+                            <img
+                                className={`${styles.bts} ${styles.bts3}`}
+                                src="/about-bw3.png"
+                                alt=""
                             />
                         </div>
                         <div className={`${styles.info} ${styles.infoFirst}`}>
@@ -162,17 +180,16 @@ export default function About() {
                     <div className={`${styles.row} section`}>
                         <div
                             className={`${styles.fullImg} ${styles.fullImgMarginLeft}`}
-                            // id='smallImageContainer'
+                            id="smallImageContainer"
                         >
                             <div
                                 style={{
-                                    backgroundImage: `url(/adidas-2.jpeg)`,
+                                    backgroundImage: `url(/about6.png)`,
                                 }}
                             />
                         </div>
                     </div>
                     <div className={`${styles.row} ${styles.rowStart} section`}>
-                        {/* <img className={styles.bg3} src="/bg3.jpg" alt="" /> */}
                         <div
                             className={`${styles.info} ${styles.infoFirst} ${styles.infoFirstStart}`}
                         >
@@ -183,6 +200,11 @@ export default function About() {
                                 <span>VIEW MORE</span>
                             </button>
                         </div>
+                        <img
+                            className={`${styles.bts} ${styles.bts4}`}
+                            src="/about-bw4.png"
+                            alt=""
+                        />
                     </div>
                 </div>
                 <div className="wrapper">

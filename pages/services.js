@@ -13,6 +13,21 @@ gsap.registerPlugin(ScrollTrigger);
 export default function Services() {
     const router = useRouter();
     useEffect(() => {
+        const headerImg = document.querySelector(`#header`);
+        headerImg.style.backgroundPosition = `0% 0px`;
+        gsap.set(headerImg, { filter: "blur(0px) brightness(0.6)" });
+        gsap.to(headerImg, {
+            backgroundPosition: `0% ${window.innerHeight / 2}px`,
+            scale: 1.2,
+            filter: "blur(10px) brightness(0)",
+            ease: "none",
+            scrollTrigger: {
+                trigger: headerImg,
+                start: "top",
+                end: "bottom top",
+                scrub: true,
+            },
+        });
         gsap.utils
             .toArray("#smallImageContainer")
             .forEach((smallScreenImg, i) => {
@@ -162,6 +177,7 @@ export default function Services() {
             <div className={titleStyles.container}>
                 <Header />
                 <img
+                    id="header"
                     className={`${titleStyles.headerImg} ${titleStyles.headerAbout}`}
                     src="/services-header.png"
                     alt=""
@@ -261,7 +277,7 @@ export default function Services() {
                     <div
                         className={`${styles.contentLeftContainer} section`}
                         style={{ marginBottom: 40 }}
-                        // id='smallImageContainer'
+                        id="smallImageContainer"
                     >
                         <div id="first" className={styles.contentLeft}>
                             <div className={styles.content}>
@@ -292,7 +308,7 @@ export default function Services() {
                     <div
                         className={`${styles.contentLeftContainer} ${styles.noGrey} section`}
                         style={{ marginBottom: 40 }}
-                        // id='smallImageContainer'
+                        id="smallImageContainer"
                     >
                         <div className={styles.block}></div>
                         <div id="second" className={styles.contentLeft}>
@@ -326,7 +342,7 @@ export default function Services() {
                     <div
                         className={`${styles.contentLeftContainer} section`}
                         style={{ marginBottom: 40 }}
-                        // id='smallImageContainer'
+                        id="smallImageContainer"
                     >
                         <div id="third" className={styles.contentLeft}>
                             <div className={styles.content}>
@@ -359,7 +375,7 @@ export default function Services() {
                     <div
                         className={`${styles.contentLeftContainer} ${styles.noGrey} section`}
                         style={{ marginBottom: 40 }}
-                        // id='smallImageContainer'
+                        id="smallImageContainer"
                     >
                         <div className={styles.block}></div>
                         <div id="fourth" className={styles.contentLeft}>
@@ -393,7 +409,7 @@ export default function Services() {
                     <div
                         className={`${styles.contentLeftContainer} section`}
                         style={{ marginBottom: 40 }}
-                        // id='smallImageContainer'
+                        id="smallImageContainer"
                     >
                         <div id="fifth" className={styles.contentLeft}>
                             <div className={styles.content}>

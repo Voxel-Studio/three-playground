@@ -128,20 +128,22 @@ export default function Home() {
             logos,
             { opacity: 0, y: -30 },
             {
+                duration: 0.5,
                 opacity: 1,
                 y: 0,
                 stagger: 0.2,
                 scrollTrigger: {
                     trigger: logoRef.current,
                     start: "top bottom",
-                    end: "bottom top",
-                    toggleActions: "play none none reverse",
+                    end: "bottom 75%",
+                    // toggleActions: "play none none reverse",
+                    scrub: "true",
                 },
             }
         );
         gsap.fromTo(
             cards,
-            { opacity: 0, y: 50 },
+            { opacity: 0, y: 200 },
             {
                 opacity: 1,
                 y: 0,
@@ -149,8 +151,9 @@ export default function Home() {
                 scrollTrigger: {
                     trigger: "#grid",
                     start: "top bottom",
-                    end: "bottom top",
-                    toggleActions: "play none none reverse",
+                    end: "top center",
+                    // toggleActions: "play none none reverse",
+                    scrub: "true",
                 },
             }
         );
@@ -159,8 +162,9 @@ export default function Home() {
             scrollTrigger: {
                 trigger: "#grid",
                 start: "top bottom",
-                end: "bottom top",
-                toggleActions: "play none none reverse",
+                end: "bottom bottom",
+                // toggleActions: "play none none reverse",
+                scrub: "true",
             },
         });
         // gsap.set("#pyramid-container-1", { yPercent: -20 });

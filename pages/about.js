@@ -11,6 +11,21 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function About() {
     useEffect(() => {
+        const headerImg = document.querySelector(`#header`);
+        headerImg.style.backgroundPosition = `0% 0px`;
+        gsap.set(headerImg, { filter: "blur(0px) brightness(0.6)" });
+        gsap.to(headerImg, {
+            backgroundPosition: `0% ${window.innerHeight / 2}px`,
+            scale: 1.2,
+            filter: "blur(10px) brightness(0)",
+            ease: "none",
+            scrollTrigger: {
+                trigger: headerImg,
+                start: "top",
+                end: "bottom top",
+                scrub: true,
+            },
+        });
         gsap.utils
             .toArray("#smallImageContainer")
             .forEach((smallScreenImg, i) => {
@@ -136,6 +151,7 @@ export default function About() {
             <div className={titleStyles.container}>
                 <Header />
                 <img
+                    id="header"
                     className={`${titleStyles.headerImg} ${titleStyles.headerAbout}`}
                     src="/about-bg.png"
                     alt=""

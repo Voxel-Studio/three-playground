@@ -5,6 +5,10 @@ import Footer from "../components/footer";
 import titleStyles from "../styles/TitleSection.module.css";
 import styles from "../styles/News.module.css";
 import { newsItems } from "../utils/helper";
+import { useEffect } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
 
 // const items = [
 //     {
@@ -25,6 +29,23 @@ import { newsItems } from "../utils/helper";
 // ];
 
 export default function News() {
+    useEffect(() => {
+        const headerImg = document.querySelector(`#header`);
+        headerImg.style.backgroundPosition = `0% 0px`;
+        gsap.set(headerImg, { filter: "blur(0px) brightness(0.6)" });
+        gsap.to(headerImg, {
+            backgroundPosition: `0% ${window.innerHeight / 2}px`,
+            scale: 1.2,
+            filter: "blur(10px) brightness(0)",
+            ease: "none",
+            scrollTrigger: {
+                trigger: headerImg,
+                start: "top",
+                end: "bottom top",
+                scrub: true,
+            },
+        });
+    });
     return (
         <div className={titleStyles.container}>
             <Head>
@@ -32,6 +53,7 @@ export default function News() {
             </Head>
             <Header />
             <img
+                id="header"
                 className={titleStyles.headerImg}
                 src="/news-heading.png"
                 alt=""

@@ -28,7 +28,7 @@
         rgba(0, 0, 0, 0) 100%
     );
     /* margin-top: 6000px; */
-    margin-top: 10000px;
+    margin-top: 9500px;
 }
 
 .scrollDown {
@@ -353,9 +353,9 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-size: fill;
+    background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
+    /* background-repeat: no-repeat; */
 }
 
 .info {
@@ -395,13 +395,15 @@
     width: calc(100% - 120px);
     height: 670px;
     margin-left: 120px;
+    overflow: hidden;
 }
 
 .fullImg div {
     width: 100%;
-    height: 100%;
+    height: 120%;
     background-size: cover;
-    background-repeat: no-repeat;
+    background-position: center;
+    /* background-repeat: no-repeat; */
 }
 
 .fullImgMarginLeft {

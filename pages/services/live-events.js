@@ -119,12 +119,10 @@ export default function LiveEvents() {
                             {/* <div className={styles.imgOverlayRight}></div> */}
                         </div>
                     </div>
-                    {/* <div className={`section`}>
-                        <div className={styles.carousel} id='carousel'></div>
-                    </div> */}
-                    <div className="section">
+                    <div className={styles.carousel}>
                         <Carousel />
                     </div>
+
                     <div className={`${styles.row} ${styles.rowLast} section`}>
                         <div className={styles.rowImg}>
                             <img src="/news1-new.jpg" alt="" />

@@ -16,7 +16,7 @@ const Carousel = () => {
     const [activeSlideIndex, setActiveSlideIndex] = useState(1);
     const [progressBarRef, setProgressBarRef] = useState(null);
 
-    const totalSlides = 12;
+    const totalSlides = 5;
 
     useEffect(() => {
         if (!emblaApi) return;
@@ -59,47 +59,12 @@ const Carousel = () => {
                     />
                     <Slide
                         index={4}
-                        src="/carousel1.png"
+                        src="/carousel5.png"
                         slide={activeSlideIndex}
                     />
                     <Slide
                         index={5}
-                        src="/carousel2.png"
-                        slide={activeSlideIndex}
-                    />
-                    <Slide
-                        index={6}
-                        src="/carousel3.png"
-                        slide={activeSlideIndex}
-                    />
-                    <Slide
-                        index={7}
-                        src="/carousel1.png"
-                        slide={activeSlideIndex}
-                    />
-                    <Slide
-                        index={8}
-                        src="/carousel2.png"
-                        slide={activeSlideIndex}
-                    />
-                    <Slide
-                        index={9}
-                        src="/carousel3.png"
-                        slide={activeSlideIndex}
-                    />
-                    <Slide
-                        index={10}
-                        src="/carousel1.png"
-                        slide={activeSlideIndex}
-                    />
-                    <Slide
-                        index={11}
-                        src="/carousel2.png"
-                        slide={activeSlideIndex}
-                    />
-                    <Slide
-                        index={12}
-                        src="/carousel3.png"
+                        src="/carousel4.png"
                         slide={activeSlideIndex}
                     />
                 </div>
@@ -119,7 +84,9 @@ const Carousel = () => {
                         className={styles.progress_thumb}
                     />
                 </div>
-                <div style={{ opacity: 0.8 }}>012</div>
+                <div style={{ opacity: 0.8 }}>
+                    {totalSlides > 9 ? `0${totalSlides}` : `00${totalSlides}`}
+                </div>
             </div>
         </div>
     );

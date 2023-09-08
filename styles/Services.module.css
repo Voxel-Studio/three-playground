@@ -256,6 +256,41 @@
     transform: scale(2);
 }
 
+.contentFull {
+    position: relative;
+    width: 100vw;
+    height: 600px;
+    margin-left: calc(-50vw + 600px);
+}
+
+.contentFull div {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 15%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.contentFull div h1 {
+    font-size: 4rem;
+    max-width: 500px;
+    font-weight: 400;
+    margin-bottom: 80px;
+}
+
+.contentFull div ul {
+    list-style-position: outside;
+    transform: translateX(-20px);
+}
+
+.contentFull div ul li {
+    font-weight: 300;
+    margin-bottom: 10px;
+}
 @media (max-width: 1350px) {
     .contentLeftContainer {
         width: 100%;

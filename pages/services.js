@@ -328,6 +328,7 @@ export default function Services() {
                             </p>
                         </div>
                     </div>
+
                     <div
                         className={`${styles.imgRightContainer} ${styles.smallScreenImg} section`}
                         id="smallImageContainer"
@@ -337,8 +338,33 @@ export default function Services() {
                             style={{
                                 backgroundImage: `url(/services2.png)`,
                             }}
-                        />
+                        >
+                            <div className={`${styles.contentFull} section`}>
+                                <div>
+                                    <h1>Praesent urna nisl convallis</h1>
+                                    <ul>
+                                        <li>
+                                            In a enim non libero commodo
+                                            dapibus. Curabitur
+                                        </li>
+                                        <li>
+                                            Ullamcorper, orci ut ultricies
+                                            imperdiet, tellus libero
+                                        </li>
+                                        <li>
+                                            Malesuada risus, non commodo lectus
+                                            eros vel risus
+                                        </li>
+                                        <li>
+                                            Interdum et malesuada fames ac ante
+                                            ipsum
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
                     <div
                         className={`${styles.contentLeftContainer} section`}
                         style={{ marginBottom: 40 }}

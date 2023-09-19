@@ -165,7 +165,10 @@
 }
 
 .carousel {
-	margin-left: -17%;
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	/* margin-left: -17%; */
 	/* position: relative;
     scale: 1.8;
     margin: 20vh 0; */

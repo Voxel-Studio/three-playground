@@ -199,7 +199,7 @@ export default function Services() {
                 <img
                     id='header'
                     className={`${titleStyles.headerImg} ${titleStyles.headerAbout}`}
-                    src='/services-header.png'
+                    src='/services-header.jpg'
                     alt=''
                 />
                 <div className='wrapper' style={{ marginBottom: 80 }}>
@@ -327,7 +327,7 @@ export default function Services() {
                     >
                         <div
                             className={`${styles.imgLeft} ${styles.smallImg}`}
-                            style={{ backgroundImage: `url(/services1.png)` }}
+                            style={{ backgroundImage: `url(/services1.jpg)` }}
                         />
                     </div>
                     <div
@@ -361,7 +361,7 @@ export default function Services() {
                         <div
                             className={`${styles.imgRight} ${styles.smallImg}`}
                             style={{
-                                backgroundImage: `url(/services2.png)`,
+                                backgroundImage: `url(/services2.jpg)`,
                             }}
                         >
                             <div className={`${styles.contentFull} section`}>
@@ -453,7 +453,7 @@ export default function Services() {
                         <div
                             className={`${styles.imgRight} ${styles.smallImg}`}
                             style={{
-                                backgroundImage: `url(/services4.png)`,
+                                backgroundImage: `url(/services4.jpg)`,
                             }}
                         />
                     </div>
@@ -486,7 +486,7 @@ export default function Services() {
                         <div
                             className={`${styles.imgLeft} ${styles.smallImg}`}
                             style={{
-                                backgroundImage: `url(/services5.png)`,
+                                backgroundImage: `url(/services5.jpg)`,
                             }}
                         />
                     </div>

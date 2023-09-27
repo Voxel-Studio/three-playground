@@ -154,7 +154,7 @@ export default function About() {
                 <img
                     id='header'
                     className={`${titleStyles.headerImg} ${titleStyles.headerAbout}`}
-                    src='/about-bg.png'
+                    src='/about-bg.jpg'
                     alt=''
                 />
                 <div className='wrapper' style={{ marginBottom: 80 }}>
@@ -209,7 +209,7 @@ export default function About() {
                             className={`${styles.fullImg}`}
                         >
                             <div
-                                style={{ backgroundImage: `url(/about2.png)` }}
+                                style={{ backgroundImage: `url(/about2.jpg)` }}
                             />
                         </div>
                     </div>
@@ -251,7 +251,7 @@ export default function About() {
                             className={`${styles.fullImg}`}
                         >
                             <div
-                                style={{ backgroundImage: `url(/about3.png)` }}
+                                style={{ backgroundImage: `url(/about3.jpg)` }}
                             />
                         </div>
                     </div>
@@ -303,7 +303,7 @@ export default function About() {
                         >
                             <div
                                 style={{
-                                    backgroundImage: `url(/about6.png)`,
+                                    backgroundImage: `url(/about6.jpg)`,
                                 }}
                             />
                         </div>

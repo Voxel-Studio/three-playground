@@ -1,33 +1,33 @@
-import Head from "next/head";
-import Header from "../components/header";
-import Footer from "../components/footer";
-import titleStyles from "../styles/TitleSection.module.css";
-import styles from "../styles/About.module.css";
-import { useEffect } from "react";
-import { gsap } from "gsap";
-import { SplitText } from "gsap/dist/SplitText";
-import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import Head from 'next/head';
+import Header from '../components/header';
+import Footer from '../components/footer';
+import titleStyles from '../styles/TitleSection.module.css';
+import styles from '../styles/About.module.css';
+import { useEffect } from 'react';
+import { gsap } from 'gsap';
+import { SplitText } from 'gsap/dist/SplitText';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 export default function About() {
     useEffect(() => {
         const headerImg = document.querySelector(`#header`);
         headerImg.style.backgroundPosition = `0% 0px`;
-        gsap.set(headerImg, { filter: "blur(0px) brightness(0.6)" });
+        gsap.set(headerImg, { filter: 'blur(0px) brightness(0.6)' });
         gsap.to(headerImg, {
             backgroundPosition: `0% ${window.innerHeight / 2}px`,
             scale: 1.2,
-            filter: "blur(10px) brightness(0)",
-            ease: "none",
+            filter: 'blur(10px) brightness(0)',
+            ease: 'none',
             scrollTrigger: {
                 trigger: headerImg,
-                start: "top",
-                end: "bottom top",
+                start: 'top',
+                end: 'bottom top',
                 scrub: true,
             },
         });
         gsap.utils
-            .toArray("#smallImageContainer")
+            .toArray('#smallImageContainer')
             .forEach((smallScreenImg, i) => {
                 const smallImg = smallScreenImg.querySelector(`div`);
                 console.log(smallImg);
@@ -36,27 +36,28 @@ export default function About() {
                 }px`;
                 gsap.to(smallImg, {
                     backgroundPosition: `50% ${window.innerHeight / 12}px`,
-                    ease: "none",
+                    ease: 'none',
                     scrollTrigger: {
                         trigger: smallScreenImg,
                         scrub: true,
                     },
                 });
             });
-        gsap.utils.toArray(".section").forEach((section, i) => {
+        gsap.utils.toArray('.section').forEach((section, i) => {
             console.log(section);
             gsap.from(section, {
                 opacity: 0,
-                duration: 2,
-                ease: "none",
+                // duration: 2,
+                duration: 0.5,
+                ease: 'none',
                 scrollTrigger: {
                     trigger: section,
                 },
             });
         });
         const tlFirstInfo = gsap.timeline(),
-            splitFirstInfo = new SplitText("#firstSplit", {
-                type: "words,chars",
+            splitFirstInfo = new SplitText('#firstSplit', {
+                type: 'words,chars',
             }),
             chars = splitFirstInfo.chars;
         tlFirstInfo.from(
@@ -65,20 +66,20 @@ export default function About() {
                 duration: 0.8,
                 opacity: 0,
                 y: 10,
-                ease: "circ.out",
+                ease: 'circ.out',
                 stagger: 0.02,
                 scrollTrigger: {
-                    trigger: "#first",
-                    start: "top 75%",
-                    end: "bottom center ",
+                    trigger: '#first',
+                    start: 'top 75%',
+                    end: 'bottom center ',
                     scrub: 1,
                 },
             },
-            "+=0"
+            '+=0'
         );
         const tlSecondInfo = gsap.timeline(),
-            splitSecondInfo = new SplitText("#secondSplit", {
-                type: "words,chars",
+            splitSecondInfo = new SplitText('#secondSplit', {
+                type: 'words,chars',
             }),
             charsSecond = splitSecondInfo.chars;
         tlSecondInfo.from(
@@ -87,20 +88,20 @@ export default function About() {
                 duration: 0.8,
                 opacity: 0,
                 y: 10,
-                ease: "circ.out",
+                ease: 'circ.out',
                 stagger: 0.02,
                 scrollTrigger: {
-                    trigger: "#second",
-                    start: "top 75%",
-                    end: "bottom center",
+                    trigger: '#second',
+                    start: 'top 75%',
+                    end: 'bottom center',
                     scrub: 1,
                 },
             },
-            "+=0"
+            '+=0'
         );
         const tlThirdInfo = gsap.timeline(),
-            splitThirdInfo = new SplitText("#thirdSplit", {
-                type: "words,chars",
+            splitThirdInfo = new SplitText('#thirdSplit', {
+                type: 'words,chars',
             }),
             charsThird = splitThirdInfo.chars;
         tlThirdInfo.from(
@@ -109,20 +110,20 @@ export default function About() {
                 duration: 0.8,
                 opacity: 0,
                 y: 10,
-                ease: "circ.out",
+                ease: 'circ.out',
                 stagger: 0.02,
                 scrollTrigger: {
-                    trigger: "#third",
-                    start: "top 75%",
-                    end: "bottom center",
+                    trigger: '#third',
+                    start: 'top 75%',
+                    end: 'bottom center',
                     scrub: 1,
                 },
             },
-            "+=0"
+            '+=0'
         );
         const tlFourthInfo = gsap.timeline(),
-            splitFourthInfo = new SplitText("#fourthSplit", {
-                type: "words,chars",
+            splitFourthInfo = new SplitText('#fourthSplit', {
+                type: 'words,chars',
             }),
             charsFourth = splitFourthInfo.chars;
         tlFourthInfo.from(
@@ -131,16 +132,16 @@ export default function About() {
                 duration: 0.8,
                 opacity: 0,
                 y: 10,
-                ease: "circ.out",
+                ease: 'circ.out',
                 stagger: 0.02,
                 scrollTrigger: {
-                    trigger: "#fourth",
-                    start: "top 75%",
-                    end: "bottom center",
+                    trigger: '#fourth',
+                    start: 'top 75%',
+                    end: 'bottom center',
                     scrub: 1,
                 },
             },
-            "+=0"
+            '+=0'
         );
     });
     return (
@@ -151,18 +152,18 @@ export default function About() {
             <div className={titleStyles.container}>
                 <Header />
                 <img
-                    id="header"
+                    id='header'
                     className={`${titleStyles.headerImg} ${titleStyles.headerAbout}`}
-                    src="/about-bg.png"
-                    alt=""
+                    src='/about-bg.png'
+                    alt=''
                 />
-                <div className="wrapper" style={{ marginBottom: 80 }}>
+                <div className='wrapper' style={{ marginBottom: 80 }}>
                     <h1 className={titleStyles.h1}>About</h1>
                     <div className={titleStyles.line}></div>
                 </div>
                 <div className={styles.aboutWrapper}>
                     <div className={`${styles.row} section`}>
-                        <p className="sectionHeader">
+                        <p className='sectionHeader'>
                             In a enim non libero commodo dapibus. Curabitur
                             ullamcorper, orci ut ultricies imperdiet, tellus
                             libero malesuada risus, non commodo lectus eros vel
@@ -174,7 +175,7 @@ export default function About() {
                     </div>
                     <div
                         className={`${styles.imgRightContainer} ${styles.smallScreenImg} section`}
-                        id="smallImageContainer"
+                        id='smallImageContainer'
                     >
                         <div
                             className={`${styles.imgRight} ${styles.smallImg}`}
@@ -182,12 +183,12 @@ export default function About() {
                         />
                     </div>
                     <div
-                        id="first"
+                        id='first'
                         className={`${styles.row} ${styles.rowEnd} section`}
                     >
                         <div className={`${styles.info} ${styles.infoFirst}`}>
                             <p>EVENT TECH</p>
-                            <h3 id="firstSplit">
+                            <h3 id='firstSplit'>
                                 Praesent urna nisl convallis aliquam
                             </h3>
                             <button className={styles.viewButton}>
@@ -198,8 +199,8 @@ export default function About() {
                         {/* <img className={styles.bg1} src='/bg1.jpg' alt='' /> */}
                         <img
                             className={`${styles.bts} ${styles.bts1}`}
-                            src="/about-bw1.png"
-                            alt=""
+                            src='/about-bw1.png'
+                            alt=''
                         />
                     </div>
                     <div className={`${styles.row} section`}>
@@ -213,19 +214,19 @@ export default function About() {
                         </div>
                     </div>
                     <div
-                        id="second"
+                        id='second'
                         className={`${styles.row} ${styles.rowStart} section`}
-                        style={{ marginRight: "10vw" }}
+                        style={{ marginRight: '10vw' }}
                     >
                         {/* <img className={styles.bg2} src="/bg2.jpg" alt="" /> */}
                         <img
                             className={`${styles.bts} ${styles.bts2}`}
-                            src="/about-bw2.png"
-                            alt=""
+                            src='/about-bw2.png'
+                            alt=''
                         />
                         <div className={`${styles.info} ${styles.infoFirst}`}>
                             <p>EVENT TECH</p>
-                            <h3 id="secondSplit">
+                            <h3 id='secondSplit'>
                                 Praesent urna nisl convallis aliquam
                             </h3>
                             <button className={styles.viewButton}>
@@ -238,7 +239,7 @@ export default function About() {
                         className={`${styles.row} ${styles.rowImages} section`}
                     >
                         <div
-                            id="smallImageContainer"
+                            id='smallImageContainer'
                             className={`${styles.fullImg}`}
                         >
                             <div
@@ -246,7 +247,7 @@ export default function About() {
                             />
                         </div>
                         <div
-                            id="smallImageContainer"
+                            id='smallImageContainer'
                             className={`${styles.fullImg}`}
                         >
                             <div
@@ -277,16 +278,16 @@ export default function About() {
                             /> */}
                             <img
                                 className={`${styles.bts} ${styles.bts3}`}
-                                src="/about-bw3.png"
-                                alt=""
+                                src='/about-bw3.png'
+                                alt=''
                             />
                         </div>
                         <div
-                            id="third"
+                            id='third'
                             className={`${styles.info} ${styles.infoFirst}`}
                         >
                             <p>EVENT TECH</p>
-                            <h3 id="thirdSplit">
+                            <h3 id='thirdSplit'>
                                 Praesent urna nisl convallis aliquam
                             </h3>
                             <button className={styles.viewButton}>
@@ -298,7 +299,7 @@ export default function About() {
                     <div className={`${styles.row} section`}>
                         <div
                             className={`${styles.fullImg} ${styles.fullImgMarginLeft}`}
-                            id="smallImageContainer"
+                            id='smallImageContainer'
                         >
                             <div
                                 style={{
@@ -308,14 +309,14 @@ export default function About() {
                         </div>
                     </div>
                     <div
-                        id="fourth"
+                        id='fourth'
                         className={`${styles.row} ${styles.rowStart} section`}
                     >
                         <div
                             className={`${styles.info} ${styles.infoFirst} ${styles.infoFirstStart}`}
                         >
                             <p>EVENT TECH</p>
-                            <h3 id="fourthSplit">
+                            <h3 id='fourthSplit'>
                                 Praesent urna nisl convallis aliquam
                             </h3>
                             <button className={styles.viewButton}>
@@ -325,16 +326,16 @@ export default function About() {
                         </div>
                         <img
                             className={`${styles.bts} ${styles.bts4}`}
-                            src="/about-bw4.png"
-                            alt=""
+                            src='/about-bw4.png'
+                            alt=''
                         />
                     </div>
                 </div>
-                <div className="wrapper">
+                <div className='wrapper'>
                     <div
-                        className="backToTop"
+                        className='backToTop'
                         onClick={() =>
-                            window.scrollTo({ top: 0, behavior: "smooth" })
+                            window.scrollTo({ top: 0, behavior: 'smooth' })
                         }
                     >
                         <p>BACK TO TOP</p>

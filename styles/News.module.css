@@ -2,6 +2,7 @@
     position: relative;
     width: 90%;
     max-width: 1200px;
+    margin-top: 10vh;
 }
 
 .news {
@@ -43,7 +44,6 @@
     margin-right: 40px;
 }
 
-
 .bottom {
     width: 100%;
 }
@@ -54,7 +54,6 @@
     background: white;
     transition: all 0.35s ease-in-out;
 }
-
 
 .info h2 {
     font-weight: 400;
@@ -89,6 +88,4 @@
     .info {
         width: 60%;
     }
-
-    
 }

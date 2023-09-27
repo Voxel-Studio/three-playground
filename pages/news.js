@@ -1,10 +1,14 @@
-import Head from 'next/head';
-import Link from 'next/link';
-import Header from '../components/header';
-import Footer from '../components/footer';
-import titleStyles from '../styles/TitleSection.module.css';
-import styles from '../styles/News.module.css';
-import { newsItems } from '../utils/helper';
+import Head from "next/head";
+import Link from "next/link";
+import Header from "../components/header";
+import Footer from "../components/footer";
+import titleStyles from "../styles/TitleSection.module.css";
+import styles from "../styles/News.module.css";
+import { newsItems } from "../utils/helper";
+import { useEffect } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
 
 // const items = [
 //     {
@@ -25,18 +29,36 @@ import { newsItems } from '../utils/helper';
 // ];
 
 export default function News() {
+    useEffect(() => {
+        const headerImg = document.querySelector(`#header`);
+        headerImg.style.backgroundPosition = `0% 0px`;
+        gsap.set(headerImg, { filter: "blur(0px) brightness(0.6)" });
+        gsap.to(headerImg, {
+            backgroundPosition: `0% ${window.innerHeight / 2}px`,
+            scale: 1.2,
+            filter: "blur(10px) brightness(0)",
+            ease: "none",
+            scrollTrigger: {
+                trigger: headerImg,
+                start: "top",
+                end: "bottom top",
+                scrub: true,
+            },
+        });
+    });
     return (
         <div className={titleStyles.container}>
             <Head>
                 <title>Insert Productions Limited - News.</title>
             </Head>
             <Header />
-            <div className='wrapper'>
-                <img
-                    className={titleStyles.headerImg}
-                    src='/news-header.jpg'
-                    alt=''
-                />
+            <img
+                id="header"
+                className={titleStyles.headerImg}
+                src="/news-heading.png"
+                alt=""
+            />
+            <div className="wrapper">
                 <h1 className={titleStyles.h1}>News and insights</h1>
                 <div className={titleStyles.line}></div>
             </div>
@@ -49,7 +71,7 @@ export default function News() {
                                     <img
                                         className={styles.img}
                                         src={item.img}
-                                        alt=''
+                                        alt=""
                                     />
                                     <div className={styles.info}>
                                         <p>01222</p>
@@ -66,11 +88,11 @@ export default function News() {
                     })}
                 </ul>
             </div>
-            <div className='wrapper'>
+            <div className="wrapper">
                 <div
-                    className='backToTop'
+                    className="backToTop"
                     onClick={() =>
-                        window.scrollTo({ top: 0, behavior: 'smooth' })
+                        window.scrollTo({ top: 0, behavior: "smooth" })
                     }
                 >
                     <p>BACK TO TOP</p>

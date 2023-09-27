@@ -1,13 +1,14 @@
-import { useEffect, useState } from 'react';
-import * as THREE from 'three';
+import { useEffect, useState } from "react";
+import * as THREE from "three";
 // import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
-import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js';
-import VirtualScroll from 'virtual-scroll';
-import styles from '../styles/Projects.module.css';
-import { Plane } from 'three';
-import { Loading } from './loading';
-import { loadingTimeMs, projectItems } from '../utils/helper';
+import { FontLoader } from "three/examples/jsm/loaders/FontLoader.js";
+import { TextGeometry } from "three/examples/jsm/geometries/TextGeometry.js";
+import VirtualScroll from "virtual-scroll";
+import styles from "../styles/Projects.module.css";
+import { Plane } from "three";
+import { Loading } from "./loading";
+import { loadingTimeMs, projectItems } from "../utils/helper";
+import { useThree } from "@react-three/fiber";
 
 const visibleHeightAtZDepth = (depth, camera) => {
     // compensate for cameras not positioned at z=0
@@ -28,9 +29,11 @@ const visibleWidthAtZDepth = (depth, camera) => {
 };
 
 const init = (setSelected) => {
+    //Ratio
+    let ratio = window.innerWidth / window.innerHeight / 2;
     // Element variables
-    const container = document.getElementById('container');
-    const webglEl = document.getElementById('webglEl');
+    const container = document.getElementById("container");
+    const webglEl = document.getElementById("webglEl");
 
     // Scene
     const scene = new THREE.Scene();
@@ -41,7 +44,6 @@ const init = (setSelected) => {
         1100
     );
     camera.position.z = 5;
-
     // Points
     const totalPoints = 8;
     const theta = (Math.PI * 2) / totalPoints;
@@ -57,11 +59,10 @@ const init = (setSelected) => {
         titles.push(item.title);
     });
     // const radius = 7;
-    const radius = 5.5;
+    let radius = 5.5 * ratio;
     const group = new THREE.Group();
     const loader = new FontLoader();
     for (let i = 0; i < totalPoints; i++) {
-        // const geo = new THREE.PlaneGeometry(5, 2.8, 10, 10);
         const geo = new THREE.PlaneGeometry(4, 2.25, 10, 10);
         const mat = new THREE.ShaderMaterial({
             uniforms: {
@@ -91,7 +92,7 @@ const init = (setSelected) => {
         });
         const mesh = new THREE.Mesh(geo, mat);
         const angle = theta * i + Math.PI;
-        mesh.name = 'plane' + ' ' + i;
+        mesh.name = "plane" + " " + i;
         group.add(mesh);
         mesh.position.set(
             radius * Math.cos(angle),
@@ -99,19 +100,21 @@ const init = (setSelected) => {
             0
         );
         mesh.rotation.z = angle;
-        mesh.scale.y *= -1;
-        loader.load('/lexend-deca.json', function (font) {
+        console.log(mesh.scale);
+        mesh.scale.x *= ratio;
+        mesh.scale.y *= -1 * ratio;
+        loader.load("/lexend-deca.json", function (font) {
             const textGeometry = new TextGeometry(titles[i], {
                 font: font,
-                size: 0.2,
+                size: 0.16,
                 height: 0.01,
                 curveSegments: 8,
             });
             const textMaterial = new THREE.MeshBasicMaterial({
-                color: 'white',
+                color: "white",
             });
             const text = new THREE.Mesh(textGeometry, textMaterial);
-            text.name = 'text' + ' ' + i;
+            text.name = "text" + " " + i;
             group.add(text);
             text.position.set(
                 // radius * 1 * Math.cos(angle),
@@ -123,8 +126,8 @@ const init = (setSelected) => {
                 2
             );
             text.rotation.z = angle;
-            text.scale.y *= -1;
-            text.scale.x *= -1;
+            text.scale.y *= -1 * ratio;
+            text.scale.x *= -1 * ratio;
             // console.log(text.position);
         });
     }
@@ -156,7 +159,7 @@ const init = (setSelected) => {
 
     // Renderer
     const renderer = new THREE.WebGLRenderer({ antialias: true });
-    renderer.setClearColor('#000000');
+    renderer.setClearColor("#000000");
     renderer.setSize(window.innerWidth, window.innerHeight);
     webglEl.appendChild(renderer.domElement);
     renderer.setPixelRatio(window.devicePixelRatio);
@@ -166,8 +169,37 @@ const init = (setSelected) => {
         camera.aspect = window.innerWidth / window.innerHeight;
         camera.updateProjectionMatrix();
         renderer.setSize(window.innerWidth, window.innerHeight);
+        ratio = window.innerWidth / window.innerHeight / 2;
+        radius = 5.5 * ratio;
+        scene.traverse((object) => {
+            if (object.name.includes("plane")) {
+                const angle =
+                    theta * object.name[object.name.length - 1] + Math.PI;
+                // Scale the mesh
+                object.scale.x = ratio;
+                object.scale.y = -1 * ratio;
+                //Reposition the mesh
+                object.position.set(
+                    radius * Math.cos(angle),
+                    radius * Math.sin(angle),
+                    0
+                );
+            }
+            if (object.name.includes("text")) {
+                const angle =
+                    theta * object.name[object.name.length - 1] + Math.PI;
+                object.position.set(
+                    radius * 2 * Math.cos(angle),
+                    radius * 2 * Math.sin(angle),
+                    2
+                );
+                object.scale.x = -1 * ratio;
+                object.scale.y = -1 * ratio;
+            }
+        });
+        group.position.x = visibleWidthAtZDepth(0, camera) / 2 + 1;
     };
-    window.addEventListener('resize', onWindowResize, false);
+    window.addEventListener("resize", onWindowResize, false);
 
     // Parallax mouse movement
     let oldX = window.innerWidth / 2;
@@ -201,16 +233,16 @@ const init = (setSelected) => {
             const hit = intersects[0].object;
             if (hit) {
                 const name = hit.name;
-                const type = name.split(' ')[0];
-                if (type === 'plane') {
-                    document.body.style.cursor = 'pointer';
+                const type = name.split(" ")[0];
+                if (type === "plane") {
+                    document.body.style.cursor = "pointer";
                 }
             }
         } else {
-            document.body.style.cursor = 'auto';
+            document.body.style.cursor = "auto";
         }
     };
-    window.addEventListener('mousemove', onMouseMove);
+    window.addEventListener("mousemove", onMouseMove);
 
     const onClick = (e) => {
         rayCaster.setFromCamera(mouse, camera);
@@ -219,17 +251,17 @@ const init = (setSelected) => {
             const hit = intersects[0].object;
             if (hit) {
                 const name = hit.name;
-                const type = name.split(' ')[0];
+                const type = name.split(" ")[0];
                 console.log(type);
-                const num = name.split(' ')[1];
+                const num = name.split(" ")[1];
                 // if (type === 'plane' || type === 'text') {
-                if (type === 'plane') {
+                if (type === "plane") {
                     window.location.href = `/case-studies/${projectItems[num].id}`;
                 }
             }
         }
     };
-    window.addEventListener('click', onClick);
+    window.addEventListener("click", onClick);
 
     // Rendering
     const render = () => {
@@ -262,11 +294,11 @@ const init = (setSelected) => {
         targetDeltaY += (deltaY - targetDeltaY) * 0.05;
 
         scene.traverse(function (child) {
-            if (child.name === 'plane') {
+            if (child.name === "plane") {
                 child.translateX(targetDeltaX / 3000);
                 child.translateY(-targetDeltaY / 3000);
             }
-            if (child.name === 'text') {
+            if (child.name === "text") {
                 child.translateX(targetDeltaX / 1000);
                 child.translateY(-targetDeltaY / 1000);
             }
@@ -333,11 +365,11 @@ const init = (setSelected) => {
         }
         // console.log(selected);
 
-        const progressNumbers = document.querySelectorAll('.progressNumber');
+        const progressNumbers = document.querySelectorAll(".progressNumber");
         progressNumbers.forEach((number) => (number.style.opacity = 0.25));
         if (progressNumbers[selected])
             progressNumbers[selected].style.opacity = 1;
-        const brackets = document.querySelector('.brackets');
+        const brackets = document.querySelector(".brackets");
         if (brackets)
             brackets.style.transform = `translateY(calc(${selected}em + ${
                 selected * 10
@@ -376,20 +408,20 @@ const Projects = ({ getSelected }) => {
     }, [selected]);
 
     return (
-        <div className='wrapper'>
-            <div className={styles.container} id='container'>
-                <div id='webglEl'></div>
+        <div className="wrapper">
+            <div className={styles.container} id="container">
+                <div id="webglEl"></div>
             </div>
             <ul className={styles.progress}>
-                <img className='brackets' src='/brackets.svg' alt='' />
-                <li className='progressNumber'>01</li>
-                <li className='progressNumber'>02</li>
-                <li className='progressNumber'>03</li>
-                <li className='progressNumber'>04</li>
-                <li className='progressNumber'>05</li>
-                <li className='progressNumber'>06</li>
-                <li className='progressNumber'>07</li>
-                <li className='progressNumber'>08</li>
+                <img className="brackets" src="/brackets.svg" alt="" />
+                <li className="progressNumber">01</li>
+                <li className="progressNumber">02</li>
+                <li className="progressNumber">03</li>
+                <li className="progressNumber">04</li>
+                <li className="progressNumber">05</li>
+                <li className="progressNumber">06</li>
+                <li className="progressNumber">07</li>
+                <li className="progressNumber">08</li>
             </ul>
             {/* <img className='circle' src='/circle.svg' alt='' /> */}
             {/* <img className='progress-circle' src='/circle-chunk.svg' alt='' /> */}

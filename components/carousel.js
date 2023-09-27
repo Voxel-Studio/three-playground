@@ -1,65 +1,106 @@
-import { useState } from 'react';
-import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
+import { useEffect, useRef, useState } from "react";
+// import Slider from "react-slick";
+// import "slick-carousel/slick/slick.css";
+// import "slick-carousel/slick/slick-theme.css";
+
+import React from "react";
+import useEmblaCarousel from "embla-carousel-react";
+import Autoplay from "embla-carousel-autoplay";
+import styles from "../styles/Carousel.module.css";
 
 const Carousel = () => {
+    const [emblaRef, emblaApi] = useEmblaCarousel(
+        { loop: true, watchResize: false },
+        [Autoplay({ delay: 3500, stopOnInteraction: false })]
+    );
     const [activeSlideIndex, setActiveSlideIndex] = useState(1);
-    const settings = {
-        dots: false,
-        arrows: false,
-        slidesToShow: 5,
-        slidesToScroll: 3,
-        variableWidth: true,
-        afterChange: (index) => {
-            // console.log(index + 2);
-            setActiveSlideIndex(index + 2);
-        },
-    };
+    const [progressBarRef, setProgressBarRef] = useState(null);
+
+    const totalSlides = 5;
+
+    useEffect(() => {
+        if (!emblaApi) return;
+        const updateActiveSlide = () => {
+            const index = emblaApi.selectedScrollSnap();
+            setActiveSlideIndex(index + 1);
+        };
+
+        emblaApi.on("select", updateActiveSlide);
+        updateActiveSlide();
+
+        return () => emblaApi.off("select", updateActiveSlide);
+    }, [emblaApi]);
     return (
-        <div className='carousel'>
-            <Slider {...settings}>
-                <div>
-                    <img src='https://e3.365dm.com/23/03/2048x1152/skynews-dog-police-dogs_6077454.jpg' />
-                </div>
-                <div>
-                    <img src='http://placekitten.com/g/400/200' />
-                </div>
-                <div>
-                    <img
-                        src='https://www.rspca.org.uk/documents/1494939/0/1169530-sheep-in-field-banner_990x350.jpg/aac62a96-3742-5662-5799-134016387afc?t=1651747285142'
-                        className='activeImage'
+        <div
+            className={styles.carouselWrapper}
+            style={{
+                display: "flex",
+                flexWrap: "wrap",
+                justifyContent: "center",
+                alignItems: "center",
+            }}
+        >
+            <div className={styles.embla} ref={emblaRef}>
+                <div className={styles.embla__container}>
+                    <Slide
+                        index={1}
+                        src="/carousel1.png"
+                        slide={activeSlideIndex}
+                    />
+                    <Slide
+                        index={2}
+                        src="/carousel2.png"
+                        slide={activeSlideIndex}
+                    />
+                    <Slide
+                        index={3}
+                        src="/carousel3.png"
+                        slide={activeSlideIndex}
+                    />
+                    <Slide
+                        index={4}
+                        src="/carousel5.png"
+                        slide={activeSlideIndex}
+                    />
+                    <Slide
+                        index={5}
+                        src="/carousel4.png"
+                        slide={activeSlideIndex}
                     />
                 </div>
+            </div>
+            <div className={styles.progress}>
+                <div className={styles.line}></div>
                 <div>
-                    <img src='https://www.ciwf.org.uk/media/7430330/sheep-closeup-eating-grass.jpg?anchor=center&mode=crop&width=730&height=400&&rnd=131364863080000000' />
+                    {activeSlideIndex > 9
+                        ? `0${activeSlideIndex}`
+                        : `00${activeSlideIndex}`}
                 </div>
-                <div>
-                    <img src='https://upload.wikimedia.org/wikipedia/commons/8/8c/Cow_%28Fleckvieh_breed%29_Oeschinensee_Slaunger_2009-07-07.jpg' />
+                <div ref={setProgressBarRef} className={styles.progress_bar}>
+                    <div
+                        style={{
+                            width: `${(activeSlideIndex / totalSlides) * 100}%`,
+                        }}
+                        className={styles.progress_thumb}
+                    />
                 </div>
-                <div>
-                    <img src='https://www.ucdavis.edu/sites/default/files/styles/sf_landscape_16x9/public/home-site/blogs/one-health/blog-posts/2018/cow-field-one-health-uc-davis.jpg?h=c74750f6&itok=hQ2gfqOw' />
+                <div style={{ opacity: 0.8 }}>
+                    {totalSlides > 9 ? `0${totalSlides}` : `00${totalSlides}`}
                 </div>
-                <div>
-                    <img src='https://media.newyorker.com/photos/62506f4239f6a81b959af989/1:1/w_2000,h_2000,c_limit/brody-cow.jpg' />
-                </div>
-                <div>
-                    <img src='https://www.mammal.org.uk/wp-content/uploads/2019/02/Red-fox-Katie-Nethercoat.jpg' />
-                </div>
-                <div>
-                    <img src='https://www.nature.scot/sites/default/files/styles/max_1300x1300/public/2022-05/RedFox-FGD8284_Original%20Image_m276208.jpg?itok=9nr0luey' />
-                </div>
-                <div>
-                    <img src='https://upload.wikimedia.org/wikipedia/commons/8/83/Iceland-1979445_%28cropped_3%29.jpg' />
-                </div>
-                <div>
-                    <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Eopsaltria_australis_-_Mogo_Campground.jpg/640px-Eopsaltria_australis_-_Mogo_Campground.jpg' />
-                </div>
-                <div>
-                    <img src='https://media.audubon.org/styles/article_hero_inline/s3/tufted_titmouse._photo_deborah_bifulco_great_backyard_bird_count.jpg?itok=3_ydkTV-' />
-                </div>
-            </Slider>
-            <div className='carousel-indicator'>{`00${activeSlideIndex} / 012`}</div>
+            </div>
+        </div>
+    );
+};
+
+const Slide = ({ index, src, slide }) => {
+    const selected = index === slide;
+    return (
+        <div className="embla__slide">
+            <img
+                className={`${styles.slide_image}
+                    ${selected ? styles.selected : ""}`}
+                src={src}
+            />
         </div>
     );
 };

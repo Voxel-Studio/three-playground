@@ -116,7 +116,7 @@ export default function Project({ item }) {
             console.log(section);
             gsap.from(section, {
                 opacity: 0,
-                duration: 2,
+                duration: 0.5,
                 // ease: 'power4.out',
                 ease: 'none',
                 scrollTrigger: {

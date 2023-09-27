@@ -389,7 +389,7 @@ export default function Home() {
                     >
                         <div
                             className={`${styles.imgLeft} ${styles.smallImg}`}
-                            style={{ backgroundImage: `url(/home-1.png)` }}
+                            style={{ backgroundImage: `url(/home-1.jpg)` }}
                         />
                     </div>
                     <div
@@ -423,7 +423,7 @@ export default function Home() {
                             className={`${styles.fullImg}`}
                         >
                             <div
-                                style={{ backgroundImage: `url(/home-3.png)` }}
+                                style={{ backgroundImage: `url(/home-3.jpg)` }}
                             />
                         </div>
                     </div>
@@ -470,7 +470,7 @@ export default function Home() {
                         >
                             <div
                                 style={{
-                                    backgroundImage: `url(/home-5.png)`,
+                                    backgroundImage: `url(/home-5.jpg)`,
                                     width: '400px',
                                     marginTop: 25,
                                     marginBottom: 50,

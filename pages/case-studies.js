@@ -1,9 +1,9 @@
-import { useState } from "react";
-import { useRouter } from "next/router";
-import Head from "next/head";
-import styles from "../styles/CaseStudies.module.css";
-import Header from "../components/header";
-import Projects from "../components/projects";
+import { useState } from 'react';
+import { useRouter } from 'next/router';
+import Head from 'next/head';
+import styles from '../styles/CaseStudies.module.css';
+import Header from '../components/header';
+import Projects from '../components/projects';
 
 export default function CaseStudies() {
     const router = useRouter();

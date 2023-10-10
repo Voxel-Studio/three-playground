@@ -13,7 +13,7 @@
     margin-top: 5vh;
 }
 
-.card {
+/* .card {
     cursor: pointer;
     display: flex;
     flex-direction: column;
@@ -33,7 +33,6 @@
 
 .card ul {
     list-style: none;
-    /* margin-bottom: 80px; */
     font-weight: 300;
     min-height: 200px;
     font-size: 0.9rem;
@@ -43,7 +42,84 @@
     width: 100%;
     height: 10px;
     background-color: #333;
+} */
+
+.card {
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    overflow: hidden;
+    transform: translateY(30);
+    background-color: #0f0f0f;
+    transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out,
+        transform 1s ease-in, opacity 1s ease-in;
 }
+
+.card img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: fill;
+    margin-bottom: 40px;
+    opacity: 1;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.card h3 {
+    margin-bottom: 20px;
+    transition: padding 0.2s ease-in-out;
+}
+
+.card ul,
+.card h3 {
+    padding-left: 20px;
+}
+
+.card ul {
+    list-style: none;
+    /* margin-bottom: 80px; */
+    font-weight: 300;
+    min-height: 200px;
+    font-size: 0.9rem;
+    transition: padding 0.2s ease-in-out;
+}
+
+.cardLine {
+    width: 100%;
+    height: 10px;
+    background-color: #333;
+}
+
+.cardLineHover {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 10px;
+    background-color: rgba(255, 255, 255, 0.25);
+    transform: translateX(-100%);
+    transition: transform 0.2s ease-in-out;
+}
+
+.card:hover .cardLineHover {
+    transform: translateX(0);
+}
+
+/* .card:hover img {
+    opacity: 1;
+} */
+
+.card:hover {
+    background-color: white;
+    color: black;
+}
+
+.card:hover ul,
+.card:hover h3 {
+    padding-left: 30px;
+}
+
 
 .aboutWrapper p {
     font-weight: 300;

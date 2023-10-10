@@ -126,34 +126,36 @@ export default function Home() {
         );
         gsap.fromTo(
             logos,
-            { opacity: 0, y: -30 },
+            { opacity: 0, y: -20 },
             {
-                duration: 0.5,
+                duration: 0.1,
                 opacity: 1,
                 y: 0,
-                stagger: 0.2,
+                stagger: 0.1,
                 scrollTrigger: {
                     trigger: logoRef.current,
                     start: "top bottom",
                     end: "bottom 75%",
                     // toggleActions: "play none none reverse",
-                    scrub: "true",
+                    // scrub: 'true',
                 },
             }
         );
         gsap.fromTo(
             cards,
-            { opacity: 0, y: 200 },
+            // { opacity: 0, y: 200 },
+            { opacity: 0 },
             {
                 opacity: 1,
                 y: 0,
-                stagger: 0.2,
+                stagger: 0.1,
+                duration: 0.1,
                 scrollTrigger: {
                     trigger: "#grid",
                     start: "top bottom",
                     end: "top center",
                     // toggleActions: "play none none reverse",
-                    scrub: "true",
+                    // scrub: 'true',
                 },
             }
         );
@@ -387,7 +389,7 @@ export default function Home() {
                     >
                         <div
                             className={`${styles.imgLeft} ${styles.smallImg}`}
-                            style={{ backgroundImage: `url(/home-1.png)` }}
+                            style={{ backgroundImage: `url(/home-1.jpg)` }}
                         />
                     </div>
                     <div
@@ -421,7 +423,7 @@ export default function Home() {
                             className={`${styles.fullImg}`}
                         >
                             <div
-                                style={{ backgroundImage: `url(/home-3.png)` }}
+                                style={{ backgroundImage: `url(/home-3.jpg)` }}
                             />
                         </div>
                     </div>
@@ -468,7 +470,7 @@ export default function Home() {
                         >
                             <div
                                 style={{
-                                    backgroundImage: `url(/home-5.png)`,
+                                    backgroundImage: `url(/home-5.jpg)`,
                                     width: "400px",
                                     marginTop: 25,
                                     marginBottom: 50,

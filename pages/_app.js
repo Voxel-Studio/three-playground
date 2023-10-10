@@ -1,6 +1,6 @@
-import '../styles/globals.css';
-import Head from 'next/head';
-import Validation from '../components/validation';
+import "../styles/globals.css";
+import Head from "next/head";
+import Validation from "../components/validation";
 
 function MyApp({ Component, pageProps }) {
     return (
@@ -8,8 +8,8 @@ function MyApp({ Component, pageProps }) {
             <Head>
                 <title>Three Playground</title>
                 <meta
-                    name='viewport'
-                    content='initial-scale=1.0, width=device-width'
+                    name="viewport"
+                    content="initial-scale=1, width=device-width"
                 />
             </Head>
             <Component {...pageProps} />

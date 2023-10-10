@@ -475,7 +475,10 @@ export default function Home() {
                                 }}
                             />
                         </div>
-                        <img className={`${styles.bts}`} src="/home-6.png" />
+                        <img
+                            className={`${styles.bts} ${styles.bts3}`}
+                            src="/home-6.png"
+                        />
                     </div>
                     <div
                         className={`${styles.row} ${styles.rowCentre} section`}

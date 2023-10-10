@@ -102,7 +102,7 @@
     margin-right: 20px;
     width: 100%;
     font-size: 0.8rem;
-    outline:  none;
+    outline: none;
     transition: border-color 0.2s ease-in-out;
     color: white;
     padding-left: 20px;
@@ -118,7 +118,7 @@
     letter-spacing: 1px;
     font-size: 0.6rem;
     /* padding-left: 20px; */
-  }
+}
 
 .inputText:last-of-type {
     margin-right: 0;
@@ -224,6 +224,7 @@
     /* display: flex; */
     padding: 80px 0;
     border-bottom: solid rgba(214, 215, 217, 0.2) 1px;
+    background-color: #070707;
 }
 
 .logos img {
@@ -236,7 +237,8 @@
     justify-content: space-between;
 }
 
-.terms p, .terms li {
+.terms p,
+.terms li {
     color: #888888;
     font-size: 0.7rem;
     transition: color 0.2s ease-in-out;
@@ -259,7 +261,6 @@
 .right li:last-of-type {
     margin-right: 0;
 }
-
 
 @media (max-width: 1024px) {
     .contactContainer {

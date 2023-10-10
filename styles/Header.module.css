@@ -168,7 +168,8 @@
 }
 
 @media (max-width: 1024px) {
-    .desktop, .buttonContact {
+    .desktop,
+    .buttonContact {
         display: none;
     }
 
@@ -183,7 +184,8 @@
 }
 
 @media (max-width: 767px) {
-    .desktop, .buttonContact {
+    .desktop,
+    .buttonContact {
         display: none;
     }
 

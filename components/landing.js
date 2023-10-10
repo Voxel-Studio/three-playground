@@ -13,7 +13,7 @@ import * as THREE from "three";
 import { easing } from "maath";
 import Header from "./header";
 import { Loading } from "./loading";
-import styles from "../styles/Landing.module.css";
+// import styles from "../styles/Landing.module.css";
 
 const GOLDEN_RATIO = 1.61803398875;
 const CAMERA_START = 8;
@@ -38,7 +38,7 @@ const Landing = () => {
 
     return (
         <div className="wrapper">
-            <div className={styles.container} id="canvas-container">
+            <div id="canvas-container">
                 <Canvas
                     // dpr={[1, 1.5]}
                     camera={{
@@ -108,12 +108,12 @@ function Scene({ p = new THREE.Vector3() }) {
             }
         });
 
-        const onWindowResize = () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            // gl.setSize(window.innerWidth, window.innerHeight);
-        };
-        window.addEventListener("resize", onWindowResize, false);
+        // const onWindowResize = () => {
+        //     camera.aspect = window.innerWidth / window.innerHeight;
+        //     camera.updateProjectionMatrix();
+        //     // gl.setSize(window.innerWidth, window.innerHeight);
+        // };
+        // window.addEventListener("resize", onWindowResize, false);
 
         slab.current.material.depthWrite = false;
 
@@ -230,7 +230,7 @@ function Scene({ p = new THREE.Vector3() }) {
                 // url='/logo-text-old.svg'
                 url="/creative.svg"
                 position={[0, 1, 4.5]}
-                scale={[5.26 / 4, 2.51 / 4, 1]}
+                scale={[imageScale(5.26 / 4), imageScale(2.51 / 4, 1)]}
                 transparent
             />
             {/* Slab */}

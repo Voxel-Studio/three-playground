@@ -15,6 +15,7 @@ gsap.registerPlugin(ScrollTrigger, SplitText);
 export default function Home() {
     const router = useRouter();
     const [showScrollDown, setShowScrollDown] = useState(true);
+    const [width, setWidth] = useState(0);
     const logoRef = useRef(null);
     const cardRef = useRef(null);
 
@@ -250,6 +251,10 @@ export default function Home() {
         // return () => window.removeEventListener("scroll", handleScroll);
     });
 
+    useEffect(() => {
+        setWidth(window.innerWidth);
+    });
+
     return (
         <div className={styles.container}>
             <Head>
@@ -385,7 +390,7 @@ export default function Home() {
                     </div>
                     <div
                         className={`${styles.imgLeftContainer} ${styles.smallScreenImg} section`}
-                        id="smallImageContainer"
+                        id={width > 1350 ? "smallImageContainer" : ""}
                     >
                         <div
                             className={`${styles.imgLeft} ${styles.smallImg}`}

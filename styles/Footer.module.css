@@ -221,14 +221,23 @@
 }
 
 .logos {
-    /* display: flex; */
+    display: flex;
+    flex-wrap: wrap;
+    /* display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: 1; */
     padding: 80px 0;
     border-bottom: solid rgba(214, 215, 217, 0.2) 1px;
     background-color: #070707;
+    align-items: center;
+    justify-content: space-around;
+    /* width: fit-content; */
 }
 
 .logos img {
-    margin-right: 40px;
+    /* flex: 1; */
+    /* margin-right: 40px; */
+    height: 1fr;
 }
 
 .terms {

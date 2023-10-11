@@ -739,7 +739,7 @@
     }
 
     .rowImages .fullImg {
-        margin-left: 0 !important;
+        /* margin-left: 50% !important; */
         width: 100%;
         height: 250px;
         transform: translateY(0px) !important;
@@ -788,6 +788,11 @@
     .contentFull {
         width: 100%;
         margin-left: 0;
+    }
+
+    .bts3 {
+        right: 15%;
+        top: -50%;
     }
 }
 
@@ -843,5 +848,9 @@
         font-size: 0.75rem;
         transform: translateX(10px);
         list-style-position: inside;
+    }
+
+    .bts {
+        display: none;
     }
 }

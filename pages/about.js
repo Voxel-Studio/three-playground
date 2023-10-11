@@ -3,14 +3,16 @@ import Header from "../components/header";
 import Footer from "../components/footer";
 import titleStyles from "../styles/TitleSection.module.css";
 import styles from "../styles/About.module.css";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { gsap } from "gsap";
 import { SplitText } from "gsap/dist/SplitText";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 export default function About() {
+  const [width, setWidth] = useState(1500);
   useEffect(() => {
+    // setWidth(window.innerWidth);
     const headerImg = document.querySelector(`#header`);
     headerImg.style.backgroundPosition = `0% 0px`;
     gsap.set(headerImg, { filter: "blur(0px) brightness(0.6)" });
@@ -28,21 +30,21 @@ export default function About() {
     });
     gsap.utils.toArray("#smallImageContainer").forEach((smallScreenImg, i) => {
       const smallImg = smallScreenImg.querySelector(`div`);
-      console.log(smallImg);
-      smallImg.style.backgroundPosition = `50% ${
-        -window.innerHeight / 12 - 150
-      }px`;
-      gsap.to(smallImg, {
-        backgroundPosition: `50% ${window.innerHeight / 12}px`,
-        ease: "none",
-        scrollTrigger: {
-          trigger: smallScreenImg,
-          scrub: true,
-        },
-      });
+      if (window.innerWidth >= 1350) {
+        smallImg.style.backgroundPosition = `50% ${
+          -window.innerHeight / 12 - 150
+        }px`;
+        gsap.to(smallImg, {
+          backgroundPosition: `50% ${window.innerHeight / 12}px`,
+          ease: "none",
+          scrollTrigger: {
+            trigger: smallScreenImg,
+            scrub: true,
+          },
+        });
+      }
     });
     gsap.utils.toArray(".section").forEach((section, i) => {
-      console.log(section);
       gsap.from(section, {
         opacity: 0,
         // duration: 2,
@@ -142,6 +144,10 @@ export default function About() {
       "+=0"
     );
   });
+  //   useEffect(() => {
+  //     setWidth(window.innerWidth);
+  //     console.log(width);
+  //   });
   return (
     <>
       <Head>
@@ -233,7 +239,7 @@ export default function About() {
           </div>
           <div
             className={`${styles.imgLeftContainer} ${styles.smallScreenImg} section`}
-            // id="smallImageContainer"
+            id="smallImageContainer"
           >
             <div
               className={`${styles.imgLeft} ${styles.smallImg}`}

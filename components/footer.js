@@ -4,7 +4,12 @@ import styles from "../styles/Footer.module.css";
 const Footer = ({ showContact = false, top = 40, bg }) => {
   const router = useRouter();
   return (
-    <footer className={styles.footer} style={{ marginTop: top }}>
+    <footer
+      className={styles.footer}
+      style={{
+        marginTop: top,
+      }}
+    >
       <div
         className={styles.contact}
         style={{ display: showContact ? "flex" : "none" }}

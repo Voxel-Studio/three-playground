@@ -116,19 +116,22 @@ const init = (setSelected) => {
 			});
 			const text = new THREE.Mesh(textGeometry, textMaterial);
 			text.name = "text" + " " + i;
+
 			group.add(text);
 			text.position.set(
 				// radius * 1 * Math.cos(angle),
 				// radius * 1.75 * Math.cos(angle),
-				radius * 2 * Math.cos(angle),
+				desktop ? radius * 2 * Math.cos(angle) : radius * 1.5 * Math.cos(angle),
 				// radius * 1 * Math.sin(angle),
 				// radius * 1.75 * Math.sin(angle),
-				radius * 2 * Math.sin(angle),
+				desktop ? radius * 2 * Math.sin(angle) : radius * 1.5 * Math.sin(angle),
 				2
 			);
 			text.rotation.z = angle;
 			text.scale.y *= -1 * ratio;
 			text.scale.x *= -1 * ratio;
+			text.rotation.z += !desktop ? Math.PI / 2 : 0;
+			console.log(text.width);
 			// console.log(text.position);
 		});
 	}
@@ -151,7 +154,7 @@ const init = (setSelected) => {
 	const scroller = new VirtualScroll();
 	scroller.on((event) => {
 		// scrollPos = -event.y / 6000;
-		scrollPos = event.y / 6000;
+		scrollPos = desktop ? event.y / 6000 : -event.x / 3000;
 		// scrollSpeed = (event.deltaY * theta) / 2000;
 		scrollSpeed = (event.deltaY * theta) / 3000;
 
@@ -199,6 +202,36 @@ const init = (setSelected) => {
 				);
 				object.scale.x = -1 * ratio;
 				object.scale.y = -1 * ratio;
+
+				function centerTextGeometryOrigin(textGeometry) {
+					if (!(textGeometry instanceof TextGeometry)) {
+						console.error("Provided object is not a THREE.TextGeometry.");
+						return;
+					}
+
+					// Ensure the bounding box is computed
+					if (!textGeometry.boundingBox) {
+						textGeometry.computeBoundingBox();
+					}
+
+					const centerX =
+						(textGeometry.boundingBox.max.x + textGeometry.boundingBox.min.x) /
+						2;
+					const centerY =
+						(textGeometry.boundingBox.max.y + textGeometry.boundingBox.min.y) /
+						2;
+
+					const dx = -centerX;
+					const dy = -centerY;
+
+					textGeometry.vertices.forEach((vertex) => {
+						vertex.x += dx;
+						vertex.y += dy;
+					});
+
+					textGeometry.verticesNeedUpdate = true;
+				}
+				centerTextGeometryOrigin(textGeometry);
 			}
 		});
 		group.position.x = desktop ? visibleWidthAtZDepth(0, camera) / 2 + 1 : null;

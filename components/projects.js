@@ -121,16 +121,16 @@ const init = (setSelected) => {
 			text.position.set(
 				// radius * 1 * Math.cos(angle),
 				// radius * 1.75 * Math.cos(angle),
-				desktop ? radius * 2 * Math.cos(angle) : radius * 1.5 * Math.cos(angle),
+				desktop ? radius * 1.8 * Math.cos(angle) : radius * 1.7 * Math.cos(angle),
 				// radius * 1 * Math.sin(angle),
 				// radius * 1.75 * Math.sin(angle),
-				desktop ? radius * 2 * Math.sin(angle) : radius * 1.5 * Math.sin(angle),
+				desktop ? radius * 1.8 * Math.sin(angle) : radius * 1.7 * Math.sin(angle),
 				2
 			);
 			text.rotation.z = angle;
 			text.scale.y *= -1 * ratio;
 			text.scale.x *= -1 * ratio;
-			text.rotation.z += !desktop ? Math.PI / 2 : 0;
+			// text.rotation.z += !desktop ? Math.PI / 2 : 0;
 			console.log(text.width);
 			// console.log(text.position);
 		});
@@ -154,7 +154,7 @@ const init = (setSelected) => {
 	const scroller = new VirtualScroll();
 	scroller.on((event) => {
 		// scrollPos = -event.y / 6000;
-		scrollPos = desktop ? event.y / 6000 : -event.x / 3000;
+		scrollPos = desktop ? event.y / 6000 : -event.x / 1000;
 		// scrollSpeed = (event.deltaY * theta) / 2000;
 		scrollSpeed = (event.deltaY * theta) / 3000;
 
@@ -196,12 +196,17 @@ const init = (setSelected) => {
 			if (object.name.includes("text")) {
 				const angle = theta * object.name[object.name.length - 1] + Math.PI;
 				object.position.set(
-					radius * 2 * Math.cos(angle),
-					radius * 2 * Math.sin(angle),
+					// radius * 1 * Math.cos(angle),
+					// radius * 1.75 * Math.cos(angle),
+					desktop ? radius * 1.8 * Math.cos(angle) : radius * 1.7 * Math.cos(angle),
+					// radius * 1 * Math.sin(angle),
+					// radius * 1.75 * Math.sin(angle),
+					desktop ? radius * 1.8 * Math.sin(angle) : radius * 1.7 * Math.sin(angle),
 					2
 				);
 				object.scale.x = -1 * ratio;
 				object.scale.y = -1 * ratio;
+				// object.rotation.z += !desktop ? Math.PI / 2 : 0;
 
 				function centerTextGeometryOrigin(textGeometry) {
 					if (!(textGeometry instanceof TextGeometry)) {
@@ -231,7 +236,7 @@ const init = (setSelected) => {
 
 					textGeometry.verticesNeedUpdate = true;
 				}
-				centerTextGeometryOrigin(textGeometry);
+				// centerTextGeometryOrigin(object.geometry);
 			}
 		});
 		group.position.x = desktop ? visibleWidthAtZDepth(0, camera) / 2 + 1 : null;
@@ -407,8 +412,10 @@ const init = (setSelected) => {
 		if (progressNumbers[selected]) progressNumbers[selected].style.opacity = 1;
 		const brackets = document.querySelector(".brackets");
 		if (brackets)
-			brackets.style.transform = `translateY(calc(${selected}em + ${
+			brackets.style.transform = desktop ? `translateY(calc(${selected}em + ${
 				selected * 10
+			}px))` : `translateX(calc(${selected}em + ${
+				selected * 17
 			}px))`;
 
 		// for (let i = 0; i < group.children.length; i++) {

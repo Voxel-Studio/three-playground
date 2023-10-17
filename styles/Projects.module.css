@@ -26,3 +26,33 @@
     transform: translateY(calc(7em + 70px));
     transition: transform 0.2s ease-in-out;
 }
+
+@media (max-width: 700px) {
+    .progress {
+        right: 50%;
+        bottom: 1%;
+        transform: translateY(80%) translateX(50%);
+        flex-direction: row;
+        list-style: none;
+    }
+    
+    .progress li {
+        font-size: 0.8rem;
+        font-weight: 300;
+        opacity: 0.95;
+        margin: 0px 8px;
+        letter-spacing: 1px;
+        transition: opacity 0.2s ease-in-out;
+    }
+    
+    .progress img {
+        position: absolute;
+        width: 2em;
+        height: 2em;
+        top: -0.5em;
+        left: 0;
+        transform: translateY(0);
+        /* transform: translateX(calc(7em + 70px)); */
+        transition: transform 0.2s ease-in-out;
+    }
+}

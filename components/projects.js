@@ -28,11 +28,11 @@ const visibleWidthAtZDepth = (depth, camera) => {
   return height * camera.aspect;
 };
 
-const init = (setSelected) => {
+const init = (setSelected, setFirstFrame) => {
   // check mobile
   let desktop =
     window.innerWidth > 600 || window.innerWidth > window.innerHeight;
-  console.log(desktop, window.innerWidth);
+  //   console.log(desktop, window.innerWidth);
   //Ratio
   let ratio = desktop
     ? window.innerWidth / window.innerHeight / 2
@@ -134,8 +134,9 @@ const init = (setSelected) => {
       text.rotation.z = angle;
       text.scale.y *= -1 * ratio;
       text.scale.x *= -1 * ratio;
+
       // text.rotation.z += !desktop ? Math.PI / 2 : 0;
-      console.log(text.width);
+
       // console.log(text.position);
     });
   }
@@ -215,36 +216,6 @@ const init = (setSelected) => {
         object.scale.x = -1 * ratio;
         object.scale.y = -1 * ratio;
         // object.rotation.z += !desktop ? Math.PI / 2 : 0;
-
-        function centerTextGeometryOrigin(textGeometry) {
-          if (!(textGeometry instanceof TextGeometry)) {
-            console.error("Provided object is not a THREE.TextGeometry.");
-            return;
-          }
-
-          // Ensure the bounding box is computed
-          if (!textGeometry.boundingBox) {
-            textGeometry.computeBoundingBox();
-          }
-
-          const centerX =
-            (textGeometry.boundingBox.max.x + textGeometry.boundingBox.min.x) /
-            2;
-          const centerY =
-            (textGeometry.boundingBox.max.y + textGeometry.boundingBox.min.y) /
-            2;
-
-          const dx = -centerX;
-          const dy = -centerY;
-
-          textGeometry.vertices.forEach((vertex) => {
-            vertex.x += dx;
-            vertex.y += dy;
-          });
-
-          textGeometry.verticesNeedUpdate = true;
-        }
-        // centerTextGeometryOrigin(object.geometry);
       }
     });
     group.position.x = desktop ? visibleWidthAtZDepth(0, camera) / 2 + 1 : null;
@@ -317,8 +288,8 @@ const init = (setSelected) => {
   window.addEventListener("click", onClick);
 
   // Rendering
+  let firstFrame = true;
   const render = () => {
-    requestAnimationFrame(render);
     scrollSpeed *= 0.9;
     scrollTargetSpeed += (scrollSpeed - scrollTargetSpeed) * 0.1;
     scrollTargetPos += (scrollPos - scrollTargetPos) * 0.1;
@@ -345,17 +316,21 @@ const init = (setSelected) => {
     deltaY *= 0.9;
     targetDeltaX += (deltaX - targetDeltaX) * 0.05;
     targetDeltaY += (deltaY - targetDeltaY) * 0.05;
+    if (firstFrame) {
+      scene.traverse(function (child) {
+        if (child.name === "plane") {
+          child.translateX(targetDeltaX / 3000);
+          child.translateY(-targetDeltaY / 3000);
+        }
+        if (child.name.includes("text")) {
+          // child.translateX(targetDeltaX / 1000);
+          // child.translateY(-targetDeltaY / 1000);
 
-    scene.traverse(function (child) {
-      if (child.name === "plane") {
-        child.translateX(targetDeltaX / 3000);
-        child.translateY(-targetDeltaY / 3000);
-      }
-      if (child.name === "text") {
-        child.translateX(targetDeltaX / 1000);
-        child.translateY(-targetDeltaY / 1000);
-      }
-    });
+          if (child.geometry.boundingSphere)
+            console.log(child.geometry.boundingSphere.radius);
+        }
+      });
+    }
 
     xTargetPos += (xPos - xTargetPos) * 0.05;
     yTargetPos += (yPos - yTargetPos) * 0.05;
@@ -441,6 +416,7 @@ const init = (setSelected) => {
     //     }deg)`;
 
     renderer.render(scene, camera);
+    requestAnimationFrame(render);
   };
   render();
 };

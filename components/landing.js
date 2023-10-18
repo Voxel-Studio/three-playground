@@ -82,8 +82,8 @@ function Scene({ p = new THREE.Vector3() }) {
 	};
 	useEffect(() => {
 		setIos(
-			!/android|windows|linux|macbook/.test(
-				window.navigator.userAgent.toLowerCase()
+			!/android|windows|linux|mac/.test(
+				window.navigator.userAgent.toLowerCase() && window.innerWidth >= 700
 			)
 		);
 		let lastKnownScrollPosition = 0;

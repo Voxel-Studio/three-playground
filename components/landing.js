@@ -82,7 +82,7 @@ function Scene({ p = new THREE.Vector3() }) {
 	};
 	useEffect(() => {
 		setIos(
-			!/android|windows|linux|mac/.test(
+			!/android|windows|linux|macbook/.test(
 				window.navigator.userAgent.toLowerCase()
 			)
 		);

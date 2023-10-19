@@ -13,6 +13,8 @@ import * as THREE from "three";
 import { easing } from "maath";
 import Header from "./header";
 import { Loading } from "./loading";
+import { useGLTF } from "@react-three/drei";
+import { Truss } from "./truss";
 // import styles from "../styles/Landing.module.css";
 
 const GOLDEN_RATIO = 1.61803398875;
@@ -231,6 +233,18 @@ function Scene({ p = new THREE.Vector3() }) {
         scale={[imageScale(5.26 / 4), imageScale(2.51 / 4, 1)]}
         transparent
       />
+      <Truss
+        scale={0.75}
+        position={[-4 * responsiveRatio, 4, 7]}
+        rotation={[0, 0, 0]}
+      />
+      <Truss scale={0.75} position={[0, 4, 7]} />
+      <Truss
+        scale={0.75}
+        position={[4 * responsiveRatio, 4, 7]}
+        rotation={[0, 0, 0]}
+      />
+
       {/* Slab */}
       <Image
         url="/slab.svg"
@@ -363,7 +377,7 @@ function Scene({ p = new THREE.Vector3() }) {
         ref={slab}
       />
       {/* Top logo */}
-      <group>
+      {/*<group>
         <Image
           url="/bracket-l.svg"
           position={[-4 * responsiveRatio, 5, 7]}
@@ -388,7 +402,7 @@ function Scene({ p = new THREE.Vector3() }) {
           transparent
           ref={slab}
         />
-      </group>
+    </group>*/}
       {/* Pole */}
       <Image
         url="/pole.png"

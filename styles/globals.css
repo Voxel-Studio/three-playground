@@ -280,7 +280,7 @@ h4 {
 } */
 
 .sectionHeader {
-  /* margin-bottom: 80px; */
+  width: 100%;
 }
 
 .carousel {

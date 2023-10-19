@@ -84,7 +84,7 @@ function Scene({ p = new THREE.Vector3() }) {
   };
   useEffect(() => {
     setIos(
-      window.innerWidth <= 2000 &&
+      window.innerWidth <= 1100 &&
         !/android|windows|linux/i.test(window.navigator.userAgent)
     );
     let lastKnownScrollPosition = 0;

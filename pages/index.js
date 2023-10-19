@@ -271,7 +271,7 @@ export default function Home() {
                     </span>
                 </h1>
             </div> */}
-      {/* <Header /> */}
+      <Header />
       <div className={styles.hero}>
         <Landing />
         {/* <div className={styles.blurNew1} /> */}

@@ -53,7 +53,7 @@ const Landing = () => {
           <Scene />
         </Canvas>
       </div>
-      <Header isHomepage={true} />
+      {/*<Header isHomepage={true} />*/}
       <Loading />
     </div>
   );

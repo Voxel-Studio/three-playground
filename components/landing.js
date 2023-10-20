@@ -235,7 +235,7 @@ function Scene({ p = new THREE.Vector3() }) {
       />
 
       {/*Trusses */}
-      <group position={[0, 4, 1.5]}>
+      <group position={[0, 5, 0.5]}>
         <Truss
           scale={0.8}
           position={[-3.4 * responsiveRatio, 0, 0]}
@@ -248,7 +248,7 @@ function Scene({ p = new THREE.Vector3() }) {
           rotation={[0, 0, 0]}
         />
       </group>
-      <group position={[-5, 4, 6]} rotation={[0, Math.PI / 2, 0]}>
+      <group position={[-4.75, 5, 5.5]} rotation={[0, Math.PI / 2, 0]}>
         <Truss
           scale={0.8}
           position={[-3.4 * responsiveRatio, 0, 0]}
@@ -261,7 +261,71 @@ function Scene({ p = new THREE.Vector3() }) {
           rotation={[0, 0, 0]}
         />
       </group>
-
+      <group position={[4.75, 5, 5.5]} rotation={[0, Math.PI / 2, 0]}>
+        <Truss
+          scale={0.8}
+          position={[-3.4 * responsiveRatio, 0, 0]}
+          rotation={[0, 0, 0]}
+        />
+        <Truss scale={0.8} position={[0, 0, 0]} />
+        <Truss
+          scale={0.8}
+          position={[3.4 * responsiveRatio, 0, 0]}
+          rotation={[0, 0, 0]}
+        />
+      </group>
+      <group position={[0, 5, 10.5]}>
+        <Truss
+          scale={0.8}
+          position={[-3.4 * responsiveRatio, 0, 0]}
+          rotation={[0, 0, 0]}
+        />
+        <Truss scale={0.8} position={[0, 0, 0]} />
+        <Truss
+          scale={0.8}
+          position={[3.4 * responsiveRatio, 0, 0]}
+          rotation={[0, 0, 0]}
+        />
+      </group>
+      <group position={[-4.75, 5, 16]} rotation={[0, Math.PI / 2, 0]}>
+        <Truss
+          scale={0.8}
+          position={[-3.4 * responsiveRatio, 0, 0]}
+          rotation={[0, 0, 0]}
+        />
+        <Truss scale={0.8} position={[0, 0, 0]} />
+        <Truss
+          scale={0.8}
+          position={[3.4 * responsiveRatio, 0, 0]}
+          rotation={[0, 0, 0]}
+        />
+      </group>
+      <group position={[4.75, 5, 16]} rotation={[0, Math.PI / 2, 0]}>
+        <Truss
+          scale={0.8}
+          position={[-3.4 * responsiveRatio, 0, 0]}
+          rotation={[0, 0, 0]}
+        />
+        <Truss scale={0.8} position={[0, 0, 0]} />
+        <Truss
+          scale={0.8}
+          position={[3.4 * responsiveRatio, 0, 0]}
+          rotation={[0, 0, 0]}
+        />
+      </group>
+      <group position={[0, 5, 20.75]}>
+        <Truss
+          scale={0.8}
+          position={[-3.4 * responsiveRatio, 0, 0]}
+          rotation={[0, 0, 0]}
+        />
+        <Truss scale={0.8} position={[0, 0, 0]} />
+        <Truss
+          scale={0.8}
+          position={[3.4 * responsiveRatio, 0, 0]}
+          rotation={[0, 0, 0]}
+        />
+      </group>
       {/* Slab */}
       <Image
         url="/slab.svg"
@@ -394,10 +458,10 @@ function Scene({ p = new THREE.Vector3() }) {
         ref={slab}
       />
       {/* Top logo */}
-      {/*<group>
+      <group scale={0.8}>
         <Image
           url="/bracket-l.svg"
-          position={[-4 * responsiveRatio, 5, 7]}
+          position={[-4 * responsiveRatio, 8, 3]}
           scale={[1.899 * logoScale, 7.367 * logoScale, 1]}
           rotation={[Math.PI / 2, 0, 0]}
           transparent
@@ -405,7 +469,7 @@ function Scene({ p = new THREE.Vector3() }) {
         />
         <Image
           url="/middle.svg"
-          position={[0, 5, 7]}
+          position={[0, 8, 3]}
           scale={[1.042 * logoScale, 5.891 * logoScale, 1]}
           rotation={[Math.PI / 2, 0, 0]}
           transparent
@@ -413,13 +477,13 @@ function Scene({ p = new THREE.Vector3() }) {
         />
         <Image
           url="/bracket-r.svg"
-          position={[4 * responsiveRatio, 5, 7]}
+          position={[4 * responsiveRatio, 8, 3]}
           scale={[1.899 * logoScale, 7.367 * logoScale, 1]}
           rotation={[Math.PI / 2, 0, 0]}
           transparent
           ref={slab}
         />
-    </group>*/}
+      </group>
       {/* Pole */}
       <Image
         url="/pole.png"

@@ -233,17 +233,34 @@ function Scene({ p = new THREE.Vector3() }) {
         scale={[imageScale(5.26 / 4), imageScale(2.51 / 4, 1)]}
         transparent
       />
-      <Truss
-        scale={0.75}
-        position={[-4 * responsiveRatio, 4, 7]}
-        rotation={[0, 0, 0]}
-      />
-      <Truss scale={0.75} position={[0, 4, 7]} />
-      <Truss
-        scale={0.75}
-        position={[4 * responsiveRatio, 4, 7]}
-        rotation={[0, 0, 0]}
-      />
+
+      {/*Trusses */}
+      <group position={[0, 4, 1.5]}>
+        <Truss
+          scale={0.8}
+          position={[-3.4 * responsiveRatio, 0, 0]}
+          rotation={[0, 0, 0]}
+        />
+        <Truss scale={0.8} position={[0, 0, 0]} />
+        <Truss
+          scale={0.8}
+          position={[3.4 * responsiveRatio, 0, 0]}
+          rotation={[0, 0, 0]}
+        />
+      </group>
+      <group position={[-5, 4, 6]} rotation={[0, Math.PI / 2, 0]}>
+        <Truss
+          scale={0.8}
+          position={[-3.4 * responsiveRatio, 0, 0]}
+          rotation={[0, 0, 0]}
+        />
+        <Truss scale={0.8} position={[0, 0, 0]} />
+        <Truss
+          scale={0.8}
+          position={[3.4 * responsiveRatio, 0, 0]}
+          rotation={[0, 0, 0]}
+        />
+      </group>
 
       {/* Slab */}
       <Image

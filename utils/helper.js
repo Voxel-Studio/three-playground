@@ -23,42 +23,42 @@ export const newsItems = [
 // THIS NEEDS TO BE CONVERTED TO THE CMS
 export const projectItems = [
   {
-    title: "Building blocks \n of the future",
+    title: "Project 1",
     image: `/adidas-1.jpeg`,
     id: "project-1",
   },
   {
-    title: "Building blocks \n of the future",
+    title: "Project 2",
     image: `/tiktok-1.jpeg`,
     id: "project-2",
   },
   {
-    title: "Building blocks \n of the future",
+    title: "Project 3",
     image: `/adidas-1.jpeg`,
     id: "project-3",
   },
   {
-    title: "Building blocks \n of the future",
+    title: "Project 4",
     image: `/tiktok-2.jpeg`,
     id: "project-4",
   },
   {
-    title: "Building blocks \n of the future",
+    title: "Project 5",
     image: `/adidas-1.jpeg`,
     id: "project-5",
   },
   {
-    title: "Building blocks \n of the future",
+    title: "Project 6",
     image: `/tiktok-1.jpeg`,
     id: "project-6",
   },
   {
-    title: "Building blocks \n of the future",
+    title: "Project 7",
     image: `/adidas-1.jpeg`,
     id: "project-7",
   },
   {
-    title: "Building blocks \n of the future",
+    title: "Project 8",
     image: `/tiktok-2.jpeg`,
     id: "project-8",
   },

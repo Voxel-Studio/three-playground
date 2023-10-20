@@ -7,6 +7,7 @@ import { projectItems } from "../../utils/helper";
 import { useEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import { useRouter } from "next/router";
 gsap.registerPlugin(ScrollTrigger);
 
 // using hard coded array in helper file for now
@@ -39,41 +40,60 @@ export const getStaticProps = async (context) => {
   // just hard code for now
   const id = context.params.id;
   let data;
+  let itemNext;
+  let itemPrev;
   switch (id) {
     case "project-1":
       data = projectItems[0];
+      itemNext = projectItems[1];
+      itemPrev = projectItems[7];
       break;
     case "project-2":
       data = projectItems[1];
+      itemNext = projectItems[2];
+      itemPrev = projectItems[0];
       break;
     case "project-3":
       data = projectItems[2];
+      itemNext = projectItems[3];
+      itemPrev = projectItems[1];
       break;
     case "project-4":
       data = projectItems[3];
+      itemNext = projectItems[4];
+      itemPrev = projectItems[2];
       break;
     case "project-5":
       data = projectItems[4];
+      itemNext = projectItems[5];
+      itemPrev = projectItems[3];
       break;
     case "project-6":
       data = projectItems[5];
+      itemNext = projectItems[6];
+      itemPrev = projectItems[4];
       break;
     case "project-7":
       data = projectItems[6];
+      itemNext = projectItems[7];
+      itemPrev = projectItems[5];
       break;
     case "project-8":
       data = projectItems[7];
+      itemNext = projectItems[0];
+      itemPrev = projectItems[6];
       break;
     default:
       break;
   }
 
   return {
-    props: { item: data },
+    props: { item: data, itemNext, itemPrev },
   };
 };
 
-export default function Project({ item }) {
+export default function Project({ item, itemNext, itemPrev }) {
+  console.log(itemNext);
   useEffect(() => {
     const heroImg = document.querySelector(`.${styles.heroImg}`);
     heroImg.style.backgroundPosition = `0% 0px`;
@@ -112,7 +132,6 @@ export default function Project({ item }) {
     });
 
     gsap.utils.toArray(".section").forEach((section, i) => {
-      console.log(section);
       gsap.from(section, {
         opacity: 0,
         duration: 0.5,
@@ -124,6 +143,7 @@ export default function Project({ item }) {
       });
     });
   });
+  const router = useRouter();
   return (
     <>
       <Head>
@@ -213,18 +233,28 @@ export default function Project({ item }) {
           </p>
         </div>
         {/* <div className={styles.newsWrapper}></div> */}
-        <div className="moreNews">
+        <div
+          className="moreNews"
+          onClick={() => {
+            router.push(`/case-studies/${itemPrev.id}`);
+          }}
+        >
           <div className="newsCard">
-            <img src="/more-news-1.jpg" alt="" />
-            <p className="moreNewsFirst">Yamaha - WAY UP HOUSE</p>
+            <img src={`${itemPrev.image}`} alt="" />
+            <p className="moreNewsFirst">{itemPrev.title}</p>
             <p className="prevArticle">PREV</p>
             <div className="prevLine" />
           </div>
-          <div className="newsCard">
-            <p>TikTok - Transparency Forum</p>
+          <div
+            className="newsCard"
+            onClick={() => {
+              router.push(`/case-studies/${itemNext.id}`);
+            }}
+          >
+            <p>{itemNext.title}</p>
             <p className="nextArticle">NEXT</p>
             <div className="nextLine" />
-            <img src="/more-news-2.jpg" alt="" />
+            <img src={itemNext.image} alt="" />
           </div>
         </div>
         <div className="wrapper">

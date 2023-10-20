@@ -235,93 +235,105 @@ function Scene({ p = new THREE.Vector3() }) {
       />
 
       {/*Trusses */}
-      <group position={[0, 5, 0.5]}>
+      <group position={[0, 5, 0.5 * responsiveRatio]}>
         <Truss
-          scale={0.8}
+          scale={imageScale(0.8)}
           position={[-3.4 * responsiveRatio, 0, 0]}
           rotation={[0, 0, 0]}
         />
-        <Truss scale={0.8} position={[0, 0, 0]} />
+        <Truss scale={imageScale(0.8)} position={[0, 0, 0]} />
         <Truss
-          scale={0.8}
+          scale={imageScale(0.8)}
           position={[3.4 * responsiveRatio, 0, 0]}
           rotation={[0, 0, 0]}
         />
       </group>
-      <group position={[-4.75, 5, 5.5]} rotation={[0, Math.PI / 2, 0]}>
+      <group
+        position={[-4.75 * responsiveRatio, 5, 5.5 * responsiveRatio]}
+        rotation={[0, Math.PI / 2, 0]}
+      >
         <Truss
-          scale={0.8}
+          scale={imageScale(0.8)}
           position={[-3.4 * responsiveRatio, 0, 0]}
           rotation={[0, 0, 0]}
         />
-        <Truss scale={0.8} position={[0, 0, 0]} />
+        <Truss scale={imageScale(0.8)} position={[0, 0, 0]} />
         <Truss
-          scale={0.8}
+          scale={imageScale(0.8)}
           position={[3.4 * responsiveRatio, 0, 0]}
           rotation={[0, 0, 0]}
         />
       </group>
-      <group position={[4.75, 5, 5.5]} rotation={[0, Math.PI / 2, 0]}>
+      <group
+        position={[4.75 * responsiveRatio, 5, 5.5 * responsiveRatio]}
+        rotation={[0, Math.PI / 2, 0]}
+      >
         <Truss
-          scale={0.8}
+          scale={imageScale(0.8)}
           position={[-3.4 * responsiveRatio, 0, 0]}
           rotation={[0, 0, 0]}
         />
-        <Truss scale={0.8} position={[0, 0, 0]} />
+        <Truss scale={imageScale(0.8)} position={[0, 0, 0]} />
         <Truss
-          scale={0.8}
+          scale={imageScale(0.8)}
           position={[3.4 * responsiveRatio, 0, 0]}
           rotation={[0, 0, 0]}
         />
       </group>
-      <group position={[0, 5, 10.5]}>
+      <group position={[0, 5, 10.5 * responsiveRatio]}>
         <Truss
-          scale={0.8}
+          scale={imageScale(0.8)}
           position={[-3.4 * responsiveRatio, 0, 0]}
           rotation={[0, 0, 0]}
         />
-        <Truss scale={0.8} position={[0, 0, 0]} />
+        <Truss scale={imageScale(0.8)} position={[0, 0, 0]} />
         <Truss
-          scale={0.8}
+          scale={imageScale(0.8)}
           position={[3.4 * responsiveRatio, 0, 0]}
           rotation={[0, 0, 0]}
         />
       </group>
-      <group position={[-4.75, 5, 16]} rotation={[0, Math.PI / 2, 0]}>
+      <group
+        position={[-4.75 * responsiveRatio, 5, 16 * responsiveRatio]}
+        rotation={[0, Math.PI / 2, 0]}
+      >
         <Truss
-          scale={0.8}
+          scale={imageScale(0.8)}
           position={[-3.4 * responsiveRatio, 0, 0]}
           rotation={[0, 0, 0]}
         />
-        <Truss scale={0.8} position={[0, 0, 0]} />
+        <Truss scale={imageScale(0.8)} position={[0, 0, 0]} />
         <Truss
-          scale={0.8}
+          scale={imageScale(0.8)}
           position={[3.4 * responsiveRatio, 0, 0]}
           rotation={[0, 0, 0]}
         />
       </group>
-      <group position={[4.75, 5, 16]} rotation={[0, Math.PI / 2, 0]}>
+      <group
+        position={[4.75 * responsiveRatio, 5, 16 * responsiveRatio]}
+        rotation={[0, Math.PI / 2, 0]}
+      >
         <Truss
-          scale={0.8}
+          scale={imageScale(0.8)}
           position={[-3.4 * responsiveRatio, 0, 0]}
           rotation={[0, 0, 0]}
         />
-        <Truss scale={0.8} position={[0, 0, 0]} />
+        <Truss scale={imageScale(0.8)} position={[0, 0, 0]} />
         <Truss
-          scale={0.8}
+          scale={imageScale(0.8)}
           position={[3.4 * responsiveRatio, 0, 0]}
           rotation={[0, 0, 0]}
         />
       </group>
-      <group position={[0, 5, 20.75]}>
+      <group position={[0, 5, 20.75 * responsiveRatio]}>
         <Truss
-          scale={0.8}
+          scale={imageScale(0.8)}
           position={[-3.4 * responsiveRatio, 0, 0]}
           rotation={[0, 0, 0]}
         />
-        <Truss scale={0.8} position={[0, 0, 0]} />
+        <Truss scale={imageScale(0.8)} position={[0, 0, 0]} />
         <Truss
-          scale={0.8}
+          scale={imageScale(0.8)}
           position={[3.4 * responsiveRatio, 0, 0]}
           rotation={[0, 0, 0]}
         />

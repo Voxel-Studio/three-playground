@@ -325,9 +325,6 @@ const init = (setSelected, setFirstFrame) => {
         if (child.name.includes("text")) {
           // child.translateX(targetDeltaX / 1000);
           // child.translateY(-targetDeltaY / 1000);
-
-          if (child.geometry.boundingSphere)
-            console.log(child.geometry.boundingSphere.radius);
         }
       });
     }

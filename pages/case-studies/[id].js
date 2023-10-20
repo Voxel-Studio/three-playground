@@ -93,7 +93,7 @@ export const getStaticProps = async (context) => {
 };
 
 export default function Project({ item, itemNext, itemPrev }) {
-  console.log(itemNext);
+  console.log("prev", itemPrev.id, "next", itemNext.id);
   useEffect(() => {
     const heroImg = document.querySelector(`.${styles.heroImg}`);
     heroImg.style.backgroundPosition = `0% 0px`;
@@ -233,13 +233,13 @@ export default function Project({ item, itemNext, itemPrev }) {
           </p>
         </div>
         {/* <div className={styles.newsWrapper}></div> */}
-        <div
-          className="moreNews"
-          onClick={() => {
-            router.push(`/case-studies/${itemPrev.id}`);
-          }}
-        >
-          <div className="newsCard">
+        <div className="moreNews">
+          <div
+            className="newsCard"
+            onClick={() => {
+              router.push(`/case-studies/${itemPrev.id}`);
+            }}
+          >
             <img src={`${itemPrev.image}`} alt="" />
             <p className="moreNewsFirst">{itemPrev.title}</p>
             <p className="prevArticle">PREV</p>

@@ -5,13 +5,69 @@ import Footer from "../../components/footer";
 import titleStyles from "../../styles/TitleSection.module.css";
 import styles from "../../styles/ServiceSingle.module.css";
 import Carousel from "../../components/carousel";
-import { projectItems } from "../../utils/helper";
+import { serviceItems } from "../../utils/helper";
 import { useEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
-export default function LiveEvents() {
+// using hard coded array in helper file for now
+// this needs to be converted to CMS using the commented out code
+// I think this requires the site to be rebuilt after each CMS change?
+// might need to change this to server side rendering SSR?
+export const getStaticPaths = async () => {
+  // const res = await fetch('STRAPI_URL_HERE/');
+  // const data = await res.json();
+
+  // const paths = data.map(item => {
+  const paths = serviceItems.map((item) => {
+    return {
+      params: { id: item.id },
+    };
+  });
+
+  return {
+    paths,
+    fallback: false,
+  };
+};
+
+export const getStaticProps = async (context) => {
+  // const id = context.params.id;
+
+  // const res = await fetch('STRAPI_URL_HERE/' + id);
+  // const data = await res.json();
+
+  // just hard code for now
+  const id = context.params.id;
+  console.log(id);
+  let data;
+  switch (id) {
+    case "live-events":
+      data = serviceItems[0];
+      break;
+    case "virtual-events":
+      data = serviceItems[1];
+      break;
+    case "digital":
+      data = serviceItems[2];
+      break;
+    case "experiential":
+      data = serviceItems[3];
+      break;
+    case "av-hire":
+      data = serviceItems[4];
+      break;
+    default:
+      break;
+  }
+
+  return {
+    props: { item: data },
+  };
+};
+
+export default function Service({ item }) {
   useEffect(() => {
     const heroImg = document.querySelector(`.${styles.heroImg}`);
     heroImg.style.backgroundPosition = `0% 0px`;
@@ -50,7 +106,6 @@ export default function LiveEvents() {
     });
 
     gsap.utils.toArray(".section").forEach((section, i) => {
-      console.log(section);
       gsap.from(section, {
         opacity: 0,
         duration: 2,
@@ -66,19 +121,19 @@ export default function LiveEvents() {
   return (
     <>
       <Head>
-        <title>Insert Productions Limited - Live Events.</title>
+        <title>Insert Productions Limited - {item.title}.</title>
       </Head>
       <div className={styles.fullscreenHero}>
         <div
           className={styles.heroImg}
-          style={{ backgroundImage: "url(/about5.jpeg)" }}
+          style={{ backgroundImage: `url(${item.image})` }}
         />
       </div>
       <div className={titleStyles.container}>
         <Header />
         <div className="wrapper" style={{ minHeight: 859 }}>
           <h1 className={titleStyles.h1} id="title">
-            Live Events
+            {item.title}
           </h1>
           <div className={titleStyles.line}></div>
         </div>
@@ -143,8 +198,7 @@ export default function LiveEvents() {
                 className={styles.card}
                 onClick={() => router.push("/services/live-events")}
                 style={{
-                  opacity:
-                    router.pathname === "/services/live-events" ? 0.4 : 1,
+                  opacity: item.id === "live-events" ? 0.4 : 1,
                 }}
               >
                 <img src="/about5.jpeg" alt="" />
@@ -164,8 +218,7 @@ export default function LiveEvents() {
                 className={styles.card}
                 onClick={() => router.push("/services/virtual-events")}
                 style={{
-                  opacity:
-                    router.pathname === "/services/virtual-events" ? 0.4 : 1,
+                  opacity: item.id === "virtual-events" ? 0.4 : 1,
                 }}
               >
                 <img src="/services-card2.jpg" alt="" />
@@ -182,7 +235,7 @@ export default function LiveEvents() {
                 className={styles.card}
                 onClick={() => router.push("/services/digital")}
                 style={{
-                  opacity: router.pathname === "/services/digital" ? 0.4 : 1,
+                  opacity: item.id === "digital" ? 0.4 : 1,
                 }}
               >
                 <img src="/services-card3.jpeg" alt="" />
@@ -202,8 +255,7 @@ export default function LiveEvents() {
                 className={styles.card}
                 onClick={() => router.push("/services/experiential")}
                 style={{
-                  opacity:
-                    router.pathname === "/services/experiential" ? 0.4 : 1,
+                  opacity: item.id === "experiential" ? 0.4 : 1,
                 }}
               >
                 <img src="/services-card4.jpeg" alt="" />
@@ -222,7 +274,7 @@ export default function LiveEvents() {
                 className={styles.card}
                 onClick={() => router.push("/services/av-hire")}
                 style={{
-                  opacity: router.pathname === "/services/av-hire" ? 0.4 : 1,
+                  opacity: item.id === "av-hire" ? 0.4 : 1,
                 }}
               >
                 <img src="/services-card5.jpeg" alt="" />

@@ -28,10 +28,11 @@ const visibleWidthAtZDepth = (depth, camera) => {
 	return height * camera.aspect;
 };
 
-const init = (setSelected, setFirstFrame) => {
+const init = (setSelected, setDesktop, setFirstFrame) => {
 	// check mobile
 	let desktop =
 		window.innerWidth > 600 || window.innerWidth > window.innerHeight;
+	setDesktop(desktop);
 	//   console.log(desktop, window.innerWidth);
 	//Ratio
 	let ratio = desktop
@@ -181,6 +182,7 @@ const init = (setSelected, setFirstFrame) => {
 		camera.updateProjectionMatrix();
 		renderer.setSize(window.innerWidth, window.innerHeight);
 		desktop = window.innerWidth > 600 || window.innerWidth > window.innerHeight;
+		setDesktop(desktop);
 		ratio = desktop
 			? window.innerWidth / window.innerHeight / 2
 			: window.innerHeight / window.innerWidth / 3.5;
@@ -347,8 +349,8 @@ const init = (setSelected, setFirstFrame) => {
 		// refactor this later to be generic to work with any number of project cards
 		let selected = 0;
 		if (rot > theta * 7 + theta * 0.5 || rot <= theta * 0.5) {
-			setSelected(6);
-			selected = 1;
+			setSelected(desktop ? 0 : 6);
+			selected = desktop ? 0 : 1;
 		} else if (rot > theta * 0.5 && rot <= theta + theta * 0.5) {
 			setSelected(desktop ? 7 : 5);
 			selected = desktop ? 7 : 2;
@@ -421,9 +423,10 @@ const init = (setSelected, setFirstFrame) => {
 
 const Projects = ({ getSelected }) => {
 	const [selected, setSelected] = useState(0);
+	const [desktop, setDesktop] = useState(null);
 
 	useEffect(() => {
-		init(setSelected);
+		init(setSelected, setDesktop);
 	}, []);
 
 	useEffect(() => {
@@ -435,7 +438,9 @@ const Projects = ({ getSelected }) => {
 			<div className={styles.container} id="container">
 				<div id="webglEl"></div>
 			</div>
-			<h1 className={styles.projectTitle}>{projectItems[selected].title}</h1>
+			{!desktop ? (
+				<h1 className={styles.projectTitle}>{projectItems[selected].title}</h1>
+			) : null}
 			<ul className={styles.progress}>
 				<img className="brackets" src="/brackets.svg" alt="" />
 				<li className="progressNumber">01</li>

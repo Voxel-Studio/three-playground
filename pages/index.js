@@ -271,7 +271,7 @@ export default function Home() {
                     </span>
                 </h1>
             </div> */}
-
+      <Header />
       <div className={styles.hero}>
         <Landing />
         {/* <div className={styles.blurNew1} /> */}
@@ -290,7 +290,6 @@ export default function Home() {
         />
       </div>
       <div className={styles.homeContainer}>
-        <Header />
         {/* <div
                     className={`${styles.row} ${styles.rowTransition} section`}
                 /> */}

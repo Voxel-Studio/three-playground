@@ -15,6 +15,7 @@ import Header from "./header";
 import { Loading } from "./loading";
 import { useGLTF } from "@react-three/drei";
 import { Truss } from "./truss";
+import Ceiling from "./ceiling";
 // import styles from "../styles/Landing.module.css";
 
 const GOLDEN_RATIO = 1.61803398875;
@@ -235,109 +236,7 @@ function Scene({ p = new THREE.Vector3() }) {
       />
 
       {/*Trusses */}
-      <group position={[0, 5, 0.5 * responsiveRatio]}>
-        <Truss
-          scale={imageScale(0.8)}
-          position={[-3.4 * responsiveRatio, 0, 0]}
-          rotation={[0, 0, 0]}
-        />
-        <Truss scale={imageScale(0.8)} position={[0, 0, 0]} />
-        <Truss
-          scale={imageScale(0.8)}
-          position={[3.4 * responsiveRatio, 0, 0]}
-          rotation={[0, 0, 0]}
-        />
-      </group>
-      <group
-        position={[-4.75 * responsiveRatio, 5, 5.5 * responsiveRatio]}
-        rotation={[0, Math.PI / 2, 0]}
-      >
-        <Truss
-          scale={imageScale(0.8)}
-          position={[-3.4 * responsiveRatio, 0, 0]}
-          rotation={[0, 0, 0]}
-        />
-        <Truss scale={imageScale(0.8)} position={[0, 0, 0]} />
-        <Truss
-          scale={imageScale(0.8)}
-          position={[3.4 * responsiveRatio, 0, 0]}
-          rotation={[0, 0, 0]}
-        />
-      </group>
-      <group
-        position={[4.75 * responsiveRatio, 5, 5.5 * responsiveRatio]}
-        rotation={[0, Math.PI / 2, 0]}
-      >
-        <Truss
-          scale={imageScale(0.8)}
-          position={[-3.4 * responsiveRatio, 0, 0]}
-          rotation={[0, 0, 0]}
-        />
-        <Truss scale={imageScale(0.8)} position={[0, 0, 0]} />
-        <Truss
-          scale={imageScale(0.8)}
-          position={[3.4 * responsiveRatio, 0, 0]}
-          rotation={[0, 0, 0]}
-        />
-      </group>
-      <group position={[0, 5, 10.5 * responsiveRatio]}>
-        <Truss
-          scale={imageScale(0.8)}
-          position={[-3.4 * responsiveRatio, 0, 0]}
-          rotation={[0, 0, 0]}
-        />
-        <Truss scale={imageScale(0.8)} position={[0, 0, 0]} />
-        <Truss
-          scale={imageScale(0.8)}
-          position={[3.4 * responsiveRatio, 0, 0]}
-          rotation={[0, 0, 0]}
-        />
-      </group>
-      <group
-        position={[-4.75 * responsiveRatio, 5, 16 * responsiveRatio]}
-        rotation={[0, Math.PI / 2, 0]}
-      >
-        <Truss
-          scale={imageScale(0.8)}
-          position={[-3.4 * responsiveRatio, 0, 0]}
-          rotation={[0, 0, 0]}
-        />
-        <Truss scale={imageScale(0.8)} position={[0, 0, 0]} />
-        <Truss
-          scale={imageScale(0.8)}
-          position={[3.4 * responsiveRatio, 0, 0]}
-          rotation={[0, 0, 0]}
-        />
-      </group>
-      <group
-        position={[4.75 * responsiveRatio, 5, 16 * responsiveRatio]}
-        rotation={[0, Math.PI / 2, 0]}
-      >
-        <Truss
-          scale={imageScale(0.8)}
-          position={[-3.4 * responsiveRatio, 0, 0]}
-          rotation={[0, 0, 0]}
-        />
-        <Truss scale={imageScale(0.8)} position={[0, 0, 0]} />
-        <Truss
-          scale={imageScale(0.8)}
-          position={[3.4 * responsiveRatio, 0, 0]}
-          rotation={[0, 0, 0]}
-        />
-      </group>
-      <group position={[0, 5, 20.75 * responsiveRatio]}>
-        <Truss
-          scale={imageScale(0.8)}
-          position={[-3.4 * responsiveRatio, 0, 0]}
-          rotation={[0, 0, 0]}
-        />
-        <Truss scale={imageScale(0.8)} position={[0, 0, 0]} />
-        <Truss
-          scale={imageScale(0.8)}
-          position={[3.4 * responsiveRatio, 0, 0]}
-          rotation={[0, 0, 0]}
-        />
-      </group>
+      <Ceiling position={[0, 6, 0]} />
       {/* Slab */}
       <Image
         url="/slab.svg"
@@ -470,7 +369,7 @@ function Scene({ p = new THREE.Vector3() }) {
         ref={slab}
       />
       {/* Top logo */}
-      <group scale={0.8}>
+      {/* <group scale={0.8}>
         <Image
           url="/bracket-l.svg"
           position={[-4 * responsiveRatio, 8, 3]}
@@ -495,7 +394,7 @@ function Scene({ p = new THREE.Vector3() }) {
           transparent
           ref={slab}
         />
-      </group>
+      </group> */}
       {/* Pole */}
       <Image
         url="/pole.png"

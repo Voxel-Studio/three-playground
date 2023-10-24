@@ -161,7 +161,7 @@ const init = (setSelected, setDesktop, setFirstFrame) => {
   scroller.on((event) => {
     // scrollPos = -event.y / 6000;
     scrollPos = desktop
-      ? !/android|windows|linux/i.test(window.navigator.userAgent)
+      ? /mac/i.test(window.navigator.userAgent)
         ? event.y / 6000
         : event.y / 2000
       : -event.x / 600;

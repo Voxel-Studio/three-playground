@@ -87,13 +87,12 @@ const Header = () => {
           className={`${styles.mobile}`}
           style={{
             transform:
-              router.pathname === "/"
-                ? showMobile
-                  ? "translateX(-5%)"
-                  : "translateX(-105%)"
-                : showMobile
-                ? "translateX(0)"
-                : "translateX(-100%)",
+              // router.pathname === "/"
+              //   ? showMobile
+              //     ? "translateX(-5%)"
+              //     : "translateX(-105%)"
+              //   :
+              showMobile ? "translateX(0)" : "translateX(-100%)",
           }}
         >
           <Link href="/">

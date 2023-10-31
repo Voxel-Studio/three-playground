@@ -13,7 +13,7 @@ export function Truss(props) {
 						geometry={nodes["Material_003-material"].geometry}
 						material={materials.Material_003}
 					>
-						<meshStandardMaterial color="#222222" />
+						<meshStandardMaterial color="#292929" />
 					</mesh>
 					<mesh
 						castShadow

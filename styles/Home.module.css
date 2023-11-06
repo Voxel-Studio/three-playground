@@ -701,9 +701,13 @@
   .block {
     display: none;
   }
+
+  .bts {
+    display: none;
+  }
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1080px) {
   .section div {
     width: 100%;
     margin-left: 0;

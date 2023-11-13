@@ -116,7 +116,7 @@ export default function Home() {
           trigger: "#third",
           //markers:true,
           // start: 'top 75%',
-          end: "bottom 75%",
+          end: "top 25%",
           scrub: 1,
         },
         //,   onComplete: () => {splitFirstInfo.revert()}
@@ -374,6 +374,8 @@ export default function Home() {
                   <li>Video</li>
                   <li>Lighting</li>
                   <li>Audio</li>
+                  <li>Rigging</li>
+                  <li>Staging</li>
                 </ul>
                 <div className={styles.cardLine} />
                 <div className={styles.cardLineHover} />
@@ -391,15 +393,15 @@ export default function Home() {
           </div>
           <div className={`${styles.row} ${styles.rowEnd} section`} id="first">
             <div className={`${styles.info} ${styles.infoFirst}`}>
-              <p>EVENT TECH</p>
+              {/* <p>EVENT TECH</p> */}
               <img
                 className={`${styles.bts} ${styles.bts1}`}
                 src="/home-2.png"
               />
-              <h3 id="firstSplit">Praesent urna nisl convallis aliquam</h3>
+              <h3 id="firstSplit">Creative excellence with global reach</h3>
               <button className={styles.viewButton}>
                 <div className={styles.underlay}></div>
-                <span>VIEW MORE</span>
+                <span>Find out more</span>
               </button>
             </div>
             {/* <div className={styles.bg1} id='pyramid-container-1'>
@@ -433,12 +435,16 @@ export default function Home() {
                 className={`${styles.bts} ${styles.bts2}`}
                 src="/home-4.png"
               />
-              <p>EVENT TECH</p>
+              <p style={{ textTransform: "uppercase" }}>
+                Matt Mullenweg - Social media entrepreneur
+              </p>
 
-              <h3 id="secondSplit">Praesent urna nisl convallis aliquam</h3>
+              <h3 id="secondSplit">
+                "Technology is best when it brings people together".
+              </h3>
               <button className={styles.viewButton}>
                 <div className={styles.underlay}></div>
-                <span>VIEW MORE</span>
+                <span>Find out more</span>
               </button>
             </div>
           </div>
@@ -452,7 +458,7 @@ export default function Home() {
               <div />
             </div>
 
-            <div
+            {/*<div
               id={width >= 1350 ? "smallImageContainer" : ""}
               className={`${styles.fullImg}`}
             >
@@ -463,8 +469,8 @@ export default function Home() {
                   marginTop: 25,
                   marginBottom: 50,
                 }}
-              />
-            </div>
+              /> 
+            </div>*/}
             <img className={`${styles.bts} ${styles.bts3}`} src="/home-6.png" />
           </div>
           <div
@@ -495,24 +501,33 @@ export default function Home() {
           <div className={`${styles.contentLeftContainer} section`} id="third">
             <div className={styles.contentLeft}>
               <div className={styles.content}>
-                <h2>Lorem ipsum</h2>
+                <h2>Our Clients</h2>
                 <div className={styles.sectionLine} />
                 <button className={styles.viewButton}>
                   <div className={styles.underlay}></div>
-                  <span>VIEW MORE</span>
+                  <span>Work with us</span>
                 </button>
               </div>
               <p id="thirdSplit">
-                Vivamus ac venenatis enim. In et iaculis nisi. Nulla posuere
-                aliquam bibendum. Cras blandit volutpat euismod. Nullam nunc
-                augue, blandit convallis felis
+                At Insert Productions, we take great pride in our client-centric
+                approach. We believe that the success of our clients is our
+                success, and we are committed to forming strong, collaborative
+                partnerships and working closely with them to deliver
+                exceptional value and achieve mutual goals. Our client list
+                speaks volumes. From our inception, we have represented a
+                diverse spectrum of brands, spanning from startups to
+                World-renowned enterprises, all underpinned by the same
+                dedicated partnership approach. Every day has seen us
+                wholeheartedly committing our expertise and passion to our
+                clients, resulting in remarkable successes and the cultivation
+                of enduring relationships.
               </p>
             </div>
           </div>
-          <div className={`${styles.contentFull} section`}>
+          {/* <div className={`${styles.contentFull} section`}>
             <img src="/about5.jpeg" alt="" />
             <div>
-              <h1>Praesent urna nisl convallis</h1>
+                <h1>Praesent urna nisl convallis</h1>
               <ul>
                 <li>In a enim non libero commodo dapibus. Curabitur</li>
                 <li>Ullamcorper, orci ut ultricies imperdiet, tellus libero</li>
@@ -520,7 +535,7 @@ export default function Home() {
                 <li>Interdum et malesuada fames ac ante ipsum</li>
               </ul>
             </div>
-          </div>
+          </div>*/}
         </div>
       </div>
       <div className="wrapper" style={{ background: "#070707" }}>

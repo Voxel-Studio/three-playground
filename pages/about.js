@@ -93,7 +93,7 @@ export default function About() {
         scrollTrigger: {
           trigger: "#second",
           start: "top 75%",
-          end: "bottom center",
+          end: "bottom 75%",
           scrub: 1,
         },
       },
@@ -168,12 +168,11 @@ export default function About() {
         <div className={styles.aboutWrapper}>
           <div className={`${styles.row} section`}>
             <p className="sectionHeader">
-              In a enim non libero commodo dapibus. Curabitur ullamcorper, orci
-              ut ultricies imperdiet, tellus libero malesuada risus, non commodo
-              lectus eros vel risus. Interdum et malesuada fames ac ante ipsum
-              primis in faucibus. Suspendisse sit amet bibendum lectus, blandit
-              ultrices nunc. Nunc laoreet purus lacus, vitae pellentesque enim
-              semper vitae.
+              We are a leading provider of global technology services in the
+              corporate, entertainment, and special event sectors. With more
+              than 50 years of combined expertise, we specialise in all types of
+              event experiences, from live and broadcast to corporate events, to
+              exhibitions, concerts, livestreams and more.
             </p>
           </div>
           <div
@@ -187,8 +186,12 @@ export default function About() {
           </div>
           <div id="first" className={`${styles.row} ${styles.rowEnd} section`}>
             <div className={`${styles.info} ${styles.infoFirst}`}>
-              <p>EVENT TECH</p>
-              <h3 id="firstSplit">Praesent urna nisl convallis aliquam</h3>
+              {/* <p>EVENT TECH</p> */}
+              <h3 id="firstSplit">
+                We are the engineers of creative technical production, bringing
+                innovative technical solutions that respond directly to the
+                needs of our clients and their audiences.
+              </h3>
               <button className={styles.viewButton}>
                 <div className={styles.underlay}></div>
                 <span>VIEW MORE</span>
@@ -221,12 +224,18 @@ export default function About() {
               alt=""
             />
             <div className={`${styles.info} ${styles.infoFirst}`}>
-              <p>EVENT TECH</p>
-              <h3 id="secondSplit">Praesent urna nisl convallis aliquam</h3>
-              <button className={styles.viewButton}>
+              {/* <p>EVENT TECH</p> */}
+              <h3 id="secondSplit">
+                We champion boundary breaking ideas and impossible concepts.
+                Through the use of technology, we create immersive experiences
+                that challenge the way things have always been done and push the
+                boundaries in a digital world where our audiences demand nothing
+                short of exceptional.
+              </h3>
+              {/* <button className={styles.viewButton}>
                 <div className={styles.underlay}></div>
                 <span>VIEW MORE</span>
-              </button>
+              </button> */}
             </div>
           </div>
           <div className={`${styles.row} ${styles.rowImages} section`}>
@@ -265,11 +274,11 @@ export default function About() {
               />
             </div>
             <div id="third" className={`${styles.info} ${styles.infoFirst}`}>
-              <p>EVENT TECH</p>
-              <h3 id="thirdSplit">Praesent urna nisl convallis aliquam</h3>
+              {/* <p>EVENT TECH</p> */}
+              <h3 id="thirdSplit">What our clients say about us</h3>
               <button className={styles.viewButton}>
                 <div className={styles.underlay}></div>
-                <span>VIEW MORE</span>
+                <span>Testimonials</span>
               </button>
             </div>
           </div>
@@ -292,11 +301,11 @@ export default function About() {
             <div
               className={`${styles.info} ${styles.infoFirst} ${styles.infoFirstStart}`}
             >
-              <p>EVENT TECH</p>
-              <h3 id="fourthSplit">Praesent urna nisl convallis aliquam</h3>
+              {/* <p>EVENT TECH</p> */}
+              {/* <h3 id="fourthSplit">Praesent urna nisl convallis aliquam</h3> */}
               <button className={styles.viewButton}>
                 <div className={styles.underlay}></div>
-                <span>VIEW MORE</span>
+                <span>Get in touch</span>
               </button>
             </div>
             <img

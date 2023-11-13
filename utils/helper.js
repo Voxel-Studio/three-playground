@@ -23,42 +23,42 @@ export const newsItems = [
 // THIS NEEDS TO BE CONVERTED TO THE CMS
 export const projectItems = [
   {
-    title: "Project 1",
+    title: "TikTok Summit",
     image: `/adidas-1.jpeg`,
     id: "project-1",
   },
   {
-    title: "Project 2",
+    title: "Adidas",
     image: `/tiktok-1.jpeg`,
     id: "project-2",
   },
   {
-    title: "Project 3",
+    title: "Sweaty Betty",
     image: `/adidas-1.jpeg`,
     id: "project-3",
   },
   {
-    title: "Project 4",
+    title: "Invisilign",
     image: `/tiktok-2.jpeg`,
     id: "project-4",
   },
   {
-    title: "Project 5",
+    title: "Microsoft*",
     image: `/adidas-1.jpeg`,
     id: "project-5",
   },
   {
-    title: "Project 6",
+    title: "American Express",
     image: `/tiktok-1.jpeg`,
     id: "project-6",
   },
   {
-    title: "Project 7",
+    title: "Chanel or Stone Island",
     image: `/adidas-1.jpeg`,
     id: "project-7",
   },
   {
-    title: "Project 8",
+    title: "BMW/Mini",
     image: `/tiktok-2.jpeg`,
     id: "project-8",
   },

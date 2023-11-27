@@ -328,17 +328,20 @@
 }
 
 .bts1 {
+  object-fit: cover;
   width: 80%;
   left: -110%;
   top: 5%;
 }
 
 .bts2 {
+  object-fit: cover;
   top: -40%;
   left: 120%;
 }
 
 .bts3 {
+  object-fit: cover;
   width: 35%;
 }
 

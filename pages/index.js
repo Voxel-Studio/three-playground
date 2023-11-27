@@ -263,7 +263,7 @@ export default function Home() {
             <div className={`${styles.info} ${styles.infoFirst}`}>
               <img
                 className={`${styles.bts} ${styles.bts1}`}
-                src='/home-2.png'
+                src='/images/2.13.jpg'
               />
               <h3 id='firstSplit'>Creative excellence with global reach</h3>
               <Link href='/contact'>
@@ -276,7 +276,7 @@ export default function Home() {
           </div>
           <div className={`${styles.row} section`}>
             <div className={`${styles.fullImg}`}>
-              <div style={{ backgroundImage: `url(/home-3.jpg)` }} />
+              <div style={{ backgroundImage: `url(/images/2.14.jpg)` }} />
             </div>
           </div>
           <div

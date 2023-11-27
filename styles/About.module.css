@@ -8,6 +8,8 @@
 
 .aboutWrapper p {
   font-weight: 300;
+  font-size: 2rem;
+  max-width: 750px;
 }
 
 .imgLeftContainer {
@@ -68,6 +70,7 @@
 
 .bts {
   filter: grayscale(100%);
+  opacity: 0.5;
   position: absolute;
   z-index: 0;
 }
@@ -81,19 +84,27 @@
 .bts2 {
   width: 400px;
   height: auto;
-  top: -25vh;
+  /* top: -25vh; */
   left: 30vw;
 }
 
 .bts3 {
   /* top: -2vh; */
+  width: 500px;
   left: -10vw;
 }
 
 .bts4 {
-  top: -30vh;
-  right: 5vw;
+  width: 500px;
+  top: -5vh;
+  right: 2vw;
 }
+
+.video {
+  width: 100%;
+  margin-bottom: 100px;
+}
+
 .rowStart {
   justify-content: flex-start;
 }

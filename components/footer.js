@@ -1,8 +1,8 @@
-import { useRouter } from "next/router";
-import styles from "../styles/Footer.module.css";
+import { useRouter } from 'next/router'
+import styles from '../styles/Footer.module.css'
 
 const Footer = ({ showContact = false, top = 40, bg }) => {
-  const router = useRouter();
+  const router = useRouter()
   return (
     <footer
       className={styles.footer}
@@ -12,7 +12,7 @@ const Footer = ({ showContact = false, top = 40, bg }) => {
     >
       <div
         className={styles.contact}
-        style={{ display: showContact ? "flex" : "none" }}
+        style={{ display: showContact ? 'flex' : 'none' }}
       >
         <div className={`${styles.contactContainer} wrapper`}>
           <div className={styles.info}>
@@ -31,7 +31,7 @@ const Footer = ({ showContact = false, top = 40, bg }) => {
               <div className={styles.col}>
                 <h4>EMAIL</h4>
                 <p>
-                  <a href="mailto:hello@insertproductions.com">
+                  <a href='mailto:hello@insertproductions.com'>
                     hello@insertproductions.com
                   </a>
                 </p>
@@ -39,8 +39,8 @@ const Footer = ({ showContact = false, top = 40, bg }) => {
             </div>
             <div className={styles.row}>
               <div className={styles.social}>
-                <img src="/linkedin.svg" alt="" />
-                <img src="/ig.svg" alt="" />
+                <img src='/linkedin.svg' alt='' />
+                <img src='/ig.svg' alt='' />
               </div>
             </div>
             {/* </div> */}
@@ -49,26 +49,26 @@ const Footer = ({ showContact = false, top = 40, bg }) => {
             <div className={styles.formRow}>
               <input
                 className={`${styles.formName} ${styles.inputText}`}
-                type="text"
-                placeholder="NAME*"
+                type='text'
+                placeholder='NAME*'
                 required
               />
               <input
                 className={styles.inputText}
-                type="email"
-                placeholder="EMAIL*"
+                type='email'
+                placeholder='EMAIL*'
                 required
               />
             </div>
             <div className={styles.formRow}>
               <input
                 className={`${styles.inputMessage} ${styles.inputText}`}
-                type="text"
-                placeholder="MESSAGE*"
+                type='text'
+                placeholder='MESSAGE*'
                 required
               />
             </div>
-            <button className={styles.submitButton} type="submit">
+            <button className={styles.submitButton} type='submit'>
               <div className={styles.underlay}></div>
               <span>SEND IT NOW</span>
             </button>
@@ -77,34 +77,35 @@ const Footer = ({ showContact = false, top = 40, bg }) => {
       </div>
       <div className={`${styles.about} wrapper`} style={{ background: bg }}>
         <div className={styles.aboutCol}>
-          <img className={styles.aboutLogo} src="/insert-logo.png" alt="" />
+          <img className={styles.aboutLogo} src='/insert-logo.png' alt='' />
           <p className={styles.lightText}>Creative technical production</p>
           <p className={styles.lightText}>for global brands and events</p>
         </div>
         <div className={`${styles.aboutCol} ${styles.aboutColRightJustify}`}>
           <p className={styles.heavyText}>
-            <a href="mailto:hello@insertproductions.com">
+            <a href='mailto:hello@insertproductions.com'>
               hello@insertproductions.com
             </a>
           </p>
           <p className={styles.heavyText}>020 7183 0290</p>
           <div className={`${styles.social} ${styles.aboutSocial}`}>
-            <img src="/linkedin.svg" alt="" />
-            <img src="/ig.svg" alt="" />
+            <img src='/linkedin.svg' alt='' />
+            <img src='/ig.svg' alt='' />
           </div>
         </div>
       </div>
       <div
         className={`${styles.logos} wrapper`}
         style={{
-          backgroundColor: router.pathname === "/" ? "#070707" : "transparent",
+          backgroundColor: router.pathname === '/' ? '#070707' : 'transparent',
         }}
       >
-        <img src="/logos1.png" alt="" />
-        <img src="/logos2.png" alt="" />
-        <img src="/logos3.png" alt="" />
-        <img src="/logos4.png" alt="" />
-        <img src="/logos5.png" alt="" />
+        <img src='/logos1.png' alt='' />
+        <img src='/logos2.png' alt='' />
+        <img src='/logos3.png' alt='' />
+        <img src='/logos4.png' alt='' />
+        <img src='/logos5.png' alt='' />
+        <img src='/bematrix-sm.png' alt='' />
       </div>
       <div className={`${styles.terms} wrapper`}>
         <div className={styles.left}>
@@ -118,7 +119,7 @@ const Footer = ({ showContact = false, top = 40, bg }) => {
         </ul>
       </div>
     </footer>
-  );
-};
+  )
+}
 
-export default Footer;
+export default Footer

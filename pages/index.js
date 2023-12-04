@@ -293,7 +293,7 @@ export default function Home() {
               </p>
 
               <h3 id='secondSplit'>
-                "Technology is best when it brings people together".
+                &quot;Technology is best when it brings people together&quot;.
               </h3>
               <button className={styles.viewButton}>
                 <div className={styles.underlay}></div>

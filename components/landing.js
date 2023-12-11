@@ -277,19 +277,19 @@ function Scene({ p = new THREE.Vector3() }) {
       <Frame
         p={[-3 * responsiveRatio, 0, 1]}
         r={[0, 0, 0]}
-        s={[imageScale(0.9), imageScale(GOLDEN_RATIO), imageScale(0.075)]}
+        s={[imageScale(1.4), imageScale(GOLDEN_RATIO), imageScale(0.075)]}
         url='/images/1.2.jpg'
       />
       <Frame
         p={[-2 * responsiveRatio, 0, 5]}
         r={[0, Math.PI / 2, 0]}
-        s={[imageScale(0.9), imageScale(GOLDEN_RATIO), imageScale(0.075)]}
+        s={[imageScale(1.2), imageScale(GOLDEN_RATIO), imageScale(0.075)]}
         url='/images/1.3.jpg'
       />
       <Frame
         p={[2 * responsiveRatio, 0, 5]}
         r={[0, -Math.PI / 2 + Math.PI / 8, 0]}
-        s={[imageScale(0.9), imageScale(GOLDEN_RATIO), imageScale(0.075)]}
+        s={[imageScale(1.2), imageScale(GOLDEN_RATIO), imageScale(0.075)]}
         url='/images/1.4.jpg'
       />
       {/* Pole */}
@@ -335,7 +335,7 @@ function Scene({ p = new THREE.Vector3() }) {
       <Frame
         p={[-5.5 * responsiveRatio, 0, 13.5]}
         r={[0, Math.PI / 2 - Math.PI / 4, 0]}
-        s={[imageScale(0.9), imageScale(GOLDEN_RATIO), imageScale(0.075)]}
+        s={[imageScale(1.5), imageScale(GOLDEN_RATIO), imageScale(0.075)]}
         url='/images/1.7.jpg'
       />
       {/* Arch back dots */}

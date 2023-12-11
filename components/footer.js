@@ -105,7 +105,7 @@ const Footer = ({ showContact = false, top = 40, bg }) => {
         <img src='/logos3.png' alt='' />
         <img src='/logos4.png' alt='' />
         <img src='/logos5.png' alt='' />
-        <img src='/bematrix-sm.png' alt='' />
+        <img src='/bematrix-sm-2.png' alt='' />
       </div>
       <div className={`${styles.terms} wrapper`}>
         <div className={styles.left}>

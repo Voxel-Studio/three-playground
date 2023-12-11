@@ -237,6 +237,7 @@
 .logos img {
   /* flex: 1; */
   margin: 0 2%;
+  max-width: 100px;
   /* height: 1fr; */
 }
 

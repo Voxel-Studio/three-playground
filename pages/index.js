@@ -268,7 +268,10 @@ export default function Home() {
                     >
                         <div
                             className={`${styles.imgLeft} ${styles.smallImg}`}
-                            style={{ backgroundImage: `url(/images/2.10.jpg)` }}
+                            style={{
+                                backgroundImage: `url(/images/2.10.jpg)`,
+                                // backgroundPosition: "right",
+                            }}
                         />
                     </div>
                     <div

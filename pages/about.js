@@ -156,7 +156,7 @@ export default function About() {
                 <img
                     id="header"
                     className={`${titleStyles.headerImg} ${titleStyles.headerAbout}`}
-                    src="/images/3.21.jpg"
+                    src="/about-bg.jpg"
                     alt=""
                 />
                 <div className="wrapper" style={{ marginBottom: 80 }}>

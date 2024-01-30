@@ -377,9 +377,6 @@ export default function Services() {
                                 In the ever-evolving landscape of modern
                                 business and engagement, digital events have
                                 become not only relevant but crucial to success.
-                                As we navigate a world that increasingly values
-                                connectivity and accessibility, the significance
-                                of digital events cannot be overstated.
                             </p>
                         </div>
                     </div>
@@ -414,9 +411,6 @@ export default function Services() {
                             <p id="fourthSplit">
                                 Step into a realm of unparalleled engagement and
                                 immersive moments with our experiential events.
-                                We redefine traditional gatherings, offering not
-                                just events but unforgettable experiences that
-                                leave lasting impressions.
                             </p>
                         </div>
                     </div>
@@ -442,10 +436,7 @@ export default function Services() {
                                 <div className={styles.sectionLine} />
                                 <button className={styles.viewButton}>
                                     <div className={styles.underlay}></div>
-                                    <span>
-                                        Get in touch to find out more about our
-                                        hire products
-                                    </span>
+                                    <span>Hire from us</span>
                                 </button>
                             </div>
                             <p id="fifthSplit">

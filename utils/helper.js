@@ -22,42 +22,42 @@ export const newsItems = [
 
 export const projectItems = [
   {
-    title: 'TikTok Summit',
+    title: 'TikTok | For You Summit',
     image: `/adidas-1.jpeg`,
     id: 'project-1',
   },
   {
-    title: 'Adidas',
+    title: 'Ice 365 | Digitain',
     image: `/tiktok-1.jpeg`,
     id: 'project-2',
   },
   {
-    title: 'Sweaty Betty',
+    title: 'Mini x Morag Myerscough |\nNice to Meet You Again',
     image: `/adidas-1.jpeg`,
     id: 'project-3',
   },
   {
-    title: 'Invisalign',
+    title: 'Adidas Uniforia',
     image: `/tiktok-2.jpeg`,
     id: 'project-4',
   },
   {
-    title: 'Microsoft*',
+    title: 'Arnold Festival',
     image: `/adidas-1.jpeg`,
     id: 'project-5',
   },
   {
-    title: 'American Express',
+    title: 'Mahou',
     image: `/tiktok-1.jpeg`,
     id: 'project-6',
   },
   {
-    title: 'Chanel or Stone Island',
+    title: 'Cannes Lions | Netflix',
     image: `/adidas-1.jpeg`,
     id: 'project-7',
   },
   {
-    title: 'BMW/Mini',
+    title: 'Adidas Ambika P3',
     image: `/tiktok-2.jpeg`,
     id: 'project-8',
   },

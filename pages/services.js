@@ -179,7 +179,7 @@ export default function Services() {
           id='header'
           className={`${titleStyles.headerImg} ${titleStyles.headerAbout}`}
           // src="/services-header.jpg"
-          src='/images/4.19.jpg'
+          src='/images/4.1.jpg'
           alt=''
         />
         <div className='wrapper' style={{ marginBottom: 80 }}>
@@ -299,7 +299,8 @@ export default function Services() {
           >
             <div
               className={`${styles.imgLeft} ${styles.smallImg}`}
-              style={{ backgroundImage: `url(/services1.jpg)` }}
+              // style={{ backgroundImage: `url(/services1.jpg)` }}
+              style={{ backgroundImage: `url(/images/4.23.jpg)` }}
             />
           </div>
           <div
@@ -342,11 +343,10 @@ export default function Services() {
                     Unleash the Power of Connection
                   </h1>
                   <ul>
-                    <li>Unleash the Power of Connection</li>
                     <li>Elevate Your Strategy</li>
+                    <li>Captivate the audience</li>
                     <li>
-                      Captivate the audience, and lead the way with the dynamic
-                      impact of Our Virtual Events
+                      Lead the way with the dynamic impact of Virtual Events
                     </li>
                   </ul>
                 </div>
@@ -419,7 +419,7 @@ export default function Services() {
               className={`${styles.imgRight} ${styles.smallImg}`}
               style={{
                 // backgroundImage: `url(/images/4.19.jpg)`,
-                backgroundImage: `url(/images/4.19-a.jpg)`,
+                backgroundImage: `url(/images/4.19.jpg)`,
               }}
             />
           </div>
@@ -434,7 +434,7 @@ export default function Services() {
                 <div className={styles.sectionLine} />
                 <button className={styles.viewButton}>
                   <div className={styles.underlay}></div>
-                  <span>Hire from us</span>
+                  <span>Find out more</span>
                 </button>
               </div>
               <p id='fifthSplit'>

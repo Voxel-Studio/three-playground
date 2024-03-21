@@ -300,7 +300,7 @@ export default function Services() {
             <div
               className={`${styles.imgLeft} ${styles.smallImg}`}
               // style={{ backgroundImage: `url(/services1.jpg)` }}
-              style={{ backgroundImage: `url(/images/4.23.jpg)` }}
+              style={{ backgroundImage: `url(/images/4.23-new-a.jpg)` }}
             />
           </div>
           <div
@@ -450,7 +450,7 @@ export default function Services() {
               className={`${styles.imgLeft} ${styles.smallImg}`}
               style={{
                 // backgroundImage: `url(/services5.jpg)`,
-                backgroundImage: `url(/images/4.23.jpg)`,
+                backgroundImage: `url(/images/4.23-old.jpg)`,
               }}
             />
           </div>

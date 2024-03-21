@@ -178,7 +178,7 @@ export default function About() {
             <div
               className={`${styles.imgRight} ${styles.smallImg}`}
               style={{
-                backgroundImage: `url(/images/3.4.jpg)`,
+                backgroundImage: `url(/images/3.4a.jpg)`,
               }}
             />
           </div>

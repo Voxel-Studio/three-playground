@@ -23,42 +23,50 @@ export const newsItems = [
 export const projectItems = [
   {
     title: 'TikTok | For You Summit',
-    image: `/adidas-1.jpeg`,
+    // image: `/adidas-1.jpeg`,
+    image: `/images/projects/project-1.jpg`,
     id: 'project-1',
   },
   {
     title: 'Ice 365 | Digitain',
-    image: `/tiktok-1.jpeg`,
+    // image: `/tiktok-1.jpeg`,
+    image: `/images/projects/project-2.jpg`,
     id: 'project-2',
   },
   {
     title: 'Mini x Morag Myerscough |\nNice to Meet You Again',
-    image: `/adidas-1.jpeg`,
+    // image: `/adidas-1.jpeg`,
+    image: `/images/projects/project-3.jpg`,
     id: 'project-3',
   },
   {
     title: 'Adidas Uniforia',
-    image: `/tiktok-2.jpeg`,
+    // image: `/tiktok-2.jpeg`,
+    image: `/images/projects/project-4.jpg`,
     id: 'project-4',
   },
   {
     title: 'Arnold Festival',
-    image: `/adidas-1.jpeg`,
+    // image: `/adidas-1.jpeg`,
+    image: `/images/projects/project-5.jpg`,
     id: 'project-5',
   },
   {
     title: 'Mahou',
-    image: `/tiktok-1.jpeg`,
+    // image: `/tiktok-1.jpeg`,
+    image: `/images/projects/project-6.jpg`,
     id: 'project-6',
   },
   {
     title: 'Cannes Lions | Netflix',
-    image: `/adidas-1.jpeg`,
+    // image: `/adidas-1.jpeg`,
+    image: `/images/projects/project-7.jpg`,
     id: 'project-7',
   },
   {
     title: 'Adidas Ambika P3',
-    image: `/tiktok-2.jpeg`,
+    // image: `/tiktok-2.jpeg`,
+    image: `/images/projects/project-8.jpg`,
     id: 'project-8',
   },
 ]

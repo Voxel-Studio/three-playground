@@ -1,6 +1,5 @@
 import "../styles/globals.css";
 import Head from "next/head";
-import Validation from "../components/validation";
 
 function MyApp({ Component, pageProps }) {
 	return (
@@ -10,7 +9,6 @@ function MyApp({ Component, pageProps }) {
 				<meta name="viewport" content="initial-scale=1, width=device-width" />
 			</Head>
 			<Component {...pageProps} />
-			{/* <Validation /> */}
 		</>
 	);
 }

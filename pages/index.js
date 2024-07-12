@@ -4,7 +4,7 @@ import Landing from "../components/landing";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
-
+//
 export default function Home() {
   const [showScrollDown, setShowScrollDown] = useState(true);
   const [width, setWidth] = useState(0);
